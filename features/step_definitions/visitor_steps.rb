@@ -7,11 +7,13 @@ Then(/^I see a title of strategicHR$/) do
 end
 
 When(/^I go to the contact Dr\. Bob page$/) do
-  pending # express the regexp above with the code you wish you had
+  visit "/contact"
 end
 
 Then(/^I can send a message to Dr\. Bob$/) do
-  pending # express the regexp above with the code you wish you had
+  fill_in "Name", with: "Joost"
+  fill_in "Email", with: "joost@spacebabies.nl"
+  click_on "Submit"
 end
 
 When(/^I go to the course page for "(.*?)"$/) do |arg1|
