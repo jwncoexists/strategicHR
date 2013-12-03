@@ -9,13 +9,18 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 3.2' # sass-rails needs to be higher than 3.2
 gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.0.3'
 gem 'bootstrap-sass'
-gem 'rspec-rails'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platforms => :ruby
 
-gem 'uglifier', '>= 1.0.3'
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
