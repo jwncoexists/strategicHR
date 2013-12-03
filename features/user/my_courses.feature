@@ -11,4 +11,4 @@ Feature: my courses page
     Given I am a user
     When I go to my courses page
     And I click on the link to the "5 Trends Shaping the Future of Work" course
-    Then I go to the course page for "5 Trends Shaping the Future of Work"
+    Then see the course page for "5 Trends Shaping the Future of Work"

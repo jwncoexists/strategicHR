@@ -4,35 +4,35 @@
   <div class="span-6">
     <%= form_for @message, :url => contact_path do |form| %>
       <div class="control-group">
-        <%= form.label :name, class: 'control-label' %>
+        <%= form.label :name,'Name:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :name, :autofocus => true %>
+          <%= form.text_field :name, autofocus: true, size: 40, placeholder: "name", required: true %>
         </div>
       </div>
       
       <div class="control-group">
-        <%= form.label :email, class: 'control-label' %>
+        <%= form.label :email, 'Email:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :email %>
+          <%= form.text_field :email, size: 40, placeholder: "email", required: true %>
         </div>
       </div>
       <div class="control-group">
-        <%= form.label :subject, class: 'control-label' %>
+        <%= form.label :subject, 'Subject:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :subject %>
+          <%= form.text_field :subject, size: 40, placeholder: "subject of email", required: true  %>
         </div>
       </div>
       
       <div class="control-group">
-        <%= form.label :body, class: 'control-label' %>
+        <%= form.label :body, 'Message Body:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_area :body,  rows: 8 %>
+          <%= form.text_area :body, placeholder: "message body", rows: 8, cols: 40, required: true %>
         </div>
       </div>
       <br>
       <div class="control-group">
         <div class="controls">
-          <%= form.submit "submit", class: 'btn' %>
+          <%= form.submit "Submit", class: 'btn' %>
         </div>
       </div>
     </div>

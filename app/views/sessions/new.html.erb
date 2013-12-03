@@ -8,11 +8,11 @@
       <legend>Please Sign-in:</legend><br>
       <div>
         <%= label_tag :email, 'Email:' %>
-        <%= text_field_tag :email, params[:email] %>
+        <%= text_field_tag :email, params[:email], size: 40, placeholder: "email", required: true %>
       </div>
       <div>
         <%= label_tag :password, 'Password:' %>
-        <%= password_field_tag :password, params[:password] %>
+        <%= password_field_tag :password, params[:password], size: 40, placeholder: "password", required: true  %>
       </div>
       <br>
       <div>

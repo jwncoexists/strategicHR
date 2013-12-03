@@ -90,7 +90,7 @@ When(/^I click on the link to the "(.*?)" course$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Then(/^I go to the course page for "(.*?)"$/) do |arg1|
+Then(/^I see the course page for "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 

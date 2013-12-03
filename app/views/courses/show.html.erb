@@ -15,4 +15,12 @@
       <%= link_to "New Course", new_course_path(@course), class: 'btn btn-large btn-block' %>
     <% end %>
   </div>
-</div>
+</div>  
+<p>
+  <% if !current_user %>
+    <h3>Yes, I want to enroll in this class and earn CEU credits!</h3>
+    <%= link_to "Sign-in", login_path, class: 'btn btn-primary btn-large' %> or 
+    <%= link_to "Register", new_user_path, class: 'btn btn-primary btn-large' %> today!
+  <% else %>
+  <% end %>
+</p>
