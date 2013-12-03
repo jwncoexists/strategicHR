@@ -1,5 +1,8 @@
 When(/^I log in as an administrative user$/) do
-  pending # express the regexp above with the code you wish you had
+    visit('/login')
+    fill_in('Name', with: '')
+    fill_in('Password', with: '')
+    click_button('Sign-in')
 end
 
 When(/^I visit the admin home page$/) do

@@ -1,9 +1,22 @@
 StrategicHR::Application.routes.draw do
+
+
   get "welcome/index"
   get "welcome/about"
   root to: 'welcome#index'
+  match "about" => 'welcome#about', via: :get 
   resources :contact, only: [:new, :create]
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  resources :users
+  resources :email_confirmations
+  resources :courses
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+  get "sessions/create"
+  get "sessions/destroy"
   #match 'contact' => 'contact#new', :as => 'contact', :via => :get
   #match 'contact' => 'contact#create', :as => 'contact', :via => :post
 

@@ -1,0 +1,24 @@
+<div id="theText" class = "span-6">
+  <div class="depot_form">
+  <% if flash[:alert] %>
+    <p id="notice"> <%= flash[:alert] %> </p>
+  <% end %>
+  <%= form_tag sessions_create_path, :method => :get do %>
+    <fieldset>
+      <legend>Please Sign-in:</legend><br>
+      <div>
+        <%= label_tag :email, 'Email:' %>
+        <%= text_field_tag :email, params[:email] %>
+      </div>
+      <div>
+        <%= label_tag :password, 'Password:' %>
+        <%= password_field_tag :password, params[:password] %>
+      </div>
+      <br>
+      <div>
+        <%= submit_tag "Sign-in" %>
+      </div>
+    </fieldset>
+  <% end %>
+  </div>
+</div>

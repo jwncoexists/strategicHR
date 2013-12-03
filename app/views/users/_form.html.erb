@@ -1,0 +1,40 @@
+<div>
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <div class="field">
+        <%= f.label :name, 'Name:' %><br>
+        <%= f.text_field :name, size: 40, placeholder: "full name", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :email, 'Email:' %><br>
+        <%= f.email_field :email, size: 40, placeholder: "email address", required: true  %>
+      </div>
+      <div class="field">
+        <%= f.label :password, 'Password:' %><br>
+        <%= f.password_field :password, size:40, placeholder: "password", required: true  %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation, 'Confirm password:' %><br>
+        <%= f.password_field :password_confirmation, size: 40, placeholder: "confirm password", required: true  %>
+      </div>
+      <%= f.hidden_field :account, :value => @user.account %>
+      <br>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+      <br>
+    </fieldset>
+  <% end %>
+</div>

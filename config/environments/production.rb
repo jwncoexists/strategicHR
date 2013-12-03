@@ -80,7 +80,7 @@ StrategicHR::Application.configure do
 
 
 
-  # http://digginit.herokuapp.com
+  # http://strategichr.herokuapp.com
   config.action_mailer.default_url_options = { :host => 'strategichr.herokuapp.com' }  
 
   ActionMailer::Base.delivery_method = :smtp

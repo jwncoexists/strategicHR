@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= "Dear #{@user.name}," %></p><br>
+    <p>
+      Please click the following link to complete your registration with <i>StrategicHR by Dr. Bob Nelson</i>:
+    </p><br>
+    <p><%= link_to "Confirm your StrategicHR email address", @url %></p><br>
+    <p>Thank you for registering with StrategicHR by Dr. Bob Nelson. </p>
+  </body>
+</html>

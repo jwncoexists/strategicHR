@@ -12,6 +12,16 @@
         <li><%= link_to "Strategic HR", welcome_index_path %></li>
         <li><%= link_to "About", welcome_about_path %></li>
         <li><%= link_to "Contact", contact_path %></li>
+        <li><%= link_to "Courses", courses_path %></li>
+        <% if can? :update, User %>
+          <li><%= link_to "Users", users_path %></li>
+        <% end %>
+        <% if current_user %>
+          <li><%= link_to "Sign-out", logout_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign-in", login_path %></li>
+          <li><%= link_to "Sign-up", new_user_path %></li>
+        <% end %>
       </ul>
       <% flash_css_class = { :notice => 'alert alert-success', :error => 'alert alert-error', :alert => 'alert'} %>
       <% flash.each do |key, msg| %>
