@@ -2,6 +2,11 @@ StrategicHR::Application.routes.draw do
   get "welcome/index"
   get "welcome/about"
   root to: 'welcome#index'
+  resources :contact, only: [:new, :create]
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  #match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  #match 'contact' => 'contact#create', :as => 'contact', :via => :post
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

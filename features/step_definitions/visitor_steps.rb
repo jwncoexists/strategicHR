@@ -6,14 +6,18 @@ Then(/^I see a title of strategicHR$/) do
   expect(page).to have_title "Strategic HR by Dr. Bob Nelson"
 end
 
-When(/^I go to the contact Dr\. Bob page$/) do
-  visit "/contact"
+When(/^I go to the contact page$/) do
+  visit contact_path
 end
 
-Then(/^I can send a message to Dr\. Bob$/) do
-  fill_in "Name", with: "Joost"
-  fill_in "Email", with: "joost@spacebabies.nl"
-  click_on "Submit"
+Then(/^I can send a message$/) do
+
+  fill_in 'name', with: 'Jennifer Nelson'
+  fill_in "email", with: "jenniferwnelson@sbcglobal.net"
+  fill_in 'subject', with: 'Test Contact Form'
+  fill_in 'body', with: 'Hello Thank you for this class'
+  click_link "submit"
+  expect(page).to have_content 'success'
 end
 
 When(/^I go to the course page for "(.*?)"$/) do |arg1|
@@ -31,8 +35,6 @@ end
 Then(/^I am prompted to either sign\-in or register$/) do
   pending # express the regexp above with the code you wish you had
 end
-
-
 
 When(/^I go to the registration page$/) do
   pending # express the regexp above with the code you wish you had

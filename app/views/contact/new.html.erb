@@ -1,0 +1,38 @@
+<h2> Send Dr. Bob a Message </h2>
+
+<%= form_for @message, :url => contact_path do |form| %>
+
+  <div class="control-group">
+    <%= form.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= form.text_field :name, :autofocus => true %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= form.label :email, class: 'control-label' %>
+    <div class="controls">
+      <%= form.text_field :email %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= form.label :subject, class: 'control-label' %>
+    <div class="controls">
+      <%= form.text_field :subject %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= form.label :body, class: 'control-label' %>
+    <div class="controls">
+      <%= form.text_area :body %>
+    </div>
+  </div>
+  <br>
+  <div class="control-group">
+    <div class="controls">
+      <%= form.submit "submit", class: 'btn' %>
+    </div>
+  </div>
+
+<% end %>

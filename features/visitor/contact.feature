@@ -1,8 +1,7 @@
 Feature: contact Dr. Bob page
 
-  As a visitor, I can contact Dr. Bob
+  As a visitor, I can contact Strategic HR
 
-  Scenario: I can contact Dr. Bob
-    Given I am a visitor
-    When I go to the contact Dr. Bob page
-    Then I can send a message to Dr. Bob
+  Scenario: I can contact Strategic HR
+    When I go to the contact page
+    Then I can send a message
