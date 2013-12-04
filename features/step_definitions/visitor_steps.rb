@@ -20,8 +20,7 @@ Then(/^I can send a message$/) do
 end
 
 Given(/^I am a visitor to the course page for "(.*?)"$/) do |name|
-  @course = Course.create(name: name, description: name)
-  @course = Course.find_by_name! name
+  @course = Course.create!(name: name, description: Faker::Lorem.paragraph)
   visit(course_path(@course))
 end
 
@@ -39,8 +38,9 @@ Given(/^I am a visitor to the registration page$/) do
 end
 
 When(/^I enter required registration information$/) do
-  fill_in "Name:", with: "Test User"
-  fill_in "Email:", with: "bob@example.com"
+  fill_in "First Name:", with: "Test"
+  fill_in "Last Name:", with: "User"
+  fill_in "Email:", with: "test@example.com"
   fill_in "Password:", with: "5555"
   fill_in "Confirm password:", with: "5555"
 end

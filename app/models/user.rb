@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
     account.nil? ? false : ACCOUNTS.index(base_account.to_s) <= ACCOUNTS.index(account)
   end 
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+  
   def update_slug
     self.slug = self.name.parameterize
   end

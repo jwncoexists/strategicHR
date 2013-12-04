@@ -18,6 +18,6 @@ Feature: admin manage courses page
     Then the name of the course is stored
 
   Scenario: I can delete a course
-    Given a course I want to delete named "Strategic HR Summary"
-    When I view the "Strategic HR Summary" course
+    Given a course I want to delete named "Strategic HR Overview"
+    When I view the "Strategic HR Overview" course
     Then I can delete the course

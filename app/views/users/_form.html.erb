@@ -14,8 +14,12 @@
 
     <fieldset>
       <div class="field">
-        <%= f.label :name, 'Name:' %><br>
-        <%= f.text_field :name, size: 40, placeholder: "full name", required: true %>
+        <%= f.label :first_name, 'First Name:' %><br>
+        <%= f.text_field :first_name, size: 40, placeholder: "first name", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :last_name, 'Last Name:' %><br>
+        <%= f.text_field :last_name, size: 40, placeholder: "last name", required: true %>
       </div>
       <div class="field">
         <%= f.label :email, 'Email:' %><br>

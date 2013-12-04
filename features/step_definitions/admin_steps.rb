@@ -72,8 +72,7 @@ Given(/^I visit the Manage Courses home page$/) do
 end
 
 Given(/^a course named "(.*?)"$/) do |name|
-  @course = Course.create(name: name, description: name)
-  @course = Course.find_by_name! name
+  @course = Course.create!(name: name, description: Faker::Lorem.paragraph)
 end
 
 Then(/^I can create a new course named "(.*?)"$/) do |arg1|
@@ -84,7 +83,6 @@ When(/^I edit the course named "(.*?)" course$/) do |name|
   visit(edit_course_path(@course))
   fill_in 'Name', with: "Course-#{name}-Edited"
   click_button('Save')
-
 end
 
 Then(/^the name of the course is stored$/) do
@@ -92,8 +90,7 @@ Then(/^the name of the course is stored$/) do
 end
 
 Given(/^a course I want to delete named "(.*?)"$/) do |name|
-  @course = Course.create(name: name, description: name)
-  @course = Course.find_by_name! name
+  step 'a course named "Strategic HR Overview"'
 end
 
 When(/^I view the "(.*?)" course$/) do |name|

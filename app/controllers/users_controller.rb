@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    @users = User.order(:last_name)
   end
 
   # GET /users/1
@@ -67,6 +67,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :account)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :account)
     end
 end
