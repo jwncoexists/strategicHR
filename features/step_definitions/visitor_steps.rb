@@ -20,8 +20,7 @@ Then(/^I can send a message$/) do
 end
 
 Given(/^I am a visitor to the course page for "(.*?)"$/) do |name|
-  @course = Course.new(name: name, description: name)
-  @course.save
+  @course = Course.create(name: name, description: name)
   @course = Course.find_by_name! name
   visit(course_path(@course))
 end
