@@ -43,12 +43,18 @@ class QuizzesController < ApplicationController
     redirect_to quizzes_url, notice: "Successfully deleted quiz."
   end
 
+  def answers
+    @questions = @quiz.questions
+  end
+
+  private
+
   # answer-attr_accessible :content, :question_id
   # question-attr_accessible :content, :quiz_id, :answers_attributes
   # quiz-attr_accessible :name, :questions_attributes
   def quiz_params
-    params.require(:quiz).permit(:name, questions_attributes: [:content, :quiz_id, 
-                                          answers_attributes: [:content, :question_id] ] )
+    params.require(:quiz).permit(:name, questions_attributes: [:id, :content, :quiz_id, :_destroy,
+                                          answers_attributes: [:id, :content, :question_id, :_destroy] ] )
   end
 
 end
