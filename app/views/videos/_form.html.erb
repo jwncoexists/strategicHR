@@ -1,0 +1,39 @@
+<div class="span-6">
+  <%= form_for @video, html: { class: 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <%= f.label :name, 'Name:', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, size: 40, placeholder: "name of video", required: true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :description, 'Description:', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description, rows: 8, cols: 40, placeholder: "description of video contents" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :length, 'Length:', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :length, as: :float, size: 40, placeholder: "length in minutes of video", required: true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :presenter, 'Presenter:', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :presenter, size: 40, placeholder: "video presenter", required: true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :url, 'URL:', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :url, size: 40, placeholder: "youtube url of video", required: true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Save", class: 'btn' %>
+      </div>
+    </div>
+  <% end %>
+</div>

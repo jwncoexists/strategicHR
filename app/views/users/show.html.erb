@@ -1,26 +1,67 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @user.name %></h1>
+<% if can? :update, @user %>
+  <%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-primary btn-mini' %>
+<% end %>
+<% if can? :destroy, @user %>
+  <%= link_to "Delete User", @user, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: "Are you sure you want to delete user #{@user.name}, #{@user.email}?" } %> 
+<% end %>
+<% if can? :create, User %>
+  <%= link_to "Create User", new_user_path, class: 'btn btn-primary btn-mini' %> 
+<% end %>   
+<br>
+<br>
+<table id="user" class="bordered">
 
-<table id="users" class="bordered">
   <tr>
-    <td><strong>name:</strong></td>
-    <td><%= @user.name %></td>
+    <td><strong>Email:</strong></td>
+    <td><%= @user.email %></td>
   </tr>
   <tr>
-    <td><strong>e-mail:</strong></td>
-    <td><%= @user.email%></td>
+    <td><strong>Account Type:</strong></td>
+    <td><%= @user.account %></td>
   </tr>
   <tr>
-    <td><strong>account type:</strong></td>
-    <td><%= @user.account%></td>
+    <td><strong>Member Since:</strong></td>
+    <td><%= @user.created_at %></td>
   </tr>
   <tr>
-    <td><strong>member since:</strong></td>
-    <td><%= @user.created_at%></td>
+    <td><strong>Company:</strong></td>
+    <td><%= @user.company %></td>
+  </tr>
+  <tr>
+    <td><strong>Title:</strong></td>
+    <td><%= @user.title %></td>
+  </tr>
+  <tr>
+    <td><strong>Address1:</strong></td>
+    <td><%= @user.address1 %></td>
+  </tr>
+  <tr>
+    <td><strong>Address2:</strong></td>
+    <td><%= @user.address2 %></td>
+  </tr>
+  <tr>
+    <td><strong>City:</strong></td>
+    <td><%= @user.city %></td>
+  </tr>
+  <tr>
+    <td><strong>State:</strong></td>
+    <td><%= @user.state %></td>
+  </tr>
+  <tr>
+    <td><strong>Postal Code:</strong></td>
+    <td><%= @user.postal_code %></td>
+  </tr>
+  <tr>
+    <td><strong>Country:</strong></td>
+    <td><%= @user.country %></td>
+  </tr>
+  <tr>
+    <td><strong>Phone:</strong></td>
+    <td><%= @user.phone %></td>
   </tr>
 </table>
-<br>
-<br>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+
 
 

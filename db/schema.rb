@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204210052) do
+ActiveRecord::Schema.define(version: 20131204220416) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -50,5 +50,16 @@ ActiveRecord::Schema.define(version: 20131204210052) do
 
   add_index "users", ["confirmed_at"], name: "index_users_on_confirmed_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+
+  create_table "videos", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "length"
+    t.string   "presenter"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
 
 end

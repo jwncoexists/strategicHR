@@ -4,7 +4,8 @@
 When(/^I log in as an administrative user$/) do
 
   visit(new_user_path)
-  fill_in 'Name:', with: 'Test Admin User'
+  fill_in 'First Name:', with: 'Test'
+  fill_in 'Last Name:', with: 'Admin User'
   fill_in 'Email:', with: 'admin@example.com'
   fill_in 'Password:', with: 'admin'
   fill_in 'Confirm password:', with: 'admin'
@@ -40,9 +41,10 @@ end
 # Admin manage_courses.feature
 #-----------------------------
 
-Given(/^an administrative user named "(.*?)"$/) do |name|
+Given(/^a courses administrative user named "(.*?)"$/) do |name|
   visit(new_user_path)
-  fill_in 'Name:', with: name
+  fill_in 'First Name:', with: name
+  fill_in 'Last Name:', with: name
   fill_in 'Email:', with: "#{name}@example.com"
   fill_in 'Password:', with: name
   fill_in 'Confirm password:', with: name
@@ -60,7 +62,7 @@ Given(/^an administrative user named "(.*?)"$/) do |name|
   end
 end
 
-Given(/^I log in as "(.*?)"$/) do |name|
+Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: name
@@ -71,12 +73,18 @@ Given(/^I visit the Manage Courses home page$/) do
    visit(courses_path)
 end
 
-Given(/^a course named "(.*?)"$/) do |name|
-  @course = Course.create!(name: name, description: Faker::Lorem.paragraph)
+Then(/^I can create a new course named "(.*?)"$/) do |name|
+  click_link('Create Course')
+  fill_in 'Name', with: name
+  fill_in 'Description', with: Faker::Lorem.paragraph
+  fill_in 'CEU', with: 5
+  fill_in 'Price', with: 39.99
+  click_button('Save')
+  expect(page).to have_content name
 end
 
-Then(/^I can create a new course named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given(/^a course named "(.*?)"$/) do |name|
+  @course = Course.create!(name: name, description: Faker::Lorem.paragraph)
 end
 
 When(/^I edit the course named "(.*?)" course$/) do |name|
@@ -106,6 +114,88 @@ Then(/^I can delete the course$/) do
   # page.driver.browser.switch_to.alert.accept
   if page.text.include? @course.name
     fail("Unable to delete course #{@course.name}")
+  end
+end
+
+#---------------------------
+# Admin manage_videos.feature
+#---------------------------
+Given(/^a videos administrative user named "(.*?)"$/) do |name|
+  visit(new_user_path)
+  fill_in 'First Name:', with: name
+  fill_in 'Last Name:', with: name
+  fill_in 'Email:', with: "#{name}@example.com"
+  fill_in 'Password:', with: name
+  fill_in 'Confirm password:', with: name
+  click_button('Register') 
+
+  @user = User.find_by_email! "#{name}@example.com"
+  if !@user.update_attribute(:confirmed_at, Time.now)
+    fail('Unable to update confirmed_at attribute for admin user')
+  end
+  if !@user.update_attribute(:account, 'admin')
+    fail('Unable to update account for admin user')
+  end
+  if User.count < 1
+    fail('User not added to database')
+  end
+end
+
+Given(/^I log in as the videos "(.*?)"$/) do |name|
+  visit('/login')
+  fill_in 'email', with: "#{name}@example.com"
+  fill_in 'password', with: name
+  click_button('Sign-in')
+end
+
+Given(/^I visit the Videos page$/) do
+  visit(videos_path)
+end
+
+Then(/^I can add a new video named "(.*?)"$/) do |name|
+  click_link('Add Video')
+  fill_in 'Name:', with: name
+  fill_in 'Description:', with: Faker::Lorem.paragraph
+  fill_in 'Length:', with: 5
+  fill_in 'Presenter', with: Faker::Name.name
+  fill_in 'URL', with: 'http://www.youtube.com/watch?v=pIVREol3Zsc'
+  click_button('Save')
+  expect(page).to have_content name
+end
+
+Given(/^a video named "(.*?)"$/) do |name|
+  @video = Video.create!(name: name, description: Faker::Lorem.paragraph, length: 6, presenter: Faker::Name.name, url: 'http://www.youtube.com/watch?v=pIVREol3Zsc')
+end
+
+When(/^I edit the the "(.*?)" video$/) do |name|
+  visit(edit_video_path(@video))
+  expect(page).to have_content 'Edit Video'
+end
+
+When(/^change its url to "(.*?)"$/) do |url|
+  fill_in 'URL:', with: url
+  @video.url = url
+  click_button('Save')
+ 
+end
+
+Then(/^the url of the video is stored$/) do
+   expect(page).to have_content @video.url
+end
+
+When(/^I view the "(.*?)" video$/) do |name|
+  visit(video_path(@video))
+  if !page.text.include? name
+    fail("Unable to go to page for video: #{name}")
+  end
+end
+
+Then(/^I can delete the video$/) do
+  # page.evaluate_script('window.confirm = function() { return true; }')
+  click_link('Delete Video')
+  # page.driver.browser.switch_to.alert.accept
+  if page.text.include? @video.name
+    fail("Unable to delete video #{@video.name}")
   end
 end
 
@@ -189,9 +279,9 @@ Then(/^I can delete the quiz$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-#------------------------
+#---------------------------
 # Admin manage_users.feature
-#------------------------
+#---------------------------
 When(/^I visit the admin manage users page$/) do
   pending # express the regexp above with the code you wish you had
 end
@@ -240,26 +330,4 @@ Then(/^I can view emails which have been sent to the user list$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I visit the admin video page$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
-Then(/^I can add a new video named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^a video "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I edit the "(.*?)" video$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the name of the video is stored$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I can delete the video$/) do
-  pending # express the regexp above with the code you wish you had
-end

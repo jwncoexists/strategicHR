@@ -1,23 +1,23 @@
-<h1>Courses</h1>
+<h1>Strategic HR Training Courses</h1>
 
-<div class="row">
-  <div class="span8">
-    <% @courses.each do |course| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to course.name, course_path(course) %>
-          </h4>
-          <small>
-            <%= markdown course.description %> 
-          </small>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="span4">
-    <% if can? :create, Course %>
-      <%= link_to "New Course", new_course_path, class: 'btn btn-large btn-block' %>
-    <% end %>
-  </div>
+<div class="span8">
+  <% if can? :create, Course %>
+    <%= link_to "Create Course", new_course_path, class: 'btn btn-primary btn-mini' %>
+  <% end %>
 </div>
+<br><br>
+<div class="span8">
+  <% @courses.each do |course| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to course.name, course_path(course) %>
+        </h4>
+        <small>
+          <%= markdown course.description %> 
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>
+

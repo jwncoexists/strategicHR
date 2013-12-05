@@ -1,0 +1,21 @@
+<h1><%= @video.name %></h1>
+
+<% if can? :update, @video %>
+  <%= link_to "Edit Video", edit_video_path, class: 'btn btn-primary btn-mini' %>
+<% end %>
+<% if can? :destroy, @video %>
+  <%= link_to "Delete Video", @video, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: 'Are you sure you want to delete this video?' } %> 
+<% end %>
+<% if can? :create, @video %>
+  <%= link_to "Add Video", new_video_path, class: 'btn btn-primary btn-mini' %> 
+<% end %>    
+
+<div class="span8">
+  <p><%= markdown @video.description %></p>
+  <br>
+  <p class="small"><%= @video.url %></p>
+  <%= youtube_video @video.embedded_url %>
+</div>
+
+
+

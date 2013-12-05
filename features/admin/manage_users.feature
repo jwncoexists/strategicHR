@@ -1,7 +1,7 @@
 Feature: admin manage users page
 
   In order to create and manage users on the strategichr website,
-  As an administrative user, I can add, update, delete, export, and email users on the admin manage users page.
+  As an administrative user, I can add, update, delete, export, and email users.
 
   Scenario: I can add a new users
     When I log in as an administrative user

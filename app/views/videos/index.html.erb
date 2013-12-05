@@ -1,0 +1,24 @@
+<h1>Strategic HR Training YouTube Videos</h1>
+
+<div class="span8">
+  <% if can? :create, Video %>
+    <%= link_to "Add Video", new_video_path, class: 'btn btn-primary btn-mini' %>
+  <% end %>
+</div>
+<br><br>
+<div class="span8">
+  <% @videos.each do |video| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to video.name, video_path(video) %>
+        </h4>
+        <small>
+          <%= markdown video.description %> 
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+

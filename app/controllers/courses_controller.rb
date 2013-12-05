@@ -47,7 +47,7 @@ class CoursesController < ApplicationController
     name = @course.name
     if @course.destroy
       flash[:notice] = "\"#{name}\" was deleted successfully."
-      redirect_to root_path
+      redirect_to courses_path
     else
       flash[:error] = "There was an error deleting the course"
       render :show

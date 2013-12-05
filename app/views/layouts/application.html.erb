@@ -16,6 +16,9 @@
         <% if can? :update, User %>
           <li><%= link_to "Users", users_path %></li>
         <% end %>
+        <% if can? :update, Video %>
+          <li><%= link_to "Videos", videos_path %></li>
+        <% end %>
         <% if current_user %>
           <li><%= link_to "Sign-out", logout_path, method: :delete %></li>
         <% else %>

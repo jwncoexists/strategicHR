@@ -1,22 +1,23 @@
 Feature: admin manage videos page
 
   In order to add and manage videos,
-  As an administrative user, I can add, update and delete videos on the admin manage videos page.
+  As an administrative user, I can add, update and delete videos.
+
+  Background:
+    Given a videos administrative user named "Test Admin User"
+    And I log in as the videos "Test Admin User"
+    And I visit the Videos page
 
   Scenario: I can add a new video
-    When I log in as an administrative user
-    And I visit the admin video page
     Then I can add a new video named "Strategic HR Summary"
 
   Scenario: I can change an existing video
-    Given a video "Strategic HR Summary"
-    When I log in as an administrative user
-    When I edit the "Strategic HR Summary" video
-    And change its name to "Strategic HR Overview"
-    Then the name of the video is stored
+    Given a video named "Strategic HR Overview"
+    When I edit the the "Strategic HR Overview" video
+    And change its url to "http://www.youtube.com"
+    Then the url of the video is stored
 
   Scenario: I can delete a video
-    Given a video "Strategic HR Overview"
-    When I log in as an administrative user
-    And I edit the "Strategic HR Overview" video
+    Given a video named "Strategic HR Overview"
+    When I view the "Strategic HR Overview" video
     Then I can delete the video

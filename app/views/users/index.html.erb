@@ -1,12 +1,10 @@
 <h1>All Users</h1>
-<% if notice %>
-  <p id="notice"><%= notice %> </p>
-<%end %>
 
 <table>
   <thead>
     <tr>
       <th>User Name</th>
+      <th>Email</th>
       <th>Member Since</th>
     </tr>
   </thead>
@@ -15,13 +13,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.name, user_path(user)  %></td>
+        <td><%= user.email %></td>
         <td><%= user.created_at %></td>
      </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New User', new_user_path %>
 

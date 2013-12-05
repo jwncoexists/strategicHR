@@ -4,7 +4,7 @@
   <%= link_to "Edit Course", edit_course_path, class: 'btn btn-primary btn-mini' %>
 <% end %>
 <% if can? :destroy, @course %>
-  <%= link_to "Delete Course", @course, method: :delete, class: 'btn btn-primary btn-mini btn-danger', confirm: 'Are you sure you want to delete this course?' %> 
+  <%= link_to "Delete Course", @course, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: 'Are you sure you want to delete this course?' } %> 
 <% end %>  
 <div class="row">
   <div class="span8">

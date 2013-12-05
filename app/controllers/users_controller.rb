@@ -56,7 +56,16 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-
+    @user = User.find_by_slug(params[:id])
+    authorize! :destroy, @user, message: "You don't have acccess to delete this user."
+    name = @user.name
+    if @user.destroy
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to videos_path
+    else
+      flash[:error] = "There was an error deleting the user"
+      render :show
+    end
   end
 
   private

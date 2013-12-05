@@ -1,7 +1,7 @@
 Feature: admin manage quizzes page
 
   In order to create and manage quizzes,
-  As an administrative user, I can add, update and delete quizzes on the admin manage quizzes page.
+  As an administrative user, I can add, update and delete quizzes.
 
   Scenario: I can add a new quiz
     When I log in as an administrative user

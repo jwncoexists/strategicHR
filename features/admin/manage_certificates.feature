@@ -1,7 +1,7 @@
 Feature: admin manage certificates page
 
   In order to create and manage certificates for courses,
-  As an administrative user, I can add, update and delete certificates on the admin manage certificates page.
+  As an administrative user, I can add, update and delete certificates.
 
   Scenario: I can add a new certificate
     When I log in as an administrative user
