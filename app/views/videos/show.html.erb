@@ -14,6 +14,7 @@
   <p><%= markdown @video.description %></p>
   <br>
   <p class="small"><%= @video.url %></p>
+    <p class="small"><%= @video.embedded_url %></p>
   <%= youtube_video @video.embedded_url %>
 </div>
 

@@ -42,30 +42,22 @@ end
 #-----------------------------
 
 Given(/^a courses administrative user named "(.*?)"$/) do |name|
-  visit(new_user_path)
-  fill_in 'First Name:', with: name
-  fill_in 'Last Name:', with: name
-  fill_in 'Email:', with: "#{name}@example.com"
-  fill_in 'Password:', with: name
-  fill_in 'Confirm password:', with: name
-  click_button('Register') 
-
-  @user = User.find_by_email! "#{name}@example.com"
-  if !@user.update_attribute(:confirmed_at, Time.now)
-    fail('Unable to update confirmed_at attribute for admin user')
-  end
-  if !@user.update_attribute(:account, 'admin')
-    fail('Unable to update account for admin user')
-  end
-  if User.count < 1
-    fail('User not added to database')
-  end
+  puts "the name is #{name}"
+  @user = User.create!(
+    first_name: "Admin",
+    last_name: "User",
+    email: "#{name}@example.com",
+    password: "letmeinplease",
+    password_confirmation: "letmeinplease",
+    confirmed_at: Time.now,
+    account: 'admin'
+  )
 end
 
 Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
-  fill_in 'password', with: name
+  fill_in 'password', with: "letmeinplease"
   click_button('Sign-in')
 end
 
@@ -109,12 +101,9 @@ When(/^I view the "(.*?)" course$/) do |name|
 end
 
 Then(/^I can delete the course$/) do
-  # page.evaluate_script('window.confirm = function() { return true; }')
   click_link('Delete Course')
-  # page.driver.browser.switch_to.alert.accept
-  if page.text.include? @course.name
-    fail("Unable to delete course #{@course.name}")
-  end
+  Course.find_by_id(@course.id).should be_nil
+  #Course.where(name: @course.name).count.should be(0)
 end
 
 #---------------------------
@@ -191,12 +180,9 @@ When(/^I view the "(.*?)" video$/) do |name|
 end
 
 Then(/^I can delete the video$/) do
-  # page.evaluate_script('window.confirm = function() { return true; }')
   click_link('Delete Video')
-  # page.driver.browser.switch_to.alert.accept
-  if page.text.include? @video.name
-    fail("Unable to delete video #{@video.name}")
-  end
+  #Video.find_by_id(@video.id).should be_nil
+  Video.where(name: @video.name).count.should be(0)
 end
 
 #------------------------

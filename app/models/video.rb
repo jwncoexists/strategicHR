@@ -12,6 +12,8 @@ class Video < ActiveRecord::Base
   def embedded_url
     # if the youtube url is  http://www.youtube.com/watch?v=XwmtNk_Yb2Q
     # convert this to the embedded url of http://www.youtube.com/embed/XwmtNk_Yb2Q
-    self.url.gsub /watch\?v\=/, 'embed/'
+    #self.url.gsub /watch\?v\=/, 'embed/'
+    #self.url.gsub /(^.*v=)(.*)(\&.*$)/, 'http://www.youtube.com/embed/\2'
+    "http://www.youtube.com/embed/#{url}"
   end
 end
