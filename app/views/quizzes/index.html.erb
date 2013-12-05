@@ -1,0 +1,10 @@
+<h1>Quizzes</h1>
+
+<% @quizzes.each do |quiz| %>
+  <div class="article">
+    <h2><%= link_to quiz.name, quiz %></h2>
+    <%= pluralize(quiz.questions.size, "Question") %>
+  </div>
+<% end %>
+
+<p><%= link_to 'New Quiz', new_quiz_path %></p>
