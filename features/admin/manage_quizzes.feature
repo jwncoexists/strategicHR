@@ -12,24 +12,25 @@ Feature: admin manage quizzes page
     Then I can create a new quiz named "Strategic HR Overview"
 
   Scenario: I can change an existing quiz name
-    Given a quiz named "Strategic HR Overview"
-    When I edit the quiz named "Strategic HR Overview"
+    Given a quiz named "Strategic HR Summary"
+    When I edit the quiz named "Strategic HR Summary" quiz
     And change the quiz name to "Strategic HR Summary"
     Then the name of the quiz is stored
   
   Scenario: I can add a new quiz question
-    Given a quiz "Strategic HR Summary"
-    When I edit the quiz named "Strategic HR Summary"
-    And add a question, "What type of shortage do workplaces face today?"
+    Given a quiz named "Strategic HR Summary"
+    When I edit the quiz named "Strategic HR Summary" quiz
+    And add a question named, "What type of shortage do workplaces face today?"
     Then the question is added to the quiz
 
   Scenario: I can delete an existing quiz question
-    Given a quiz "Strategic HR Summary"
+    Given a quiz named "Strategic HR Summary"
     And a question, "What type of shortage do workplaces face today?"
-    When I edit the "Strategic HR Summary" quiz
-    And delete the question "What type of shortage do workplaces face today?"
+    When I edit the quiz named "Strategic HR Summary" quiz
+    And delete the question named, "What type of shortage do workplaces face today?"
     Then the question is removed from the quiz
 
   Scenario: I can delete a quiz
-    Given a quiz "Strategic HR Summary"
+    Given a quiz named "Strategic HR Summary"
+    When I view the "Strategic HR Summary" Quiz
     Then I can delete the quiz

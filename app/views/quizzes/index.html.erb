@@ -1,10 +1,15 @@
-<h1>Quizzes</h1>
-
+<h1>Strategic HR Training Quizzes</h1>
+<div class="span8">
+  <% if can? :create, Quiz %>
+    <%= link_to "Create Quiz", new_quiz_path, class: 'btn btn-primary btn-mini' %>
+  <% end %>
+</div>
 <% @quizzes.each do |quiz| %>
   <div class="article">
-    <h2><%= link_to quiz.name, quiz %></h2>
-    <%= pluralize(quiz.questions.size, "Question") %>
+    <h4><%= link_to quiz.name, quiz %> - <%= pluralize(quiz.questions.size, "Question") %></h4>
+    
+    <br>
   </div>
 <% end %>
 
-<p><%= link_to 'New Quiz', new_quiz_path %></p>
+

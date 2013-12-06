@@ -14,7 +14,7 @@ Feature: admin manage courses page
   Scenario: I can change an existing course
     Given a course named "Strategic HR Overview"
     When I edit the course named "Strategic HR Overview" course
-    And change its name to "Strategic HR Summary"
+    And change the course name to "Strategic HR Summary"
     Then the name of the course is stored
 
   Scenario: I can delete a course

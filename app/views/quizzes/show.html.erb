@@ -1,5 +1,12 @@
 <h1><%= @quiz.name %></h1>
 
+<% if can? :update, @quiz %>
+  <%= link_to "Edit Quiz", edit_quiz_path(@quiz), class: 'btn btn-primary btn-mini' %>
+<% end %>
+<% if can? :destroy, @quiz %>
+  <%= link_to "Delete Quiz", @quiz, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: 'Are you sure you want to delete this quiz?' } %> 
+<% end %>  
+<br><br>
 <ol class="questions">
 <% @quiz.questions.each do |question| %>
   <li>
@@ -12,6 +19,3 @@
   </li>
 <% end %>
 </ol>
-
-<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
-<%= link_to 'Back to Quizzes', quizzes_path %>

@@ -42,7 +42,6 @@ end
 #-----------------------------
 
 Given(/^a courses administrative user named "(.*?)"$/) do |name|
-  puts "the name is #{name}"
   @user = User.create!(
     first_name: "Admin",
     last_name: "User",
@@ -81,12 +80,16 @@ end
 
 When(/^I edit the course named "(.*?)" course$/) do |name|
   visit(edit_course_path(@course))
-  fill_in 'Name', with: "Course-#{name}-Edited"
+end
+
+When(/^change the course name to "(.*?)"$/) do |name|
+  fill_in 'Name', with: name
   click_button('Save')
+  @course.name = name
 end
 
 Then(/^the name of the course is stored$/) do
-  expect(page).to have_content "Course-#{name}-Edited"
+  expect(page).to have_content @course.name
 end
 
 Given(/^a course I want to delete named "(.*?)"$/) do |name|
@@ -186,6 +189,92 @@ Then(/^I can delete the video$/) do
 end
 
 #------------------------
+# Admin manage_quizzes.feature
+#------------------------
+
+Given(/^a quizzes administrative user named "(.*?)"$/) do |name|
+    @user = User.create!(
+    first_name: "Admin",
+    last_name: "User",
+    email: "#{name}@example.com",
+    password: "letmeinplease",
+    password_confirmation: "letmeinplease",
+    confirmed_at: Time.now,
+    account: 'admin' )
+end
+
+Given(/^I log in as the quizzes "(.*?)"$/) do |name|
+  visit('/login')
+  fill_in 'email', with: "#{name}@example.com"
+  fill_in 'password', with: "letmeinplease"
+  click_button('Sign-in')
+end
+
+Given(/^I visit the Quizzes page$/) do
+  visit(quizzes_path)
+end
+
+Then(/^I can create a new quiz named "(.*?)"$/) do |name|
+  click_link('Create Quiz')
+  fill_in 'Name', with: name
+  click_button('Save')
+  expect(page).to have_content name
+end
+
+Given(/^a quiz named "(.*?)"$/) do |name|
+  @quiz = Quiz.create!(name: name)
+end
+
+When(/^I edit the quiz named "(.*?)" quiz$/) do |name|
+  visit(edit_quiz_path(@quiz))
+end
+
+When(/^change the quiz name to "(.*?)"$/) do |name|
+  fill_in 'Name', with: "Quiz-#{name}-Edited"
+  click_button('Save')
+end
+
+Then(/^the name of the quiz is stored$/) do
+  expect(page).to have_content "Edited"
+end
+
+When(/^add a question named, "(.*?)"$/) do |name|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the question is added to the quiz$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^a question, "(.*?)"$/) do |name|
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^delete the question named, "(.*?)"$/) do |name|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the question is removed from the quiz$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I view the "(.*?)" Quiz$/) do |name|
+  @quiz = Quiz.find_by_name(name)
+  visit(quiz_path(@quiz))
+  if !page.text.include? name
+    fail("Unable to go to page for quiz: #{name}")
+  end
+end
+
+Then(/^I can delete the quiz$/) do
+  click_link('Delete Quiz')
+  Quiz.find_by_id(@quiz.id).should be_nil
+  Question.find_by_quiz_id(@quiz.id).should be_nil
+  #Quiz.where(name: @quiz.name).count.should be(0)
+end
+
+
+#------------------------
 # Admin manage_certificates feature
 #------------------------
 
@@ -214,54 +303,6 @@ Then(/^the name of the certificate is stored$/) do
 end
 
 Then(/^I can delete the certificate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-#------------------------
-# Admin manage_quizzes.feature
-#------------------------
-
-When(/^I visit the admin quiz page$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I can create a new quiz named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^a quiz "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I edit the "(.*?)" quiz$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the name of the quiz is stored$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^a question, "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^add the question "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the question is added to the quiz$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^delete the question "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the question is removed from the quiz$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I can delete the quiz$/) do
   pending # express the regexp above with the code you wish you had
 end
 
