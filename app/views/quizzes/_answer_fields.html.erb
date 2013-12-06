@@ -1,5 +1,5 @@
 <fieldset>
-  <%= f.label :content, "Answer" %>
+  <%= f.radio_button :question_id, :content, checked: :correct %>
   <%= f.text_field :content %>
   <%= f.hidden_field :_destroy %>
   <%= link_to "remove", '#', class: "remove_fields" %>

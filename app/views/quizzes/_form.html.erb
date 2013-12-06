@@ -3,9 +3,9 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-    
-  <%= f.fields_for :questions do |builder| %>
-    <%= render 'question_fields', f: builder %>
+  <br>
+  <%= f.fields_for :questions do |question| %>
+    <%= render 'question_fields', f: question %>
   <% end %>
   <%= link_to_add_fields "Add Question", f, :questions %>
 
