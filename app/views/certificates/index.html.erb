@@ -1,0 +1,31 @@
+<h1>Strategic HR Training Certificates Issued</h1>
+
+<div class="span8">
+  <% if can? :create, Certificate %>
+    <%= link_to "Create Certificate", new_certificate_path, class: 'btn btn-primary btn-mini' %>
+  <% end %>
+</div>
+<br><br>
+<div class="span8">
+  <table>
+    <thead>
+      <tr>
+        <th>Purchase Date</th>
+        <th>Purchase Price</th>
+        <th>User Email</th>
+        <th>Course</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @certificates.each do |certificate| %>
+        <tr>
+          <td><%= certificate.purchase_date %></td>
+          <td><%= certificate.purchase_price %></td>
+          <td><%= User.find(certificate.user_id).email %></td>
+          <td><%= link_to Course.find(certificate.course_id).name, certificate_path(certificate) %></td>
+       </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206014008) do
+ActiveRecord::Schema.define(version: 20131206231759) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 20131206014008) do
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
+  create_table "certificates", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.date     "purchase_date"
+    t.float    "purchase_price"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "certificates", ["course_id"], name: "index_certificates_on_course_id", using: :btree
+  add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "name"

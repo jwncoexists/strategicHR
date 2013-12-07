@@ -1,6 +1,5 @@
 StrategicHR::Application.routes.draw do
 
-
   get "welcome/index"
   get "welcome/about"
   root to: 'welcome#index'
@@ -12,6 +11,7 @@ StrategicHR::Application.routes.draw do
   resources :courses
   resources :videos
   resources :quizzes
+  resources :certificates
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

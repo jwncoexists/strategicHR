@@ -31,6 +31,7 @@ gem 'foreigner'
 gem 'cancan'
 gem 'figaro'
 gem 'redcarpet'
+gem 'prawn'
 #gem 'protected_attributes'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
