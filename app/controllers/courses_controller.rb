@@ -9,10 +9,29 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    1.times do
+      section = @course.sections.build
+    end
   end
 
   def edit
     @course = Course.find_by_slug(params[:id])
+    @videos = Video.all
+    @video_options = []
+    @videos.each do |video|
+      hash = {}
+      hash[:name] = video.name
+      hash[:id] = video.id
+      @video_options << hash
+    end
+    @quizzes = Quiz.all
+    @quiz_options = []
+    @quizzes.each do |quiz|
+      hash = {}
+      hash[:name] = quiz.name
+      hash[:id] = quiz.id
+      @quiz_options << hash
+    end
     authorize! :update, @course, message: "You don't have access to edit this course."
   end
 
@@ -57,7 +76,8 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:name, :description, :price, :user_id)
+    params.require(:course).permit(:name, :description, :price, :user_id,
+                                   sections_attributes: [:id, :video_id, :quiz_id, :sequence, :_destroy] )
   end
 
 end

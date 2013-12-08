@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206231759) do
+ActiveRecord::Schema.define(version: 20131208013805) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -64,6 +64,19 @@ ActiveRecord::Schema.define(version: 20131206231759) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sections", force: true do |t|
+    t.integer  "sequence"
+    t.integer  "course_id"
+    t.integer  "video_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sections", ["course_id"], name: "index_sections_on_course_id", using: :btree
+  add_index "sections", ["quiz_id"], name: "index_sections_on_quiz_id", using: :btree
+  add_index "sections", ["video_id"], name: "index_sections_on_video_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "last_name",                    null: false

@@ -17,6 +17,7 @@ StrategicHR::Application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
   get "sessions/create"
   get "sessions/destroy"
   #match 'contact' => 'contact#new', :as => 'contact', :via => :get

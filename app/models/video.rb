@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+  belongs_to :section
   before_save :update_slug
 
   def update_slug

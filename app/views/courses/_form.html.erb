@@ -26,6 +26,11 @@
     </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <br>
+    <h4> Videos & Quizzes </h4>
+    <%= f.fields_for :sections do |section| %>
+      <%= render 'section_fields', f: section %>
+    <% end %>
+    <%= link_to_add_fields "Add Video/Quiz", f, :sections %>
     <div class="control-group">
       <div class="controls">
         <%= f.submit "Save", class: 'btn' %>

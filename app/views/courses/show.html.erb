@@ -16,6 +16,18 @@
     <% end %>
   </div>
 </div>  
+
+<% if can? :create, Course %>
+  <ol class="sections">
+  <% @course.sections.each do |section| %>
+    <li>
+      <%= Video.find(section.video_id).name %> | 
+      <%= Quiz.find(section.quiz_id).name %>
+    </li>
+  <% end %>
+  </ol>
+<% end %>
+
 <p>
   <% if !current_user %>
     <h3>Yes, I want to enroll in this class and earn CEU credits!</h3>

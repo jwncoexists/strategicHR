@@ -11,11 +11,8 @@
     <div class="media">
       <div class="media-body">
         <h4 class="media-heading">
-          <%= link_to course.name, course_path(course) %>
+          <%= link_to course.name, course_path(course) %> - <%= pluralize(course.sections.size, "Section") %>
         </h4>        
-        <h4>
-          <%= markdown course.description %> 
-        </h4>
       </div>
     </div>
   <% end %>
