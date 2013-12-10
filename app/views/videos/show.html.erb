@@ -8,15 +8,12 @@
 <% end %>
 <% if can? :create, @video %>
   <%= link_to "Add Video", new_video_path, class: 'btn btn-primary btn-mini' %> 
+   <p><%= markdown @video.description %></p>
 <% end %>    
 
-<div class="span8">
-  <p><%= markdown @video.description %></p>
   <br>
-  <p class="small"><%= @video.url %></p>
-    <p class="small"><%= @video.embedded_url %></p>
-  <%= youtube_video @video.embedded_url %>
-</div>
+  <p><%= raw(youtube_embed(@video.url)) %></p>
+
 
 
 

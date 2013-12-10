@@ -4,7 +4,7 @@
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Question" %>
   <%= f.fields_for :answers do |answer| %>
-          <%= render 'answer_fields', f: answer, question_id: :id, question_content: :content %>
+    <%= render 'answer_fields', f: answer, locals: {question_id: :id, question_content: :content} %>
   <% end %>
   <%= link_to_add_fields "Add Answer", f, :answers %>
 </fieldset>

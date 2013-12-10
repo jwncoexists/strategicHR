@@ -6,16 +6,17 @@
 <% if can? :destroy, @course %>
   <%= link_to "Delete Course", @course, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: 'Are you sure you want to delete this course?' } %> 
 <% end %>
-<div class="row">
-  <div class="span8">
-    <p class="lead"><%= markdown @course.description %></p>
-  </div>
-  <div class="span4">
-    <% if can? :create, Course %>
-      <%= link_to "New Course", new_course_path(@course), class: 'btn btn-large btn-block' %>
-    <% end %>
-  </div>
-</div>  
+<% if can? :create, Course %>
+  <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
+<% end %>
+<% if current_user %>
+  <%= link_to "Watch Video", video_path, class: 'btn btn-primary btn-mini' %>
+<% end %>
+
+<div class="span8">
+  <p class="lead"><%= markdown @course.description %></p>
+</div>
+
 
 <% if can? :create, Course %>
   <ol class="sections">

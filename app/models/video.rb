@@ -15,6 +15,15 @@ class Video < ActiveRecord::Base
     # convert this to the embedded url of http://www.youtube.com/embed/XwmtNk_Yb2Q
     #self.url.gsub /watch\?v\=/, 'embed/'
     #self.url.gsub /(^.*v=)(.*)(\&.*$)/, 'http://www.youtube.com/embed/\2'
-    "http://www.youtube.com/embed/#{url}"
+    #{}"http://www.youtube.com/embed/#{url}"
+    youtube_id = ""
+    if url[/youtu\.be\/([^\?]*)/]
+      youtube_id = $1
+    else
+      # Regex from # http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url/4811367#4811367
+      url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
+      youtube_id = $5
+    end
+    "http://www.youtube.com/embed/#{ youtube_id }"
   end
 end

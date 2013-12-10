@@ -19,19 +19,16 @@ class Course < ActiveRecord::Base
   end
 
   # return course status of N/A, Not Started, In Progress, Completed, Certificate Purchased
-  def status(user_id)
-    return_status = ""
-    sections_avail = self.sections
-    if (sections_avail.count == 0)
-      return_status = "N/A"
-    else
+  def my_status(user_id)
+    return_status = "N/A"
+    if (!self.sections.empty?)
       return_status = "Not Started"
     end
 
     all_sections_completed = false
     sections_stats = self.section_statuses.where(user_id: user_id)
     
-    if (sections_stats.count > 0)
+    if (!sections_stats.empty?)
       return_status = "In Progress"
       all_sections_completed = true
       sections_stats.each do |section_stat|
@@ -43,7 +40,8 @@ class Course < ActiveRecord::Base
     end
 
     course_stat = self.course_statuses.where(user_id: user_id)
-    if (course_stat.count > 0)
+    if (!course_stat.empty?)
+      course_stat = course_stat.first
       if(course_stat.purchased_certificate)
         return_status = "Certificate Purchased"
       end
@@ -54,7 +52,7 @@ class Course < ActiveRecord::Base
   def section_status(user_id, section_id)
     return_status = "Not Started"
     section_stat = Section.where(user_id: user_id, section_id: section_id)
-    if (section_stat.count > 0)
+    if (!section_stat.empty?)
       if (section_stat.completed_quiz)
         return_stat = 'Quiz Completed'
       end

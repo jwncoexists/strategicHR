@@ -10,18 +10,18 @@ class CoursesController < ApplicationController
     if (current_user)
       # find user's course status, create course_status for user if doesn't already exist
       @course_status = @course.course_statuses.where(user_id: current_user.id)
-      if !@course_status
+      if @course_status.empty?
         @course_status = CourseStatus.create(course_id: @course.id, 
                                              user_id: current_user.id)
       end
       # find user's section status, create section_statuses for user if doesn't already exist
       @section_statuses = @course.section_statuses.where(user_id: current_user.id, 
                                                          course_id: @course.id)
-      if (@sections && !@section_statuses)
+      if (!@sections.empty? && @section_statuses.empty?)
         @section_statuses = []
         @sections.each do |section|
           @section_statuses << SectionStatus.create(course_id: @course.id, 
-                                                    user_id: @user.id, 
+                                                    user_id: current_user.id, 
                                                     section_id: section.id)
         end
       end
@@ -84,7 +84,7 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:name, :description, :price, :user_id,
+    params.require(:course).permit(:name, :description, :price, :user_id, :ceu,
                                    sections_attributes: [:id, :video_id, :quiz_id, :sequence, :_destroy],
                                    course_statuses_attributes: [:id, :course_id, :user_id, :purchased_certificate],
                                    sections_statuses_attributes: [:id, :section_id, :course_id, :user_id, :completed_quiz, :_destroy]  )
