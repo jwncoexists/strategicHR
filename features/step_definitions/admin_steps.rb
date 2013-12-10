@@ -65,7 +65,7 @@ Given(/^I visit the Manage Courses home page$/) do
 end
 
 Then(/^I can create a new course named "(.*?)"$/) do |name|
-  click_link('Create Course')
+  click_link('New Course')
   fill_in 'Name', with: name
   fill_in 'Description', with: Faker::Lorem.paragraph
   fill_in 'CEU', with: 5
@@ -75,7 +75,8 @@ Then(/^I can create a new course named "(.*?)"$/) do |name|
 end
 
 Given(/^a course named "(.*?)"$/) do |name|
-  @course = Course.create!(name: name, description: Faker::Lorem.paragraph)
+  @course = Course.create!(name: name, 
+                           description: Faker::Lorem.paragraph)
 end
 
 When(/^I edit the course named "(.*?)" course$/) do |name|
@@ -90,6 +91,37 @@ end
 
 Then(/^the name of the course is stored$/) do
   expect(page).to have_content @course.name
+end
+
+Given(/^a Video named "(.*?)"$/) do |name|
+  @video = Video.create!(name: "#{name}-video", 
+                         description: Faker::Lorem.paragraph, 
+                         length: 30, 
+                         presenter: 'admin', 
+                         url: 'www.youtube.com')
+end
+
+Given(/^a Quiz named "(.*?)"$/) do |name|
+  @quiz = Quiz.create!(name: "#{name}-quiz", 
+                       description: Faker::Lorem.paragraph, 
+                       passing_score: 70, 
+                       num_questions_to_show: 10)
+end
+
+When(/^add the video and quiz to the course$/) do
+  visit(edit_course_path(@course))
+  page.select @video.name
+  page.select @quiz.name
+  click_button('Save')
+end
+
+Then(/^the video and quiz are stored in the course$/) do
+  if !@course.sections.first.video_id == @video.id
+    fail("Video was not stored for the course")
+  end
+  if !@course.sections.first.quiz_id == @quiz.id
+    fail("Quiz was not stored for the course")
+  end
 end
 
 Given(/^a course I want to delete named "(.*?)"$/) do |name|
@@ -156,7 +188,11 @@ Then(/^I can add a new video named "(.*?)"$/) do |name|
 end
 
 Given(/^a video named "(.*?)"$/) do |name|
-  @video = Video.create!(name: name, description: Faker::Lorem.paragraph, length: 6, presenter: Faker::Name.name, url: 'http://www.youtube.com/watch?v=pIVREol3Zsc')
+  @video = Video.create!(name: name, 
+                         description: Faker::Lorem.paragraph, 
+                         length: 6, 
+                         presenter: Faker::Name.name, 
+                         url: 'http://www.youtube.com/watch?v=pIVREol3Zsc')
 end
 
 When(/^I edit the the "(.*?)" video$/) do |name|
@@ -215,7 +251,7 @@ Given(/^I visit the Quizzes page$/) do
 end
 
 Then(/^I can create a new quiz named "(.*?)"$/) do |name|
-  click_link('Create Quiz')
+  click_link('New Quiz')
   fill_in 'Name', with: name
   click_button('Save')
   expect(page).to have_content name

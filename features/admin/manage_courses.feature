@@ -17,6 +17,14 @@ Feature: admin manage courses page
     And change the course name to "Strategic HR Summary"
     Then the name of the course is stored
 
+  Scenario: I can add a video and quiz to an existing course
+    Given a course named "Strategic HR Overview"
+    And a Video named "Strategic HR Overview Video"
+    And a Quiz named "Strategic HR Overview Quiz'"
+    When I edit the course named "Strategic HR Overview" course
+    And add the video and quiz to the course
+    Then the video and quiz are stored in the course
+
   Scenario: I can delete a course
     Given a course named "Strategic HR Overview"
     When I view the "Strategic HR Overview" course

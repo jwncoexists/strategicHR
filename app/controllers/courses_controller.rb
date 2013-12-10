@@ -5,6 +5,27 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find_by_slug(params[:id])
+    @sections = @course.sections.order(id: :asc)
+    
+    if (current_user)
+      # find user's course status, create course_status for user if doesn't already exist
+      @course_status = @course.course_statuses.where(user_id: current_user.id)
+      if !@course_status
+        @course_status = CourseStatus.create(course_id: @course.id, 
+                                             user_id: current_user.id)
+      end
+      # find user's section status, create section_statuses for user if doesn't already exist
+      @section_statuses = @course.section_statuses.where(user_id: current_user.id, 
+                                                         course_id: @course.id)
+      if (@sections && !@section_statuses)
+        @section_statuses = []
+        @sections.each do |section|
+          @section_statuses << SectionStatus.create(course_id: @course.id, 
+                                                    user_id: @user.id, 
+                                                    section_id: section.id)
+        end
+      end
+    end
   end
 
   def new
@@ -16,22 +37,9 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find_by_slug(params[:id])
+    @sections = @course.sections.order(id: :asc)
     @videos = Video.all
-    @video_options = []
-    @videos.each do |video|
-      hash = {}
-      hash[:name] = video.name
-      hash[:id] = video.id
-      @video_options << hash
-    end
     @quizzes = Quiz.all
-    @quiz_options = []
-    @quizzes.each do |quiz|
-      hash = {}
-      hash[:name] = quiz.name
-      hash[:id] = quiz.id
-      @quiz_options << hash
-    end
     authorize! :update, @course, message: "You don't have access to edit this course."
   end
 
@@ -77,7 +85,9 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:name, :description, :price, :user_id,
-                                   sections_attributes: [:id, :video_id, :quiz_id, :sequence, :_destroy] )
+                                   sections_attributes: [:id, :video_id, :quiz_id, :sequence, :_destroy],
+                                   course_statuses_attributes: [:id, :course_id, :user_id, :purchased_certificate],
+                                   sections_statuses_attributes: [:id, :section_id, :course_id, :user_id, :completed_quiz, :_destroy]  )
   end
 
 end

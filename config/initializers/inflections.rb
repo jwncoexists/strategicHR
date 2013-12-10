@@ -9,6 +9,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
   inflect.plural /^(quiz)$/i, '\1zes'
+  inflect.plural /^(status)$/i, '\1es'
 end
 
 # These inflection rules are supported but not enabled by default:

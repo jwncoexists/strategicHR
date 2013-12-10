@@ -1,7 +1,15 @@
 <%= form_for @quiz do |f| %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 40, placeholder: "name of quiz", required: true  %>
+  </div>
+  <div class="field">
+    <%= f.label :num_questions_to_show, "# Questions on a Quiz:"  %><br />
+    <%= f.text_field :num_questions_to_show, size: 40, placeholder: "# questions to show on quiz", required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :passing_score %> <br />
+    <%= f.text_field :passing_score, size: 40, placeholder: "score required to pass quiz", required: true  %>
   </div>
   <br>
   <%= f.fields_for :questions do |question| %>

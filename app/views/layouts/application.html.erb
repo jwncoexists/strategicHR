@@ -1,12 +1,12 @@
 <!DOCTYPE html> 
 <html>
    <head>
-     <title>Strategic HR Training by Dr. Bob Nelson</title>
-     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <title>Strategic HR Training by Dr. Bob Nelson</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
 
-     <%= csrf_meta_tags %>
-   </head>
-   <body>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
     <div class="container">
       <ul class="nav nav-tabs">
         <li><%= link_to "Strategic HR", welcome_index_path %></li>
@@ -38,8 +38,8 @@
       <% end unless flash.nil? %>
 
       <%= yield %>
-     </div>
-    <%= javascript_include_tag "application" %>
-    </body>
+    </div>
+  <%= javascript_include_tag "application" %>
+  </body>
  </html> 
 

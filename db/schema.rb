@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131208013805) do
+ActiveRecord::Schema.define(version: 20131210012452) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20131208013805) do
 
   add_index "certificates", ["course_id"], name: "index_certificates_on_course_id", using: :btree
   add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", using: :btree
+
+  create_table "course_statuses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.boolean  "purchased_certificate", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "course_statuses", ["course_id"], name: "index_course_statuses_on_course_id", using: :btree
+  add_index "course_statuses", ["user_id"], name: "index_course_statuses_on_user_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -63,7 +74,22 @@ ActiveRecord::Schema.define(version: 20131208013805) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "num_questions_to_show", default: 10
+    t.integer  "passing_score",         default: 70
   end
+
+  create_table "section_statuses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "section_id"
+    t.boolean  "completed_quiz", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "section_statuses", ["course_id"], name: "index_section_statuses_on_course_id", using: :btree
+  add_index "section_statuses", ["section_id"], name: "index_section_statuses_on_section_id", using: :btree
+  add_index "section_statuses", ["user_id"], name: "index_section_statuses_on_user_id", using: :btree
 
   create_table "sections", force: true do |t|
     t.integer  "sequence"

@@ -2,19 +2,30 @@
 
 <div class="span8">
   <% if can? :create, Course %>
-    <%= link_to "Create Course", new_course_path, class: 'btn btn-primary btn-mini' %>
+    <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
   <% end %>
 </div>
 <br><br>
-<div class="span8">
+<table>
+  <tr>
+    <th>Course Name</th>
+    <th># CEU Credits</th>
+    <% if current_user %>
+      <th>Status<th>
+    <% else %>
+      <th>Description<th>
+    <% end %>
+  </tr>
   <% @courses.each do |course| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <%= link_to course.name, course_path(course) %> - <%= pluralize(course.sections.size, "Section") %>
-        </h4>        
-      </div>
-    </div>
+    <tr>
+      <td><%= link_to course.name, course_path(course) %></td>
+      <td><%= course.ceu %></td>
+      <% if current_user %>
+        <td><%= course.status(current_user.id) %></td>
+      <% else %>
+        <td><%= markdown course.description.split[0..100].join(' ') %></td>
+      <% end %>
+    </tr>
   <% end %>
-</div>
+</table>
 
