@@ -30,7 +30,8 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.account? :admin
       can :manage, :all
+    elsif user.account? :member
+      can :take, Course
     end
-    can :read, Course
   end
 end

@@ -7,16 +7,18 @@ class CoursesController < ApplicationController
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
     
+    # create new CourseStatus & SectionStatus Records if they don't already exist
     if (current_user)
       # find user's course status, create course_status for user if doesn't already exist
-      @course_status = @course.course_statuses.where(user_id: current_user.id)
-      if @course_status.empty?
-        @course_status = CourseStatus.create(course_id: @course.id, 
+      @course_status_rec = @course.course_statuses.where(user_id: current_user.id)
+      if @course_status_rec.empty?
+        @course_status_rec = CourseStatus.create(course_id: @course.id, 
                                              user_id: current_user.id)
+      else
+          @course_status_rec = @course_status_rec.first
       end
       # find user's section status, create section_statuses for user if doesn't already exist
-      @section_statuses = @course.section_statuses.where(user_id: current_user.id, 
-                                                         course_id: @course.id)
+      @section_statuses = @course.section_statuses.where(user_id: current_user.id,                                                          course_id: @course.id)
       if (!@sections.empty? && @section_statuses.empty?)
         @section_statuses = []
         @sections.each do |section|
@@ -25,6 +27,11 @@ class CoursesController < ApplicationController
                                                     section_id: section.id)
         end
       end
+    end
+    if current_user
+      @my_course_status = @course.my_status(current_user.id)
+    else
+      @my_course_status = ""
     end
   end
 
