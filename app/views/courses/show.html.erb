@@ -32,10 +32,14 @@
         <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
         <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
 
-        <% if @section_statuses.where(section_id: section.id).first.completed_quiz == true %>
-             <td>PASSED</td>
+        <% if !@section_statuses.empty? %>
+          <% if @section_statuses.where(section_id: section.id).first.completed_quiz == true %>
+            <td>PASSED</td>
+          <% else %>
+            <td>NOT PASSED</td>
+          <% end %>
         <% else %>
-             <td>NOT PASSED</td>
+          <td> NOT PASSED</td>
         <% end %>
 
       </tr>

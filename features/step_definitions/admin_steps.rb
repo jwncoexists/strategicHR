@@ -70,6 +70,8 @@ Then(/^I can create a new course named "(.*?)"$/) do |name|
   fill_in 'Description', with: Faker::Lorem.paragraph
   fill_in 'CEU', with: 5
   fill_in 'Price', with: 39.99
+  page.select Video.first.name
+  page.select Quiz.first.name
   click_button('Save')
   expect(page).to have_content name
 end
@@ -108,11 +110,12 @@ Given(/^a Quiz named "(.*?)"$/) do |name|
                        num_questions_to_show: 10)
 end
 
-When(/^add the video and quiz to the course$/) do
-  visit(edit_course_path(@course))
-  page.select @video.name
-  page.select @quiz.name
-  click_button('Save')
+When(/^add the video named "(.*?)" to the course$/) do |name|
+  page.select @name
+end
+
+When(/^add the quiz named "(.*?)" to the course$/) do |name|
+  page.select @name
 end
 
 Then(/^the video and quiz are stored in the course$/) do

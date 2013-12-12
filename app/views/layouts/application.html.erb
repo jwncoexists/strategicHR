@@ -1,44 +1,21 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-   <head>
-    <title>Strategic HR Training by Dr. Bob Nelson</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Strategic Hr" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Strategic HR Training by Dr. Bob Nelson" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="container">
-      <ul class="nav nav-tabs">
-        <li><%= link_to "Strategic HR", welcome_index_path %></li>
-        <li><%= link_to "About", welcome_about_path %></li>
-        <li><%= link_to "Contact", contact_path %></li>
-        <li><%= link_to "Courses", courses_path %></li>
-        <% if can? :update, User %>
-          <li><%= link_to "Users", users_path %></li>
-        <% end %>
-        <% if can? :update, Video %>
-          <li><%= link_to "Videos", videos_path %></li>
-        <% end %>
-        <% if can? :update, Quiz %>
-          <li><%= link_to "Quizzes", quizzes_path %></li>
-        <% end %>
-        <% if current_user %>
-          <li><%= link_to "Sign-out", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign-in", login_path %></li>
-          <li><%= link_to "Sign-up", new_user_path %></li>
-        <% end %>
-      </ul>
-      <% flash_css_class = { :notice => 'alert alert-success', :error => 'alert alert-error', :alert => 'alert'} %>
-      <% flash.each do |key, msg| %>
-        <div class=<%= flash_css_class[key] %>>
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= msg %>
-        </div>
-      <% end unless flash.nil? %>
+    <header>
 
-      <%= yield %>
-    </div>
-  <%= javascript_include_tag "application" %>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
   </body>
-</html> 
+</html>

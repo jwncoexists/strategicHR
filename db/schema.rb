@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210012452) do
+ActiveRecord::Schema.define(version: 20131212060920) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -68,6 +68,40 @@ ActiveRecord::Schema.define(version: 20131210012452) do
   end
 
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
+
+  create_table "quiz_attempts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "section_id"
+    t.integer  "quiz_id"
+    t.integer  "num_questions"
+    t.float    "passing_score"
+    t.string   "status"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quiz_attempts", ["course_id"], name: "index_quiz_attempts_on_course_id", using: :btree
+  add_index "quiz_attempts", ["quiz_id"], name: "index_quiz_attempts_on_quiz_id", using: :btree
+  add_index "quiz_attempts", ["section_id"], name: "index_quiz_attempts_on_section_id", using: :btree
+  add_index "quiz_attempts", ["user_id"], name: "index_quiz_attempts_on_user_id", using: :btree
+
+  create_table "quiz_results", force: true do |t|
+    t.integer  "quiz_attempt_id"
+    t.integer  "question_num"
+    t.text     "question_text"
+    t.integer  "answer_num"
+    t.text     "answer_text"
+    t.integer  "correct_answer_num"
+    t.text     "correct_answer_text"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quiz_results", ["quiz_attempt_id"], name: "index_quiz_results_on_quiz_attempt_id", using: :btree
 
   create_table "quizzes", force: true do |t|
     t.string   "name"
