@@ -9,10 +9,8 @@
 <% if can? :create, Course %>
   <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
 <% end %>
-<% if can? :take, Course %>
-  <% if @course_status_rec.purchased_certificate %>
-    <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id), format: "pdf"), class: 'btn btn-primary btn-mini' %>
-  <% end %>
+<% if can? :view_certificate, @course %>
+  <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id), format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
 
 <div class="span8">
@@ -25,23 +23,13 @@
     <tr>
       <th>Video</th>
       <th>Quiz</th>
-      <th>Quiz Status</th>
+      <th>Take Quiz</th>
     </tr>
     <% @sections.each do |section| %>
       <tr>
         <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
         <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
-
-        <% if !@section_statuses.empty? %>
-          <% if @section_statuses.where(section_id: section.id).first.completed_quiz == true %>
-            <td>PASSED</td>
-          <% else %>
-            <td>NOT PASSED</td>
-          <% end %>
-        <% else %>
-          <td> NOT PASSED</td>
-        <% end %>
-
+        <td><%= link_to "Start Quiz", new_attempt_path(section: section) %><td>
       </tr>
     <% end %>
 <% end %>

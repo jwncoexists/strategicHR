@@ -1,0 +1,28 @@
+<h1><%= "Quiz #{@quiz.name}" %></h1>
+<br>
+<h4><%= @question.content %>
+<br>
+<p>Please select one of the following answers:</p>
+<fieldset>
+  <div class="field">
+    <%= form_tag(result_path(@result), method: :put) %>
+      <% @answers.each do |answer| %>
+        <%= radio_button_tag('answer', answer.content, @result.answer_id == answer.id) %>
+        <%= label_tag 'answer', answer.content %>
+
+        <br>
+      <% end %>
+      <br>
+      <% if @result.prev_question != nil %>
+        <%= submit_tag "< Previous" %>
+      <% end %>
+      <% if @result.next_question != nil %>
+        <%= submit_tag "Next >" %>
+      <% else %>
+        <%= submit_tag "Complete Quiz" %>
+      <% end %>
+
+  </div>
+</fieldset>
+
+<br>

@@ -111,7 +111,8 @@ Given(/^a Quiz named "(.*?)"$/) do |name|
 end
 
 When(/^add the video named "(.*?)" to the course$/) do |name|
-  page.select @name
+  puts page.body
+  select(name, from: 'course[sections_attributes][0][video_id]')
 end
 
 When(/^add the quiz named "(.*?)" to the course$/) do |name|

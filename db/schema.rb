@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212060920) do
+ActiveRecord::Schema.define(version: 20131215214932) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 20131212060920) do
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
+  create_table "attempts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "section_id"
+    t.string   "status"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attempts", ["section_id"], name: "index_attempts_on_section_id", using: :btree
+  add_index "attempts", ["user_id"], name: "index_attempts_on_user_id", using: :btree
 
   create_table "certificates", force: true do |t|
     t.integer  "course_id"
@@ -35,17 +48,6 @@ ActiveRecord::Schema.define(version: 20131212060920) do
 
   add_index "certificates", ["course_id"], name: "index_certificates_on_course_id", using: :btree
   add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", using: :btree
-
-  create_table "course_statuses", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.boolean  "purchased_certificate", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "course_statuses", ["course_id"], name: "index_course_statuses_on_course_id", using: :btree
-  add_index "course_statuses", ["user_id"], name: "index_course_statuses_on_user_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -69,40 +71,6 @@ ActiveRecord::Schema.define(version: 20131212060920) do
 
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
-  create_table "quiz_attempts", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.integer  "section_id"
-    t.integer  "quiz_id"
-    t.integer  "num_questions"
-    t.float    "passing_score"
-    t.string   "status"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "quiz_attempts", ["course_id"], name: "index_quiz_attempts_on_course_id", using: :btree
-  add_index "quiz_attempts", ["quiz_id"], name: "index_quiz_attempts_on_quiz_id", using: :btree
-  add_index "quiz_attempts", ["section_id"], name: "index_quiz_attempts_on_section_id", using: :btree
-  add_index "quiz_attempts", ["user_id"], name: "index_quiz_attempts_on_user_id", using: :btree
-
-  create_table "quiz_results", force: true do |t|
-    t.integer  "quiz_attempt_id"
-    t.integer  "question_num"
-    t.text     "question_text"
-    t.integer  "answer_num"
-    t.text     "answer_text"
-    t.integer  "correct_answer_num"
-    t.text     "correct_answer_text"
-    t.boolean  "correct"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "quiz_results", ["quiz_attempt_id"], name: "index_quiz_results_on_quiz_attempt_id", using: :btree
-
   create_table "quizzes", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -112,18 +80,21 @@ ActiveRecord::Schema.define(version: 20131212060920) do
     t.integer  "passing_score",         default: 70
   end
 
-  create_table "section_statuses", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.integer  "section_id"
-    t.boolean  "completed_quiz", default: false
+  create_table "results", force: true do |t|
+    t.integer  "attempt_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "question_id"
+    t.integer  "correct_answer_id"
+    t.integer  "answer_id"
+    t.integer  "next_question"
+    t.integer  "prev_question"
   end
 
-  add_index "section_statuses", ["course_id"], name: "index_section_statuses_on_course_id", using: :btree
-  add_index "section_statuses", ["section_id"], name: "index_section_statuses_on_section_id", using: :btree
-  add_index "section_statuses", ["user_id"], name: "index_section_statuses_on_user_id", using: :btree
+  add_index "results", ["answer_id"], name: "index_results_on_answer_id", using: :btree
+  add_index "results", ["attempt_id"], name: "index_results_on_attempt_id", using: :btree
+  add_index "results", ["correct_answer_id"], name: "index_results_on_correct_answer_id", using: :btree
+  add_index "results", ["question_id"], name: "index_results_on_question_id", using: :btree
 
   create_table "sections", force: true do |t|
     t.integer  "sequence"

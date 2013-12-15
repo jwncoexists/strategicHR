@@ -67,9 +67,6 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
-    font-awesome-sass-rails (3.0.2.2)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     foreigner (1.5.0)
       activerecord (>= 3.0.0)
     gherkin (2.12.2)
@@ -108,6 +105,7 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    railroady (1.1.1)
     rails (4.0.0)
       actionmailer (= 4.0.0)
       actionpack (= 4.0.0)
@@ -168,8 +166,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    turbolinks (1.3.0)
-      coffee-rails
     tzinfo (0.3.38)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -189,12 +185,12 @@ DEPENDENCIES
   database_cleaner
   faker
   figaro
-  font-awesome-sass-rails
   foreigner
   jbuilder (~> 1.2)
   jquery-rails
   pg
   prawn
+  railroady
   rails (~> 4.0.0)
   rails_12factor
   rails_layout
@@ -202,5 +198,4 @@ DEPENDENCIES
   rspec-rails
   sass-rails (>= 3.2)
   sdoc
-  turbolinks
   uglifier (>= 1.0.3)

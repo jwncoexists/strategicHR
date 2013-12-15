@@ -41,6 +41,6 @@ class CertificatesController < ApplicationController
 private
 
   def certificate_params
-    params.require(:certificate).permit(:user_id, :course_id, :purchase_price, :purchase_date)
+    params.require(:certificate).permit(:user_id, :course_id, :purchase_price, :purchase_date, :slug, :created_at, :updated_at)
   end
 end

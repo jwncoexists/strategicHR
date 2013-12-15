@@ -1,0 +1,15 @@
+
+
+
+<%= link_to "Prev", edit_result_path(section: @section,
+                                     attempt: @attempt,
+                                     quiz: @quiz,
+                                     questions: @questions,
+                                     cur_question: @cur_question-1),
+                                     class: 'btn btn-primary btn-large' %>
+<%= link_to "Next", edit_result_path(section: @section,
+                                     attempt: @attempt,
+                                     quiz: @quiz,
+                                     questions: @questions,
+                                     cur_question: @cur_question+1),
+                                     class: 'btn btn-primary btn-large' %>

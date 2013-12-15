@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   before_save :update_slug
   has_secure_password
   has_many :certificates
+  has_many :attempts, dependent: :destroy
 
   ACCOUNTS = %w[member admin]
   def account?(base_account)

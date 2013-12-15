@@ -1,0 +1,3 @@
+<h1><%= "Start Quiz for Course: #{@course.name}" %></h1>
+<h4><%= "This Quiz contains: #{@num_questions} multiple choice questions." %></h4>
+<%= link_to "Begin", edit_result_path(@first_result), class: 'btn btn-primary btn-large' %>

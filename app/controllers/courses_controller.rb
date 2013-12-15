@@ -6,33 +6,6 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
-    
-    # create new CourseStatus & SectionStatus Records if they don't already exist
-    if (current_user)
-      # find user's course status, create course_status for user if doesn't already exist
-      @course_status_rec = @course.course_statuses.where(user_id: current_user.id)
-      if @course_status_rec.empty?
-        @course_status_rec = CourseStatus.create(course_id: @course.id, 
-                                             user_id: current_user.id)
-      else
-          @course_status_rec = @course_status_rec.first
-      end
-      # find user's section status, create section_statuses for user if doesn't already exist
-      @section_statuses = @course.section_statuses.where(user_id: current_user.id,                                                          course_id: @course.id)
-      if (!@sections.empty? && @section_statuses.empty?)
-        @section_statuses = []
-        @sections.each do |section|
-          @section_statuses << SectionStatus.create(course_id: @course.id, 
-                                                    user_id: current_user.id, 
-                                                    section_id: section.id)
-        end
-      end
-    end
-    if current_user
-      @my_course_status = @course.my_status(current_user.id)
-    else
-      @my_course_status = ""
-    end
   end
 
   def new
@@ -91,10 +64,8 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:name, :description, :price, :user_id, :ceu,
-                                   sections_attributes: [:id, :video_id, :quiz_id, :sequence, :_destroy],
-                                   course_statuses_attributes: [:id, :course_id, :user_id, :purchased_certificate],
-                                   sections_statuses_attributes: [:id, :section_id, :course_id, :user_id, :completed_quiz, :_destroy]  )
+    params.require(:course).permit(:id, :name, :description, :price, :user_id, :ceu, :slug,
+                                   sections_attributes: [:id, :course_id, :video_id, :quiz_id, :sequence, :_destroy] )
   end
 
 end
