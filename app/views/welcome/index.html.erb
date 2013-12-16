@@ -1,3 +1,27 @@
-<h1>Strategic HR Training by Dr. Bob Nelson</h1> 
-<p>This is the home page for Dr. Bob Nelson's Online Strategic HR training.</p> 
+<h1>Online Strategic HR Training by Dr. Bob Nelson</h1> 
+<img style="float: left; margin: 0px 15px 15px 0px;" src=<%= image_path("bob-microphone.jpg") %> alt="Dr. Bob Nelson">
+<p>Strategic Human Resource Management is no longer optional for businesses! HR managers must work with  company leaders to motivate and unify employees around the the goals of the business. This emerging trend in Human Resources is now a critical factor in the competitive success of every organization!</p> 
+<blockquote>
+  <p><strong>All of Dr. Bob's online training courses are certified for <i class="primary-colour">Business Management and Strategy CEU Credits</i> by HRCI!</p></strong>
+</blockquote>
+  <p>Dr. Bob Nelson, a leading authority on Strategic Human Resource Management, helps organizations meet their goals. He provides cutting-edge, research-based, education and training aimed at energizing employees and teams to meet corporate goals. Dr. Bob's seminars are best known for their practical, real-life, positive ideas and techniques which improve employee performance, morale, productivity, motivation, and engagement.</p>
+
+  <blockquote><strong>Join the leading-edge human resource professionals and executives from around the world who have helped their organizations succeed by taking <i class="primary-colour">Dr. Bob's positive, proven, real-life, fun, and insightful online seminars!</strong>
+  </blockquote></i>
+  <p>Each online seminar includes:</p>
+  <dl class="dl-horizontal"> 
+    <dt>*FREE* Training Videos</dt>
+    <dd>Each online course includes one or more training videos narrated by Dr. Bob.  There is no charge to watch the videos, and you can watch them as many times as you like.</dd><br>
+    <dt>*FREE* Quiz</dt>
+    <dd>After completing a training video, there is a short quiz on the key points from the training video.  Don't worry if you don't pass the quiz the first time!  You can take the quiz as many time as you like!</dd><br>
+    <dt>CEU Certificate</dt><dd>After completing the training videos and quizzes, you can optionally purchase a certificate verifying how many HRCI CEU credits you've earned for the course.</dd>
+  </dl>
+
+  <% if !current_user %>
+    <%= link_to "Sign In", login_path, class: 'btn btn btn-primary' %> <strong>or 
+    <%= link_to "Register for FREE", new_user_path, class: 'btn btn-primary' %> today!</strong>
+  <% end %>
+
+
+
 
