@@ -1,5 +1,4 @@
 // import the CSS framework
-@import 'font-awesome';
 @import "bootstrap-custom";
 @import "bootstrap";
 
@@ -42,6 +41,11 @@ img {
 .primary-colour {
   color: #55a79a;
 }
+
+.table td,
+.table th {
+    background-color: #fff !important;
+  }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes

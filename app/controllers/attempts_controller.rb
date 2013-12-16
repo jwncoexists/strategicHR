@@ -5,7 +5,14 @@ class AttemptsController < ApplicationController
 
   def show
     @attempt = Attempt.find(params[:id])
-    @course = Course.find(@attempt.section.course_id)
+    @section = Section.find(@attempt.section_id)
+    @course = Course.find(@section.course_id)
+    @quiz = Quiz.find(@section.quiz_id)
+    @num_correct = @attempt.results.where('answer_id = correct_answer_id').count
+    @num_questions = @attempt.results.count
+    @passing_score = @quiz.passing_score
+    @score = (@num_correct.to_f/@num_questions.to_f)*100.0
+    @attempt.update_attribute(:passed, @score >= @passing_score)
   end
 
   def new
@@ -47,7 +54,7 @@ class AttemptsController < ApplicationController
   private
 
   def attempt_params
-    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time,
+    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time, :passed,
                                     results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, :answer_id, :_destroy] )
   end
 
