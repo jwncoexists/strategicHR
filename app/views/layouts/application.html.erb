@@ -3,22 +3,282 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Strategic Hr" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Strategic HR Training by Dr. Bob Nelson" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Strategic HR Business Management HRCI Certified Training by Dr. Bob Nelson" %>">
 
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-    <header>
+ <body class="page page-index">
+<a href="#content" class="sr-only">Skip to content</a>
+<div id="navigation" class="wrapper">
+  <div class="navbar-static-top"> 
+    
+    <!--Hidden Header Region-->
+    <div class="header-hidden">
+      <div class="header-hidden-inner container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4">
+            <h3>About Us</h3>
+            <p>Online Strategic HR Business Management CEU Credit Training!</p>
+            <a href=<%= about_path %> class="btn btn-sm btn-primary">Find out more</a> </div>
+          <div class="col-sm-4 col-md-4"> 
+            <!--@todo: replace with company contact details-->
+            <h3>Contact Us</h3>
+            <address>
+            <p><abbr title="Phone"><i class="fa fa-phone"></i></abbr> 858-673-0690</p>
+            <p><abbr title="Email"><i class="fa fa-envelope"></i></abbr> bob@drbobnelson.com</p>
+            <p><abbr title="Address"><i class="fa fa-home"></i></abbr> PO Box 500872 San Diego, CA 92150</p>
+            </address>
+          </div>
+          <div class="col-sm-4 col-md-4"> 
+            <!--Colour Switch for demo - @todo: remove in production-->
+            <div class="colour-switcher">
+              <h3>Theme Colours</h3>
+              <a href="#green" class="green active" data-toggle="tooltip" data-placement="bottom" data-original-title="Green (Default)">Green</a> <a href="#red" class="red" data-toggle="tooltip" data-placement="bottom" data-original-title="Red">Red</a> <a href="#blue" class="blue" data-toggle="tooltip" data-placement="bottom" data-original-title="Blue">Blue</a>
+              <p>Cookies are NOT enabled so colour selection is not persistent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--Header & Branding region-->
+    <div class="header">
+      <div class="header-inner container">
+        <div class="row">
+          <div class="col-md-8"> 
+            <!--branding/logo--> 
+            <a class="navbar-brand" href="index.htm" title="Home">
+            <h1><span>Strategic</span>HR<span>.</span></h1>
+            </a>
+            <div class="slogan">HRCI Certified Online Training by <font class="primary-colour"><strong>Dr. Bob Nelson</font></strong></div>
+          </div>
+          
+          <!--header rightside-->
+          <div class="col-md-4"> 
+            <!--social media icons-->
+            <div class="social-media"> 
+              <!--@todo: replace with company social media details--> 
+              <a href="http://twitter.com"><i class="fa fa-twitter"></i></a> <a href="https://www.facebook.com/pages/Dr-Bob-Nelson/133781976903"><i class="fa fa-facebook"></i></a> <a href="http://www.linkedin.com/profile/view?id=44933175"><i class="fa fa-linkedin"></i></a> </div>
+          </div>
+        </div>
+        <div id="header-hidden-link"> <a href="#" title="Click me you'll get a surprise" class="show-hide" data-toggle="show-hide" data-target=".header-hidden"><i></i>Open</a> </div>
+      </div>
+    </div>
+    
+    <!--Change order for full width navbar
+  <div class="navbar"> 
+    <div class="container" data-toggle="clingify">-->
+    <div class="container" data-toggle="clingify">
+      <div class="navbar"> 
+        <!--
+      mobile collapse menu button
+      - data-toggle="toggle" = default BS menu
+      - data-toggle="jpanel-menu" = jPanel Menu
+      --> 
+        <a class="navbar-btn" data-toggle="jpanel-menu" data-target=".navbar-collapse"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a> 
+        
+        <!--user menu-->
+        <% if !current_user %>
+          <div class="btn-group user-menu pull-right"> <a href=<%= new_user_path %> class="btn btn-primary signup">Sign Up</a> <a href=<%= login_path %> class="btn btn-primary dropdown-toggle login">Login</a> </div>
+        <% else %>
+          <div class="btn-group user-menu pull-right"> <%= link_to "Logout", logout_path, method: :delete, class: 'btn btn-primary' %></div>
+        <% end %>
+        
+        <!--everything within this div is collapsed on mobile-->
+        <div class="navbar-collapse collapse"> 
+          
+          <!--main navigation-->
+          <ul class="nav navbar-nav">
+            <li class="home-link"><a href=<%= root_path %>><i class="fa fa-home"></i><span class="hidden">Home</span></a></li>
 
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
+            <li class="dropdown"> <a href="blog.htm" class="dropdown-toggle" id="blog-drop" data-toggle="dropdown">Courses +</a> 
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu" role="menu" aria-labelledby="blog-drop">
+                <% if current_user %>
+                  <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">My Courses</a></li>
+                <% else %>
+                  <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">All Courses</a></li>
+                <% end %>
+                <% Course.all.each do |course| %>
+                  <li role="presentation"><a role="menuitem" href=<%=course_path(course) %> tabindex="-1" class="menu-item"><%= course.name %></a></li>
+                <% end %>
+              </ul>
+            </li>
+
+            <li><a href="pricing.htm" class="menu-item">Pricing</a></li>
+            <li><a href=<%= contact_path %> class="menu-item">Contact</a></li>
+            <li><a href=<%= about_path %> class="menu-item">About</a></li>
+          </ul>
+        </div>
+        <!--/.navbar-collapse --> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="content">
+  <div class="container"> 
+    <div class="row">
       <%= render 'layouts/messages' %>
-      <container>
-        <%= yield %>
-      </container>
-    </main>
-  </body>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+<% if !current_user %>
+  <div id="content-below" class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="upsell"> <small class="muted">There is no charge to sign up for Dr. Bob Nelson's Strategic HR Online Training. <span class="spacer"> </span> </small> <a href=<%= new_user_path %> class="btn btn-primary">Sign-up Today <i class="fa fa-arrow-right"></i></a> </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col">
+        <div class="block contact-block"> 
+          <!--@todo: replace with company contact details-->
+          <h3>Contact Dr. Bob</h3>
+          <address>
+          <p><abbr title="Phone"><i class="fa fa-phone"></i></abbr> (858) 673-0690</p>
+          <p><abbr title="Fax"><i class="fa fa-print"></i></abbr> (858) 673-9031</p>
+          <p><abbr title="Email"><i class="fa fa-envelope"></i></abbr> bob@drbobnelson.com</p>
+          <p><abbr title="Address"><i class="fa fa-home"></i></abbr> PO Box 500872, San Diego, CA 92150</p>
+          </address>
+        </div>
+      </div>
+      <div class="col-md-4 col">
+        <div class="block">
+          <h3>About Us</h3>
+          <p>Dr. Bob Nelson is a leading authority on Strategic Human Resource Management topics and provides online business and management training seminars certified by HRCI for CEU credits!</p>
+        </div>
+      </div>
+      <div class="col-md-4 col">
+        <div class="block newsletter">
+          <h3>Get Dr. Bob's Tip of the Month</h3>
+          <p>Sign up for a monthly dose of inspiration from Dr. Bob Nelson:</p>
+          <!--@todo: replace with mailchimp code-->
+
+          <form role = "form" name="ccoptin" action="http://visitor.r20.constantcontact.com/d.jsp" target="_blank" method="post" style="margin-bottom:3;">
+            <div class="input-group input-group-sm">
+            <label class="sr-only" for="email-field">Email:</label>
+            <input type="text" class="form-control" name="ea">
+            &nbsp;<input type="submit" name="go" value="Join" class="submit" style="font-family:Arial,Helvetica,sans-serif; font-size:11px;">
+            <input type="hidden" name="llr" value="cydbbwfab">
+            <input type="hidden" name="m" value="1105619619586">
+            <input type="hidden" name="p" value="oi">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div id="toplink"><a href="#top" class="top-link" title="Back to top">Back To Top <i class="fa fa-chevron-up"></i></a></div>
+      <!--@todo: replace with company copyright details-->
+      <div class="subfooter">
+        <div class="col-md-6">
+          <p>Copyright 2013 &copy; Nelson Motivation Inc.</p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline footer-menu">
+            <li><a href=<%= privacy_path %>>Privacy</a></li>
+            <li><a href=<%= contact_path %>>Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!--Hidden elements - excluded from jPanel Menu on mobile-->
+<div class="hidden-elements jpanel-menu-exclude"> 
+  <!--@modal - signup modal-->
+  <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <form action="signup.htm" role="form">
+            <h5>Price Plan</h5>
+            <select class="form-control">
+              <option>Basic</option>
+              <option>Pro</option>
+              <option>Pro +</option>
+            </select>
+            <h5>Account Information</h5>
+            <div class="form-group">
+              <label class="sr-only" for="signup-first-name">First Name</label>
+              <input type="text" class="form-control" id="signup-first-name" placeholder="First name">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="signup-last-name">Last Name</label>
+              <input type="text" class="form-control" id="signup-last-name" placeholder="Last name">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="signup-username">Userame</label>
+              <input type="text" class="form-control" id="signup-username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="signup-email">Email address</label>
+              <input type="email" class="form-control" id="signup-email" placeholder="Email address">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="signup-password">Password</label>
+              <input type="password" class="form-control" id="signup-password" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="term">
+                I agree with the Terms and Conditions. </label>
+            </div>
+            <button class="btn btn-primary" type="submit">Sign up</button>
+          </form>
+        </div>
+        <div class="modal-footer"> <small>Already signed up? <a href="login.htm">Login here</a>.</small> </div>
+      </div>
+      <!-- /.modal-content --> 
+    </div>
+    <!-- /.modal-dialog --> 
+  </div>
+  <!-- /.modal --> 
+  
+  <!--@modal - login modal-->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form action="login.htm" role="form">
+            <div class="form-group">
+              <label class="sr-only" for="login-email">Email</label>
+              <input type="email" id="login-email" class="form-control email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="login-password">Password</label>
+              <input type="password" id="login-password" class="form-control password" placeholder="Password">
+            </div>
+            <button type="button" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+        <div class="modal-footer"> <small>Not a member? <a href="#" class="signup">Sign up now!</a></small><br />
+          <small><a href="#">Forgotten password?</a></small> </div>
+      </div>
+      <!-- /.modal-content --> 
+    </div>
+    <!-- /.modal-dialog --> 
+  </div>
+  <!-- /.modal --> 
+</div>
+</body>
 </html>

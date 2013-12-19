@@ -1,3 +1,10 @@
 development:
   SENDGRID_USERNAME:
   SENDGRID_PASSWORD:
+    # Stripe Keys
+  PUBLISHABLE_KEY:   ""
+  SECRET_KEY:        ""
+
+production:
+  PUBLISHABLE_KEY:   ""
+  SECRET_KEY:        ""

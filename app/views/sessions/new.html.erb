@@ -1,24 +1,26 @@
-<div id="theText" class = "span-6">
-  <div class="depot_form">
-  <% if flash[:alert] %>
-    <p id="notice"> <%= flash[:alert] %> </p>
-  <% end %>
-  <%= form_tag sessions_create_path, :method => :get do %>
-    <fieldset>
-      <legend>Please Sign-in:</legend><br>
-      <div>
-        <%= label_tag :email, 'Email:' %>
-        <%= text_field_tag :email, params[:email], size: 40, placeholder: "email", required: true %>
-      </div>
-      <div>
-        <%= label_tag :password, 'Password:' %>
-        <%= password_field_tag :password, params[:password], size: 40, placeholder: "password", required: true  %>
-      </div>
-      <br>
-      <div>
-        <%= submit_tag "Sign-in" %>
-      </div>
-    </fieldset>
-  <% end %>
+<div class="row">
+  <div class="col-md-6">
+    <%= form_tag sessions_create_path, :method => :get do %>
+      <fieldset>
+        <legend>Please Sign-in:</legend><br>
+        <div class="control-group">
+          <%= label_tag :email, 'Email:', size: 40 %>
+          <div class="controls">
+            <%= text_field_tag :email, params[:email], size: 40, placeholder: "email address", required: true %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= label_tag :password, 'Password:', size: 40 %>
+          <div class="controls">
+            <%= password_field_tag :password, params[:password], size: 40, placeholder: "password", required: true  %>
+          </div>
+        </div>
+        <br>
+        <div>
+          <%= submit_tag "Sign-in" %>
+        </div>
+      </fieldset>
+    <% end %>
+
   </div>
 </div>

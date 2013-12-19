@@ -13,7 +13,7 @@
   <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id), format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
 
-<div class="span8">
+<div class="col-md-8">
   <p class="lead"><%= markdown @course.description %></p>
 </div>
 <br>
@@ -29,16 +29,9 @@
       <tr>
         <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
         <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
-        <td><%= link_to "Start Quiz", new_attempt_path(section: section) %><td>
+        <td><%= link_to "Start Quiz", new_attempt_path(section: section) %></td>
       </tr>
     <% end %>
+  </table>
 <% end %>
 
-<p>
-  <% if !current_user %>
-    <h3>Yes, I want to enroll in this class and earn CEU credits!</h3>
-    <%= link_to "Sign-in", login_path, class: 'btn btn-primary btn-large' %> or 
-    <%= link_to "Register", new_user_path, class: 'btn btn-primary btn-large' %> today!
-  <% else %>
-  <% end %>
-</p>

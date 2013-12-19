@@ -1,6 +1,6 @@
-<h1>My Strategic HR Training Courses</h1>
+<h1>Online Strategic HR Training Courses</h1>
 
-<div class="span8">
+<div class="col-md-8">
   <% if can? :create, Course %>
     <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
   <% end %>
@@ -11,9 +11,9 @@
     <th>Course Name</th>
     <th># CEU Credits</th>
     <% if can? :take, Course %>
-      <th>Status<th>
+      <th>Status</th>
     <% else %>
-      <th>Description<th>
+      <th>Description</th>
     <% end %>
   </tr>
   <% @courses.each do |course| %>

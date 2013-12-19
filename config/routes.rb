@@ -2,6 +2,10 @@ StrategicHR::Application.routes.draw do
 
   get "welcome/index"
   get "welcome/about"
+  get "welcome/pricing"
+  match "pricing" => 'welcome#pricing', via: :get
+  get "welcome/privacy"
+  match "privacy" => 'welcome#privacy', via: :get
   root to: 'welcome#index'
   match "about" => 'welcome#about', via: :get
   resources :contact, only: [:new, :create]
@@ -14,6 +18,7 @@ StrategicHR::Application.routes.draw do
   resources :certificates
   resources :attempts
   resources :results
+  resources :charges
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
