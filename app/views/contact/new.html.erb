@@ -1,4 +1,4 @@
-<h2> Send a Message to Dr. Bob Nelson</h2>
+<h2 class="title-divider"><span>Send a Message <span class="de-em">to Dr. Bob Nelson</span></span> <small></small></h2>
 
 <div class="row">
   <div class="col-md-6">
@@ -24,7 +24,7 @@
       </div>
       
       <div class="control-group">
-        <%= form.label :body, 'Message Body:', class: 'control-label' %>
+        <%= form.label :body, 'Message:', class: 'control-label' %>
         <div class="controls">
           <%= form.text_area :body, placeholder: "message body", rows: 8, cols: 40, required: true %>
         </div>
@@ -32,7 +32,7 @@
       <br>
       <div class="control-group">
         <div class="controls">
-          <%= form.submit "Submit", class: 'btn' %>
+          <%= form.submit "Submit",  class: 'btn btn-primary btn-large'  %>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216053748) do
+ActiveRecord::Schema.define(version: 20131219050709) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20131216053748) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.float    "ceu",                                 default: 1.5
+    t.boolean  "released",                            default: false
   end
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree

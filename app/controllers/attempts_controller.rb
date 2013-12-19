@@ -55,7 +55,8 @@ class AttemptsController < ApplicationController
 
   def attempt_params
     params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time, :passed,
-                                    results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, :answer_id, :_destroy] )
+                                    results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, 
+                                                         :answer_id, :next_question, :prev_question, :_destroy] )
   end
 
 end

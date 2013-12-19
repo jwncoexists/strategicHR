@@ -3,7 +3,15 @@ When(/^I go to the strategicHR home page$/) do
 end
 
 Then(/^I see a title of strategicHR$/) do
-  expect(page).to have_content "Strategic HR Training by Dr. Bob Nelson"
+  expect(page).to have_content "StrategicHR"
+end
+
+Then(/^I see Dr\. Bob Nelson$/) do
+  expect(page).to have_content "Dr. Bob Nelson"
+end
+
+Then(/^I see CEU Credits$/) do
+  expect(page).to have_content "CEU Credits"
 end
 
 When(/^I go to the contact page$/) do
@@ -11,10 +19,10 @@ When(/^I go to the contact page$/) do
 end
 
 Then(/^I can send a message$/) do
-  fill_in 'Name', with: 'Jennifer Nelson'
-  fill_in 'Email', with: 'jenniferwnelson@example.com'
-  fill_in 'Subject', with: 'Test Contact Form'
-  fill_in 'Body', with: 'Hello and thank you for this class'
+  fill_in 'Name:', with: 'Jennifer Nelson'
+  fill_in 'Email:', with: 'jenniferwnelson@example.com'
+  fill_in 'Subject:', with: 'Test Contact Form'
+  fill_in 'Message:', with: 'Hello and thank you for this class'
   click_button "Submit"
   expect(page).to have_content 'success'
 end
@@ -28,9 +36,9 @@ Then(/^I see visitor information about the course$/) do
   expect(page).to have_content @course.name
 end
 
-Then(/^I am prompted to either sign\-in or register$/) do
-  expect(page).to have_content "Sign-in"
-  expect(page).to have_content "Register"
+Then(/^I am prompted to either login or sign up$/) do
+  expect(page).to have_content "Login"
+  expect(page).to have_content "Sign Up"
 end
 
 Given(/^I am a visitor to the registration page$/) do
@@ -51,5 +59,5 @@ end
 
 Then(/^I am directed to the login screen with a notice to confirm my email address$/) do
   expect(page).to have_content "An email has been sent"
-  expect(page).to have_content "Please Sign-in"
+  expect(page).to have_content "Please Login"
 end

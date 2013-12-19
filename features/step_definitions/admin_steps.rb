@@ -23,9 +23,9 @@ When(/^I log in as an administrative user$/) do
   end
 
   visit('/login')
-  fill_in 'email', with: 'admin@example.com'
-  fill_in 'password', with: 'admin'
-  click_button('Sign-in')
+  fill_in 'Email:', with: 'admin@example.com'
+  fill_in 'Password:', with: 'admin'
+  click_button('Submit')
 end
 
 When(/^I visit the admin home page$/) do
@@ -33,7 +33,7 @@ When(/^I visit the admin home page$/) do
 end
 
 Then(/^I can see links to administrative functions$/) do
-  # only admins can manage users
+  # only admins can update users
   expect(page).to have_content "Users"
 end
 
@@ -55,9 +55,9 @@ end
 
 Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
-  fill_in 'email', with: "#{name}@example.com"
-  fill_in 'password', with: "letmeinplease"
-  click_button('Sign-in')
+  fill_in 'Email:', with: "#{name}@example.com"
+  fill_in 'Password:', with: "letmeinplease"
+  click_button('Submit')
 end
 
 Given(/^I visit the Manage Courses home page$/) do
@@ -65,6 +65,7 @@ Given(/^I visit the Manage Courses home page$/) do
 end
 
 Then(/^I can create a new course named "(.*?)"$/) do |name|
+  #puts page.body
   click_link('New Course')
   fill_in 'Name', with: name
   fill_in 'Description', with: Faker::Lorem.paragraph
@@ -111,7 +112,7 @@ Given(/^a Quiz named "(.*?)"$/) do |name|
 end
 
 When(/^add the video named "(.*?)" to the course$/) do |name|
-  puts page.body
+  # puts page.body
   select(name, from: 'course[sections_attributes][0][video_id]')
 end
 
@@ -173,7 +174,7 @@ Given(/^I log in as the videos "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: name
-  click_button('Sign-in')
+  click_button('Submit')
 end
 
 Given(/^I visit the Videos page$/) do
@@ -247,7 +248,7 @@ Given(/^I log in as the quizzes "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: "letmeinplease"
-  click_button('Sign-in')
+  click_button('Submit')
 end
 
 Given(/^I visit the Quizzes page$/) do

@@ -1,5 +1,4 @@
 
-
 <%# navigation styled for Twitter Bootstrap 3.0 %>
 <nav class="navbar navbar-inverse">
   <div class="container">
@@ -26,12 +25,12 @@
       <%= link_to "Contact", contact_path, class: 'navbar-brand'  %>
       <% if current_user %>
         <div class="btn-group user-menu pull-right"> 
-          <%= link_to "Sign-out", logout_path, method: :delete, class: 'btn btn-primary'  %>
+          <%= link_to "Logout", logout_path, method: :delete, class: 'btn btn-primary'  %>
         </div>
       <% else %>
         <div class="btn-group user-menu pull-right"> 
-          <%= link_to "Sign-in", login_path, class: 'btn btn-primary'  %>
-          <%= link_to "Register", new_user_path, class: 'btn btn-primary'  %>
+          <%= link_to "Login", login_path, class: 'btn btn-primary'  %>
+          <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary'  %>
         </div>
       <% end %>
 

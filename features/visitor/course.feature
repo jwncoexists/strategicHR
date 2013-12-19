@@ -5,4 +5,4 @@ Feature: course page
   Scenario:
     Given I am a visitor to the course page for "Visitor Course"
     Then I see visitor information about the course
-    And I am prompted to either sign-in or register
+    And I am prompted to either login or sign up

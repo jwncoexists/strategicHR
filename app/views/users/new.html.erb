@@ -1,5 +1,7 @@
-<h3><%= "Register for Strategic HR Training by Dr. Bob Nelson:" %></h3><br>
+<h2 class="title-divider"><span>Register for <span class="de-em">StrategicHR Online Training</span></span> <small></small></h2>
+<br>
 
 <%= render 'form' %>
 
-<%= link_to "| I've already registered, I want to sign-in |", login_url %>
+<p>or if you're already a registered user, just click the button below to log in to StrategicHR:</p>
+<%= link_to "Login", login_url, class: 'btn btn-primary btn-large'  %>

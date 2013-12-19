@@ -1,4 +1,4 @@
-<h1><%= @video.name %></h1>
+<h2 class="title-divider"><span><%= @video.name %> <span class="de-em">Video</span></span> <small></small></h2>
 
 <% if can? :update, @video %>
   <%= link_to "Edit Video", edit_video_path, class: 'btn btn-primary btn-mini' %>

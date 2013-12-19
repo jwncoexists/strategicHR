@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <%= form_tag sessions_create_path, :method => :get do %>
       <fieldset>
-        <legend>Please Sign-in:</legend><br>
+        <legend>Please Login:</legend><br>
         <div class="control-group">
           <%= label_tag :email, 'Email:', size: 40 %>
           <div class="controls">
@@ -17,7 +17,7 @@
         </div>
         <br>
         <div>
-          <%= submit_tag "Sign-in" %>
+          <%= submit_tag "Submit", class: 'btn btn-primary btn-large'  %>
         </div>
       </fieldset>
     <% end %>

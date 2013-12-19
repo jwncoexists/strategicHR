@@ -17,13 +17,24 @@ class Course < ActiveRecord::Base
 
   # return status of N/A, Not Started, In Progress, Completed, Certificate Purchased
   def my_status(user_id)
-    return_status = "N/A"
-    if (!self.sections.empty?)
-      return_status = "Quiz Not Completed"
-    end
-
-    if (!self.certificates.where(user_id: user_id).empty?)
-        return_status = "Certificate Purchased"
+    return_status = "Course videos & quizzes will be available soon!"
+    if (self.released)
+      if (!self.certificates.where(user_id: user_id).empty?)
+          return_status = "Certificate Purchased"
+      else
+        return_status = "Quiz".pluralize(self.sections.count)
+        all_sections_complete = true
+        self.sections.each do |section|
+          if (section.attempts.where(user_id: user_id, passed: true).empty?)
+            all_sections_complete = false
+          end
+        end
+        if (all_sections_complete)
+          return_status = return_status + " Complete"
+        else
+          return_status = return_status + " Not Complete"
+        end
+      end
     end
     return_status
   end

@@ -1,4 +1,4 @@
-<h1><%= @quiz.name %></h1>
+<h2 class="title-divider"><span>Quiz <span class="de-em"><%= @quiz.name %></span></span> <small></small></h2>
 
 <% if can? :update, @quiz %>
   <%= link_to "Edit Quiz", edit_quiz_path(@quiz), class: 'btn btn-primary btn-mini' %>

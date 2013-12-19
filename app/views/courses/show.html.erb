@@ -1,4 +1,4 @@
-<h1><%= @course.name %></h1>
+<h2 class="title-divider"><span>Course: <span class="de-em"><%= @course.name %></span></span> <small></small></h2>
 
 <% if can? :update, @course %>
   <%= link_to "Edit Course", edit_course_path(@course), class: 'btn btn-primary btn-mini' %>
@@ -12,26 +12,39 @@
 <% if can? :view_certificate, @course %>
   <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id), format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
+<% if can? :purchase_certificate, @course %>
+  <%= link_to "Purchase Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id), format: "pdf"), class: 'btn btn-primary btn-mini' %>
+<% end %>
 
-<div class="col-md-8">
+<div class="col-md-12">
   <p class="lead"><%= markdown @course.description %></p>
 </div>
 <br>
-<% if can? :take, @course %>
-  <h4>Course Videos & Quizzes</h4>
-  <table class="table table-striped table-bordered table-condensed">
-    <tr>
-      <th>Video</th>
-      <th>Quiz</th>
-      <th>Take Quiz</th>
-    </tr>
-    <% @sections.each do |section| %>
+<div class="col-md-8">
+  <% if can? :take, @course %>
+    <h4>Course Videos & Quizzes</h4>
+    <table class="table table-striped table-bordered table-condensed">
       <tr>
-        <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
-        <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
-        <td><%= link_to "Start Quiz", new_attempt_path(section: section) %></td>
+        <th>Watch Video</th>
+        <% if can? :edit, Quiz %>
+          <th>Quiz</th>
+        <% end %>
+        <th>Take Quiz</th>
       </tr>
+      <% @sections.each do |section| %>
+        <tr>
+          <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
+          <% if can? :edit, Quiz %>
+            <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
+          <% end %>
+          <td><%= link_to "Take Quiz", new_attempt_path(section: section) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <% if current_user %>
+      <h4> This videos and quizzes for the course will be coming soon! </h4>
     <% end %>
-  </table>
-<% end %>
+  <% end %>
+</div>
 

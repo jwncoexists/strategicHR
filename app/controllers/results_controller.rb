@@ -3,6 +3,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @attempt = Attempt.find(@result.attempt_id)
     @section = Section.find(@attempt.section_id)
+    @course = Course.find(@section.course_id)
     @quiz = Quiz.find(@section.quiz_id)
     @count = Result.where(attempt_id: @attempt.id).count
     @question = Question.find(@result.question_id)
@@ -14,6 +15,7 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @attempt = Attempt.find(@result.attempt_id)
     @section = Section.find(@attempt.section_id)
+    @course = Course.find(@section.course_id)
     @quiz = Quiz.find(@section.quiz_id)
     @question = Question.find(@result.question_id)
     # save the user's answer in the result record

@@ -1,4 +1,4 @@
-<h1>Online Strategic HR Training Courses</h1>
+<h2 class="title-divider"><span>StrategicHR <span class="de-em">Online Training Courses</span></span> <small></small></h2>
 
 <div class="col-md-8">
   <% if can? :create, Course %>
@@ -23,7 +23,7 @@
       <% if can? :take, Course %>
         <td><%= course.my_status(current_user.id) %></td>
       <% else %>
-        <td><%= markdown course.description.split[0..100].join(' ') %></td>
+        <td><%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %></td>
       <% end %>
     </tr>
   <% end %>

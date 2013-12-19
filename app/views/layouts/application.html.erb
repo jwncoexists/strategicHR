@@ -50,7 +50,7 @@
           <div class="col-md-8"> 
             <!--branding/logo--> 
             <a class="navbar-brand" href="index.htm" title="Home">
-            <h1><span>Strategic</span>HR<span>.</span></h1>
+            <h1><span>Strategic</span>HR<span></span></h1>
             </a>
             <div class="slogan">HRCI Certified Online Training by <font class="primary-colour"><strong>Dr. Bob Nelson</font></strong></div>
           </div>
@@ -110,6 +110,15 @@
             <li><a href="pricing.htm" class="menu-item">Pricing</a></li>
             <li><a href=<%= contact_path %> class="menu-item">Contact</a></li>
             <li><a href=<%= about_path %> class="menu-item">About</a></li>
+            <% if can? :update, User %>
+              <li><a href=<%= users_path %> class="menu-item">Users</a></li>
+            <% end %>
+            <% if can? :update, Quiz %>
+              <li><a href=<%= quizzes_path %> class="menu-item">Quizzes</a></li>
+            <% end %>
+            <% if can? :update, Video %>
+              <li><a href=<%= videos_path %> class="menu-item">Videos</a></li>
+            <% end %>
           </ul>
         </div>
         <!--/.navbar-collapse --> 
@@ -131,7 +140,7 @@
   <div id="content-below" class="wrapper">
     <div class="container">
       <div class="row">
-        <div class="upsell"> <small class="muted">There is no charge to sign up for Dr. Bob Nelson's Strategic HR Online Training. <span class="spacer"> </span> </small> <a href=<%= new_user_path %> class="btn btn-primary">Sign-up Today <i class="fa fa-arrow-right"></i></a> </div>
+        <div class="upsell"> <small class="muted">There is no charge to sign up for Dr. Bob Nelson's Strategic HR Online Training. <span class="spacer"> </span> </small> <a href=<%= new_user_path %> class="btn btn-primary">Sign Up Today <i class="fa fa-arrow-right"></i></a> </div>
       </div>
     </div>
   </div>

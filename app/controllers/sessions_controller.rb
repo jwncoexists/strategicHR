@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         render :new
       elsif user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to courses_path notice: "You are signed in to Strategic HR by Dr. Bob."
+        redirect_to courses_path notice: "You are now logged in to Strategic HR by Dr. Bob."
       else
         flash[:alert] =  "Invalid user/password combination."
         render :new
@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: "You are signed out."
+    redirect_to root_path, notice: "You are now logged out."
   end
 end

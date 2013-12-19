@@ -31,7 +31,14 @@ class Ability
     if user.account? :admin
       can :manage, :all
     elsif user.account? :member
-      can :take, Course
+      can :take, Course, released: true
+      can :view_certificate, Course do |course|
+        course.my_status(user) == "Certificate Purchased"
+      end
+      can :purchase_certificate, Course do |course|
+        course.certificate.where(user_id: user.id).empty? &&
+        course.my_status(user) =~ /Quiz(zes)? Completed/
+      end
     end
   end
 end

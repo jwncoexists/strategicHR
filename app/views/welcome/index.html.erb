@@ -1,6 +1,6 @@
 
 <div class="block features">
-  <h2 class="title-divider"><span>Earn CEU Credits - <span class="de-em">@your place, @your pace!</span></span> <small></small></h2>
+  <h2 class="title-divider"><span>Earn CEU Credits <span class="de-em">@your place, @your pace!</span></span> <small></small></h2>
   <div class="row">
     <div class="feature col-sm-6 col-md-3"> <a href="features.htm"><img src=<%= image_path("bob-microphone.jpg") %> alt="Dr. Bob Nelson" class="img-responsive" /></a>
       <h3 class="title"><a href=<%= about_path %> >Dr. Bob <span class="de-em">Nelson</span></a></h3>
@@ -30,7 +30,7 @@
 
 <!--Customer testimonial-->
 <div class="block testimonials margin-top-large">
-  <h2 class="title-divider"><span>Testimonials <span class="de-em">for Dr. Bob's Seminars</span></span> <small></small></h2>
+  <h2 class="title-divider"><span>Testimonials <span class="de-em">for Dr. Bob Nelson's Seminars</span></span> <small></small></h2>
   <div class="row">
     <div class="col-md-4">
       <blockquote>
@@ -52,8 +52,8 @@
 
 
   <% if !current_user %>
-    <%= link_to "Sign In", login_path, class: 'btn btn btn-primary' %> <strong>or 
-    <%= link_to "Register for FREE", new_user_path, class: 'btn btn-primary' %> today!</strong>
+    <%= link_to "Login", login_path, class: 'btn btn btn-primary' %> <strong>or 
+    <%= link_to "Sign Up for FREE", new_user_path, class: 'btn btn-primary' %> today!</strong>
   <% end %>
 
 

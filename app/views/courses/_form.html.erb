@@ -24,6 +24,13 @@
         <%= f.text_field :price, as: :float, size: 40, placeholder: "price to purchase course certificate" %>
       </div>
     </div>
+    <br>
+    <div class="control-group">
+      <%= f.label :released %> <br />
+      <div class="controls">
+        <%= f.check_box :released %> <br />
+      </div>
+    </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <br>
     <h4> Videos & Quizzes </h4>
