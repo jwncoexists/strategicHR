@@ -25,7 +25,10 @@ When(/^I log in as an administrative user$/) do
   visit('/login')
   fill_in 'Email:', with: 'admin@example.com'
   fill_in 'Password:', with: 'admin'
-  click_button('Submit')
+
+  within_fieldset 'Login' do
+    click_button('Login')
+  end
 end
 
 When(/^I visit the admin home page$/) do
@@ -57,7 +60,9 @@ Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'Email:', with: "#{name}@example.com"
   fill_in 'Password:', with: "letmeinplease"
-  click_button('Submit')
+  within_fieldset 'Login' do
+    click_button('Login')
+  end
 end
 
 Given(/^I visit the Manage Courses home page$/) do
@@ -174,7 +179,9 @@ Given(/^I log in as the videos "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: name
-  click_button('Submit')
+  within_fieldset 'Login' do
+    click_button('Login')
+  end
 end
 
 Given(/^I visit the Videos page$/) do
@@ -248,7 +255,9 @@ Given(/^I log in as the quizzes "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: "letmeinplease"
-  click_button('Submit')
+  within_fieldset 'Login' do
+    click_button('Login')
+  end
 end
 
 Given(/^I visit the Quizzes page$/) do

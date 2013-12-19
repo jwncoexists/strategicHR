@@ -1,8 +1,8 @@
+<h2 class="title-divider"><span>Please <span class="de-em">Login</span></span> <small></small></h2>
 <div class="row">
   <div class="col-md-6">
     <%= form_tag sessions_create_path, :method => :get do %>
-      <fieldset>
-        <legend>Please Login:</legend><br>
+      <fieldset id="login">
         <div class="control-group">
           <%= label_tag :email, 'Email:', size: 40 %>
           <div class="controls">
@@ -17,7 +17,7 @@
         </div>
         <br>
         <div>
-          <%= submit_tag "Submit", class: 'btn btn-primary btn-large'  %>
+          <%= submit_tag "Login", class: 'btn btn-primary btn-large'  %>
         </div>
       </fieldset>
     <% end %>

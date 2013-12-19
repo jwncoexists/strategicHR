@@ -10,18 +10,24 @@
             <li>Unlimited access to all of Dr. Bob's course Training Videos</li>
             <li>Unlimited Access to Course Quizzes</li>
           </ul>
-          <%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %> 
         </div>
       </div>
       <div class="col-md-3">
         <div class="well">
-          <h3 class="title"><span class="em">CEU</span> <span class="fancy">Certificatation</span></h3>
+          <h3 class="title"><span class="em">CEU</span> <span class="fancy">Certificates</span></h3>
           <p class="price"><span class="currency">$</span> <span class="digits">39<span>.99</span></span> <span class="term">ea.</span></p>
           <ul class="unstyled points">
             <li>Printable Certificate of Completion</li>
             <li>Includes HRCI Course Code with # of CEU Credits</li>
           </ul>
-          <a class="btn btn-primary">Sign Up</a> </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="row">
+      <% if !current_user %>
+        <%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %>
+      <% end %> 
     </div>
   </div>

@@ -15,7 +15,7 @@ StrategicHR::Application.routes.draw do
   resources :courses
   resources :videos
   resources :quizzes
-  resources :certificates
+  resources :certificates, only: [:show, :index]
   resources :attempts
   resources :results
   resources :charges
