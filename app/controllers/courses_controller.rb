@@ -1,23 +1,26 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    @courses = Course.all(order: "released desc, name asc")
   end
 
   def show
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
+    @ceus = @course.ceus
   end
 
   def new
     @course = Course.new
     1.times do
       section = @course.sections.build
+      ceu = @course.ceus.build
     end
   end
 
   def edit
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
+    @ceus = @course.ceus
     @videos = Video.all
     @quizzes = Quiz.all
     authorize! :update, @course, message: "You don't have access to edit this course."
@@ -64,8 +67,10 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:id, :name, :description, :price, :user_id, :ceu, :slug, :released,
-                                   sections_attributes: [:id, :course_id, :video_id, :quiz_id, :sequence, :_destroy] )
+    params.require(:course).permit(:id, :name, :description, :price, :user_id, :ceu, :slug, :released, :created_at, :updated_at,
+                                   sections_attributes: [:id, :course_id, :video_id, :quiz_id, :sequence, :created_at, :updated_at, :_destroy],
+                                   ceus_attributes: [:id, :course_id, :name, :organization, :credit, :created_at, :updated_at, :_destroy],
+                                    )
   end
 
 end

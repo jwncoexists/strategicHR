@@ -2,7 +2,7 @@ class CertificatePdf < Prawn::Document
 
   def initialize(certificate)
     super(page_layout: :landscape)
-    @certificate = Certificate.find_by_slug(certificate)
+    @certificate = certificate
     @user = User.find(@certificate.user_id)
     @course = Course.find(@certificate.course_id)
     image "#{Rails.root}/app/assets/images/StrategicHRCertificate.png", :at => [0, 612]

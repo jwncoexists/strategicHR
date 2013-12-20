@@ -1,5 +1,25 @@
 <h2 class="title-divider"><span>Start Quiz for Course: <span class="de-em"><%= @course.name %></span></span> <small></small></h2>
 
-<h4><%= "This Quiz contains: #{@num_questions} multiple choice questions." %></h4>
+<div class="well well-mini">
+  <div class="row">
+    <div class="col-xs-4 col-sm-2">
+      <strong>Total # Questions:</strong>
+    </div>
+    <div class="col-xs-4 col-sm-2">
+      <%= @num_questions %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 col-sm-2">
+      <strong>Passing Score:</strong>
+    </div>
+    <div class="col-xs-4 col-sm-2">   
+      <%= "#{@quiz.passing_score}% Correct" %>
+    </div>
+  </div>
+</div>
+<p>Click the <strong><%= link_to "Begin Quiz", edit_result_path(@first_result) %></strong> button to start this quiz.  This quiz is not timed, but you must answer all of the questions in order to have the the quiz scored. If you do not achieve a passing score, you can take this quiz as many time as you like.</p>
+<p>Once you have successfully passed all of the quizzes for a course, you will be eligible to purchase a Certificate verifying the number of CEU credits you have earned for this course.</p>
+<br>
+<%= link_to "Back to Course", course_path(@course), class: 'btn btn-primary btn-large' %>
 <%= link_to "Begin Quiz", edit_result_path(@first_result), class: 'btn btn-primary btn-large' %>
-<%= link_to "Go Back to Course", course_path(@course), class: 'btn btn-primary btn-large' %>

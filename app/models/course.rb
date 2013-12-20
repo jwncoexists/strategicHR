@@ -6,6 +6,8 @@ class Course < ActiveRecord::Base
   has_many :quizzes, through: :sections
   accepts_nested_attributes_for :sections, allow_destroy: true
   has_many :certificates
+  has_many :ceus, dependent: :destroy
+  accepts_nested_attributes_for :ceus, allow_destroy: true
 
   def update_slug
     self.slug = self.name.parameterize

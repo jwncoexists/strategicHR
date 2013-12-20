@@ -2,25 +2,27 @@
 
 <br><br>
 <div class="col-md-8">
-  <table class="table table-striped table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Purchase Date</th>
-        <th>Purchase Price</th>
-        <th>User Email</th>
-        <th>Course</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @certificates.each do |certificate| %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-condensed">
+      <thead>
         <tr>
-          <td><%= certificate.purchase_date %></td>
-          <td><%= certificate.purchase_price %></td>
-          <td><%= User.find(certificate.user_id).email %></td>
-          <td><%= link_to Course.find(certificate.course_id).name, certificate_path(certificate) %></td>
-       </tr>
-      <% end %>
-    </tbody>
-  </table>
+          <th>Purchase Date</th>
+          <th>Purchase Price</th>
+          <th>User Email</th>
+          <th>Course</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @certificates.each do |certificate| %>
+          <tr>
+            <td><%= certificate.purchase_date %></td>
+            <td><%= certificate.purchase_price %></td>
+            <td><%= User.find(certificate.user_id).email %></td>
+            <td><%= link_to Course.find(certificate.course_id).name, certificate_path(certificate) %></td>
+         </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

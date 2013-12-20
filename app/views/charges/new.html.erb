@@ -1,12 +1,56 @@
-<%= form_tag charges_path do %>
-  <article>
-    <label class="amount">
-      <span>Amount: $5.00</span>
-    </label>
-  </article>
+<h2 class="title-divider"><span>Purchase Certificate for: <span class="de-em"><%= @course.name %></span></span> <small></small></h2>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="500"></script>
-<% end %>
+<p><i>This certificate will enable you to claim the appropriate CEU credits for completing the course. Please verify all of the information below and then click the "Pay With Card" button below.  After purchasing the certificate, you will be redirected to a link where you can print or save the certificate.</p>
+<p><strong>If more than one type of CEU credit is available for a course, then you will need to choose from the menu below which type of CEU credits you want, BEFORE purchasing the certificate.</p></i></strong>
+
+<div class="row">
+  <div class="col-sm-12"> 
+    <%= form_tag(charges_path(course_id: @course.id), class: 'form-horizontal') do %>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Item:</label>
+        <div class="col-sm-10">
+          <p class="form-control-static"><%= @course.name %> Certificate</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Certificate Format:</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">Electronic (.pdf file)</p>
+        </div>
+      </div>    
+
+      <div class="form-group">
+        <% if @course.ceus.empty? %>
+          <label class="col-sm-2 control-label">CEU Credits:</label>
+          <div class="col-sm-10">
+            <p class="form-control-static text-danger">CEU Credits Are NOT Available for this Course!</p>
+          </div>
+        <% else %>
+          <label class="col-sm-2 control-label">CEU Credit Choice:</label>
+          <div class="col-sm-10">
+            <%= collection_select(:ceu, :id, @course.ceus, :id, :full_ceu_name) %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Total Cost:</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">$<%= @course.price %> USD</p>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Dr. Bob Nelson's Strategic HR Online Course Certificate"
+              data-amount=<%= (@course.price * 100).to_i %>></script>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

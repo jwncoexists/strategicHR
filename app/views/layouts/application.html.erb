@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-md-8"> 
             <!--branding/logo--> 
-            <a class="navbar-brand" href="index.htm" title="Home">
+            <a class="navbar-brand" href=<% root_path %> title="Strategic HR Home">
             <h1><span>Strategic</span>HR<span></span></h1>
             </a>
             <div class="slogan">HRCI Certified Online Training by <font class="primary-colour"><strong>Dr. Bob Nelson</font></strong></div>
@@ -107,7 +107,7 @@
               </ul>
             </li>
 
-            <li><a href="pricing.htm" class="menu-item">Pricing</a></li>
+            <li><a href=<%= pricing_path %> class="menu-item">Pricing</a></li>
             <li><a href=<%= contact_path %> class="menu-item">Contact</a></li>
             <li><a href=<%= about_path %> class="menu-item">About</a></li>
             <% if can? :update, User %>
@@ -251,7 +251,7 @@
             <button class="btn btn-primary" type="submit">Sign up</button>
           </form>
         </div>
-        <div class="modal-footer"> <small>Already signed up? <a href="login.htm">Login here</a>.</small> </div>
+        <div class="modal-footer"> <small>Already signed up? <a href=<%= login_path %>>Login here</a>.</small> </div>
       </div>
       <!-- /.modal-content --> 
     </div>
@@ -280,7 +280,7 @@
             <button type="button" class="btn btn-primary">Login</button>
           </form>
         </div>
-        <div class="modal-footer"> <small>Not a member? <a href="#" class="signup">Sign up now!</a></small><br />
+        <div class="modal-footer"> <small>Not a member? <a href=<%= new_user_path %> class="signup">Sign up now!</a></small><br />
           <small><a href="#">Forgotten password?</a></small> </div>
       </div>
       <!-- /.modal-content --> 

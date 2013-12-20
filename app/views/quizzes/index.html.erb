@@ -1,16 +1,20 @@
 <h2 class="title-divider"><span>StrategicHR <span class="de-em">Training Quizzes</span></span> <small></small></h2>
 
-<div class="col-md-8">
-  <% if can? :create, Quiz %>
-    <%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary btn-mini' %>
-  <% end %>
-</div>
-<% @quizzes.each do |quiz| %>
-  <div class="article">
-    <h4><%= link_to quiz.name, quiz %> - <%= pluralize(quiz.questions.size, "Question") %></h4>
-    
-    <br>
+<div class="row">
+  <div class="col-md-8">
+    <% if can? :create, Quiz %>
+      <%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary btn-mini' %>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-md-8">
+    <% @quizzes.each do |quiz| %>
+      <div class="article">
+        <h4><%= link_to quiz.name, quiz %> - <%= pluralize(quiz.questions.size, "Question") %></h4>
+        
+        <br>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 

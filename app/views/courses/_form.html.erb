@@ -15,7 +15,7 @@
     <div class="control-group">
       <%= f.label :ceu, 'CEU', class: 'control-label' %>
       <div class="controls">
-        <%= f.text_field :ceu, as: :integer, size: 40, placeholder: "# of CEU credits", required: true %>
+        <%= f.text_field :ceu, as: :float, size: 40, placeholder: "# of CEU credits", required: true %>
       </div>
     </div>
     <div class="control-group">
@@ -33,14 +33,22 @@
     </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <br>
+    <h4> CEU Credits </h4>
+    <%= f.fields_for :ceus do |ceu| %>
+      <%= render 'ceu_fields', f: ceu %>
+    <% end %>
+    <%= link_to_add_fields "Add CEU Credits", f, :ceus %>
+    <br>
     <h4> Videos & Quizzes </h4>
     <%= f.fields_for :sections do |section| %>
       <%= render 'section_fields', f: section %>
     <% end %>
     <%= link_to_add_fields "Add Video/Quiz", f, :sections %>
+    <br>
+    <br>
     <div class="control-group">
       <div class="controls">
-        <%= f.submit "Save", class: 'btn' %>
+        <%= f.submit "Save", class: 'btn btn-primary btn-mini' %>
       </div>
     </div>
   <% end %>

@@ -12,7 +12,10 @@ class AttemptsController < ApplicationController
     @num_questions = @attempt.results.count
     @passing_score = @quiz.passing_score
     @score = (@num_correct.to_f/@num_questions.to_f)*100.0
-    @attempt.update_attribute(:passed, @score >= @passing_score)
+    @attempt.update_attribute(:end_time, Time.now)
+    if !@attempt.passed && @score >= @passing_score
+      @attempt.update_attribute(:passed, @score >= @passing_score)
+    end
   end
 
   def new
@@ -54,8 +57,8 @@ class AttemptsController < ApplicationController
   private
 
   def attempt_params
-    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time, :passed,
-                                    results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, 
+    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time, :passed, :created_at, :updated_at,
+                                    results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, :created_at, :updated_at,
                                                          :answer_id, :next_question, :prev_question, :_destroy] )
   end
 

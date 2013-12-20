@@ -1,1 +1,30 @@
-<h2>Thanks, you paid <strong>$5.00</strong>!</h2>
+<h2 class="title-divider"><span>Thank You for Your <span class="de-em">Purchase!</span></span> <small></small></h2>
+
+<% if can? :view_certificate, @course %>
+  <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
+<% end %>
+<br>
+
+ <div class="table-responsive">
+  <table class="table table-striped table-bordered table-condensed"> 
+    <div class="col-md-8">
+      <tr>
+        <td>Purchase Date:</td>
+        <td><%= @certificate.purchase_date.strftime("%c") %></td>
+      </tr>
+      <tr>
+        <td>Item Purchased:</td>
+        <td><%= "Certificate of Completion for: #{Course.find(@certificate.course_id).name}" %></td>
+      </tr>
+      <tr>
+        <td>CEU Credits:</td>
+        <td><%= "#{Ceu.find(@certificate.ceu_id).full_ceu_name}" %></td>
+      </tr>
+      <tr>
+        <td>Payment Method:</td>
+        <td>Credit Card</td>
+      </tr>
+      <tr>
+        <td>Amount Paid:</td>
+        <td><%= "$#{@certificate.purchase_price}" %></td>
+      </tr>

@@ -1,66 +1,103 @@
 <h2 class="title-divider"><span>Quiz Results <span class="de-em">for <%= @quiz.name %></span></span> <small></small></h2>
 <br>
-<container>
+
+<% if can? :purchase_certificate, @course %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to "Purchase My Course Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini' %>
+      <%= link_to "Return to Course", course_path(@course), class: 'btn btn-primary btn-mini' %>
+    </div>
+  </div>
+<% else %>
+  <%= link_to "Return to Course", course_path(@course), class: 'btn btn-primary btn-mini' %>
+<% end %>
+<br>
 <div class="row">
   <div class="col-sm-12">
     <% if @attempt.passed %>
-      <h4>Congratulations you PASSED!!</h4>
+      <h4>Congratulations you PASSED this quiz!!</h4>
     <% else %>
       <h4>You <i>did not pass</i> this quiz.  Please review the video and then take the quiz again.</h4>
     <% end %>
     <div class="row">
       <div class="col-sm-3" >
         <span class="pull-right">
-          <h4><%= "Your Score:" %> </h4>
+          <h5><%= "Your Score:" %> </h5>
         </span>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <h4><%= "#{@score}%" %> </h4>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h5><%= "#{@score}%" %> </h5>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3" >
         <span class="pull-right">
-          <h4><%= "Total # of Questions:" %></h4>
+          <h5><%= "Total # of Questions:" %></h5>
         </span>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <h4><%= "#{@num_questions}" %></h4>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h5><%= "#{@num_questions}" %></h5>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3" >
         <span class="pull-right">
-          <h4><%= "# Correct:" %> </h4>
+          <h5><%= "# Correct:" %> </h5>
         </span>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <h4><%= "#{@num_correct}" %> </h4>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h5><%= "#{@num_correct}" %> </h5>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-3" >
+        <span class="pull-right">
+          <h5><%= "# Start Time:" %> </h5>
+        </span>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h5><%= @attempt.start_time.strftime("%c") %> </h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3" >
+        <span class="pull-right">
+          <h5><%= "# End Time:" %> </h5>
+        </span>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <h5><%= @attempt.start_time.strftime("%c") %> </h5>
+      </div>
+    </div>
+
+
   </div>
 </div>
-</container>
+
 <br>
 
-<table class="table table-striped table-bordered table-condensed"> 
-  <tr>
-    <th>Question</th>
-    <th>Your Answer</th>
-    <th>Correct?</th>
-    <th>Correct Answer</th>
-  </tr>
-  <% @attempt.results.each do |result| %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-condensed"> 
     <tr>
-      <td><%= Question.find(result.question_id).content %></td>
-      <td><%= Answer.find(result.answer_id).content %></td>
-      <% if result.answer_id == result.correct_answer_id %>
-        <td><font color="green">CORRECT</td></font>
-        <td></td>
-      <% else %>
-        <td><font color="red">INCORRECT</td></font>
-        <td> <%= Answer.find(result.correct_answer_id).content %></td>
-      <% end %>
+      <th>Question</th>
+      <th>Your Answer</th>
+      <th>Correct?</th>
+      <th>Correct Answer</th>
     </tr>
-  <% end %>
-</table>
+    <% @attempt.results.each do |result| %>
+      <tr>
+        <td><%= Question.find(result.question_id).content %></td>
+        <td><%= Answer.find(result.answer_id).content %></td>
+        <% if result.answer_id == result.correct_answer_id %>
+          <td><font color="green">CORRECT</td></font>
+          <td></td>
+        <% else %>
+          <td><font color="red">INCORRECT</td></font>
+          <td> <%= Answer.find(result.correct_answer_id).content %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
