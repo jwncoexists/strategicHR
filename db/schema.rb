@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219191749) do
+ActiveRecord::Schema.define(version: 20131220075620) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -125,10 +125,10 @@ ActiveRecord::Schema.define(version: 20131219191749) do
   add_index "sections", ["video_id"], name: "index_sections_on_video_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "last_name",                    null: false
-    t.string   "password_digest", default: "", null: false
-    t.string   "email",           default: "", null: false
-    t.string   "account"
+    t.string   "last_name",                          null: false
+    t.string   "password_digest", default: "",       null: false
+    t.string   "email",           default: "",       null: false
+    t.string   "account",         default: "member"
     t.string   "slug"
     t.date     "confirmed_at"
     t.datetime "created_at"
