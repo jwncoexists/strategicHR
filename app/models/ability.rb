@@ -27,32 +27,38 @@ class Ability
     #   can :update, Article, :published => true
     #
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    user ||= User.new # guest user (not logged in)
-    if user.account? :admin
-      can :view_certificate, Course do |course|
-        !Certificate.where(course_id: course.id, user_id: user.id).empty?
+    # user ||= User.new # guest user (not logged in)
+    if user
+      if user.account? :admin
+        can :view_certificate, Course do |course|
+          !Certificate.where(course_id: course.id, user_id: user.id).empty?
+        end
+        can :purchase_certificate, Course do |course|
+          Certificate.where(course_id: course.id, user_id: user.id).empty? &&
+          course.my_status(user) =~ /Quiz(zes)? Complete/
+        end
+        can :create, Course
+        can :update, Course
+        can :destroy, Course
+        can :take, Course
+        can :manage, Quiz
+        can :manage, Section
+        can :manage, Video
+        can :manage, User
+      elsif user.account? :member
+        can :take, Course, released: true
+        can :view_certificate, Course do |course|
+          course.my_status(user) == "Certificate Purchased"
+        end
+        can :purchase_certificate, Course do |course|
+          Certificate.where(course_id: course.id, user_id: user.id).empty? &&
+          course.my_status(user) =~ /Quiz(zes)? Complete/
+        end
       end
-      can :purchase_certificate, Course do |course|
-        Certificate.where(course_id: course.id, user_id: user.id).empty? &&
-        course.my_status(user) =~ /Quiz(zes)? Complete/
-      end
-      can :create, Course
-      can :update, Course
-      can :destroy, Course
-      can :take, Course
-      can :manage, Quiz
-      can :manage, Section
-      can :manage, Video
-      can :manage, User
-    elsif user.account? :member
-      can :take, Course, released: true
-      can :view_certificate, Course do |course|
-        course.my_status(user) == "Certificate Purchased"
-      end
-      can :purchase_certificate, Course do |course|
-        Certificate.where(course_id: course.id, user_id: user.id).empty? &&
-        course.my_status(user) =~ /Quiz(zes)? Complete/
-      end
+      
+    # users who are not logged in can view courses  
+    else
+      can :view, Course
     end
   end
 end
