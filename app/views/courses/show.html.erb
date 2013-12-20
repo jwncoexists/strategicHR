@@ -55,17 +55,25 @@
         </tr>
         <% @sections.each do |section| %>
           <tr>
-            <td><%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %></td>
+            <td><% if section.video_id %>
+                  <%= link_to Video.find(section.video_id).name, video_path(Video.find(section.video_id)) %>
+                <% end %>
+            </td>
             <% if can? :edit, Quiz %>
-              <td><%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %></td>
+              <td><% if section.quiz_id %>
+                    <%= link_to Quiz.find(section.quiz_id).name, quiz_path(Quiz.find(section.quiz_id)) %>
+                  <% end %>
+              </td>
             <% end %>
             <% if !section.attempts.where(user_id: current_user.id, passed: true).empty? %>
               <td><%= link_to "Quiz PASSED! View My Results", attempt_path(section.attempts.where(user_id: current_user.id, passed: true).order("end_time DESC").first) %></td>
             <% else %>
               <td>
-                <%= link_to "Take Quiz", new_attempt_path(section: section) %>
-                <% if !section.attempts.where(user_id: current_user.id).empty? %>
-                  OR <%= link_to "View Last Results", attempt_path(section.attempts.where(user_id: current_user.id).order("end_time DESC").first) %>
+                <% if section.quiz_id %>
+                  <%= link_to "Take Quiz", new_attempt_path(section: section) %>
+                  <% if !section.attempts.where(user_id: current_user.id).empty? %>
+                    OR <%= link_to "View Last Results", attempt_path(section.attempts.where(user_id: current_user.id).order("end_time DESC").first) %>
+                  <% end %>
                 <% end %>
               </td>
             <% end %>
