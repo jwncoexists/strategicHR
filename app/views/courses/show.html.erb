@@ -34,6 +34,8 @@
 <% end %>
 <% if can? :purchase_certificate, @course %>
   <%= link_to "Purchase Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini' %>
+<% elsif can? :view_certificate, @course %>
+   <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
 
 <div class="col-md-12">

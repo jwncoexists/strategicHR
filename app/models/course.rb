@@ -22,7 +22,7 @@ class Course < ActiveRecord::Base
     return_status = "Course videos & quizzes will be available soon!"
     if (self.released)
       if (!self.certificates.where(user_id: user_id).empty?)
-          return_status = "Certificate Purchased"
+          return_status = "Course Completed! Certificate Purchased"
       else
         return_status = "Quiz".pluralize(self.sections.count)
         all_sections_complete = true
