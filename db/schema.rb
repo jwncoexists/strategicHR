@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220075620) do
+ActiveRecord::Schema.define(version: 20131222163219) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20131220075620) do
     t.float    "credit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
   end
 
   add_index "ceus", ["course_id"], name: "index_ceus_on_course_id", using: :btree
@@ -71,7 +72,6 @@ ActiveRecord::Schema.define(version: 20131220075620) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.float    "ceu",                                 default: 1.5
     t.boolean  "released",                            default: false
   end
 

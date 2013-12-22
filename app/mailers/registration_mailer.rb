@@ -1,5 +1,5 @@
 class RegistrationMailer < ActionMailer::Base
-  default from: "jenniferwnelson@sbcglobal.net"
+  default from: "bob@drbobnelson.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
