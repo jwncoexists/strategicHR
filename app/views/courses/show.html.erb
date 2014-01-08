@@ -12,8 +12,8 @@
             <tr>
             <% @ceus.each do |ceu| %>
               <td><%= ceu.credit %></td>
-              <td><%= ceu.name %> Credits</td>
-              <td><i><%= ceu.organization %></i></td>
+              <td><font class="primary-colour">| </font><%= ceu.name %> Credits</td>
+              <td><font class="primary-colour">| </font><%= ceu.organization %></td>
             <% end %>
             </tr>
           </table>
@@ -45,7 +45,7 @@
 <div class="col-md-8">
   <% if can? :take, @course %>
     <h4>Course Videos & Quizzes</h4>
-    <p><i>Click on the links in the table below to watch a course video.  After you have watched the video, click on the link to take the quiz, or if you've already completed the quiz, then you can view the results of your quiz if you've passed it.</p></i>
+    <p><i>Click on the links in the table below to watch a course video.  After you have watched the video, click on the link to take the quiz, or if you've already completed the quiz, then you can view the results of your quiz.</p></i>
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-condensed">
         <tr>
