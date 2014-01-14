@@ -29,9 +29,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      @user.update_attribute(:token, SecureRandom.hex(6))
+  
       RegistrationMailer.registration_confirmation(@user, new_email_confirmation_url(token: @user.token)).deliver
-        redirect_to login_path, notice: "An email has been sent to your account. Please click the link in the email to verify address, then log in below."
+        redirect_to login_path, notice: "Confirmation email sent!! Click the link in your email to verify address, then log in below."
     else
       flash[:error] = "Error creating new user. Please try again."
       render :new

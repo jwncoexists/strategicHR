@@ -15,6 +15,12 @@
             <%= password_field_tag :password, params[:password], size: 40, placeholder: "password", required: true  %>
           </div>
         </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= label_tag :remember_me %>
+            <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+          </div>
+        </div>
         <br>
         <div>
           <%= submit_tag "Login", class: 'btn btn-primary btn-large'  %>
