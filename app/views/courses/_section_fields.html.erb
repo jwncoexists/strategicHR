@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset id="course_section">
   <%= f.select(:video_id, options_from_collection_for_select(Video.all, :id, :name)) %>
   <%= f.select(:quiz_id, options_from_collection_for_select(Quiz.all, :id, :name)) %>
   <%= f.hidden_field :_destroy %>

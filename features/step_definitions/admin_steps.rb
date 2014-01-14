@@ -26,7 +26,7 @@ When(/^I log in as an administrative user$/) do
   fill_in 'Email:', with: 'admin@example.com'
   fill_in 'Password:', with: 'admin'
 
-  within_fieldset 'Login' do
+  within_fieldset 'login' do
     click_button('Login')
   end
 end
@@ -60,7 +60,7 @@ Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'Email:', with: "#{name}@example.com"
   fill_in 'Password:', with: "letmeinplease"
-  within_fieldset 'Login' do
+  within_fieldset 'login' do
     click_button('Login')
   end
 end
@@ -85,6 +85,8 @@ end
 Given(/^a course named "(.*?)"$/) do |name|
   @course = Course.create!(name: name, 
                            description: Faker::Lorem.paragraph)
+  section = @course.sections.build
+  ceu = @course.ceus.build
 end
 
 When(/^I edit the course named "(.*?)" course$/) do |name|
@@ -102,7 +104,7 @@ Then(/^the name of the course is stored$/) do
 end
 
 Given(/^a Video named "(.*?)"$/) do |name|
-  @video = Video.create!(name: "#{name}-video", 
+  @video = Video.create!(name: name, 
                          description: Faker::Lorem.paragraph, 
                          length: 30, 
                          presenter: 'admin', 
@@ -110,22 +112,23 @@ Given(/^a Video named "(.*?)"$/) do |name|
 end
 
 Given(/^a Quiz named "(.*?)"$/) do |name|
-  @quiz = Quiz.create!(name: "#{name}-quiz", 
+  @quiz = Quiz.create!(name: name, 
                        description: Faker::Lorem.paragraph, 
                        passing_score: 70, 
                        num_questions_to_show: 10)
 end
 
 When(/^add the video named "(.*?)" to the course$/) do |name|
-  # puts page.body
-  select(name, from: 'course[sections_attributes][0][video_id]')
+  # select(name, from: 'course[sections_attributes][0][video_id]')
+  # will just default to this video since there's only one
 end
 
 When(/^add the quiz named "(.*?)" to the course$/) do |name|
-  page.select @name
+  # quiz should be selected by default, since only one
 end
 
 Then(/^the video and quiz are stored in the course$/) do
+  click_button('Save')
   if !@course.sections.first.video_id == @video.id
     fail("Video was not stored for the course")
   end
@@ -155,31 +158,22 @@ end
 # Admin manage_videos.feature
 #---------------------------
 Given(/^a videos administrative user named "(.*?)"$/) do |name|
-  visit(new_user_path)
-  fill_in 'First Name:', with: name
-  fill_in 'Last Name:', with: name
-  fill_in 'Email:', with: "#{name}@example.com"
-  fill_in 'Password:', with: name
-  fill_in 'Confirm password:', with: name
-  click_button('Register') 
-
-  @user = User.find_by_email! "#{name}@example.com"
-  if !@user.update_attribute(:confirmed_at, Time.now)
-    fail('Unable to update confirmed_at attribute for admin user')
-  end
-  if !@user.update_attribute(:account, 'admin')
-    fail('Unable to update account for admin user')
-  end
-  if User.count < 1
-    fail('User not added to database')
-  end
+  @user = User.create!(
+    first_name: "Admin",
+    last_name: "User",
+    email: "#{name}@example.com",
+    password: "letmeinplease",
+    password_confirmation: "letmeinplease",
+    confirmed_at: Time.now,
+    account: 'admin' 
+  )
 end
 
 Given(/^I log in as the videos "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
-  fill_in 'password', with: name
-  within_fieldset 'Login' do
+  fill_in 'password', with: "letmeinplease"
+  within_fieldset 'login' do
     click_button('Login')
   end
 end
@@ -189,6 +183,7 @@ Given(/^I visit the Videos page$/) do
 end
 
 Then(/^I can add a new video named "(.*?)"$/) do |name|
+  puts page.body
   click_link('Add Video')
   fill_in 'Name:', with: name
   fill_in 'Description:', with: Faker::Lorem.paragraph
@@ -213,6 +208,7 @@ When(/^I edit the the "(.*?)" video$/) do |name|
 end
 
 When(/^change its url to "(.*?)"$/) do |url|
+  @url = url
   fill_in 'URL:', with: url
   @video.url = url
   click_button('Save')
@@ -220,7 +216,7 @@ When(/^change its url to "(.*?)"$/) do |url|
 end
 
 Then(/^the url of the video is stored$/) do
-   expect(page).to have_content @video.url
+   Video.find_by_url!(@url)
 end
 
 When(/^I view the "(.*?)" video$/) do |name|
@@ -255,7 +251,7 @@ Given(/^I log in as the quizzes "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: "letmeinplease"
-  within_fieldset 'Login' do
+  within_fieldset 'login' do
     click_button('Login')
   end
 end
@@ -321,39 +317,6 @@ Then(/^I can delete the quiz$/) do
   Quiz.find_by_id(@quiz.id).should be_nil
   Question.find_by_quiz_id(@quiz.id).should be_nil
   #Quiz.where(name: @quiz.name).count.should be(0)
-end
-
-
-#------------------------
-# Admin manage_certificates feature
-#------------------------
-
-When(/^I visit the admin manage certificates page$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I can create a new certificate named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^a certificate "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I edit the "(.*?)" certificate$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^change its name to "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the name of the certificate is stored$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I can delete the certificate$/) do
-  pending # express the regexp above with the code you wish you had
 end
 
 #---------------------------
