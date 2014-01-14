@@ -139,9 +139,6 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.0.0)
-    redis (3.0.6)
-    redis-session-store (0.2.1)
-      redis
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (2.14.6)
@@ -211,7 +208,6 @@ DEPENDENCIES
   rails_12factor
   rails_layout
   redcarpet
-  redis-session-store
   rspec-rails
   sass-rails (>= 3.2)
   sdoc
