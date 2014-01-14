@@ -25,14 +25,14 @@ class CertificatePdf < Prawn::Document
     font "Helvetica", style: :italic
     if( @ceu )
       text_box  "# #{@ceu.code} #{@course.name}",  
-              at: [0,270],
+              at: [0,260],
               width: 720, 
               height: 36, 
               size: 18, 
               align: :center, 
               overflow: :shrink_to_fit
       text_box  "#{@ceu.full_ceu_name_no_org}",  
-              at: [0,240],
+              at: [0,230],
               width: 720, 
               height: 36, 
               size: 18, 
