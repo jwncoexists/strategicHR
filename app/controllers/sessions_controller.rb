@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       if !user.confirmed_at
-        flash[:alert] = "Email address has not been verified. Please click link in confirmation email to verify."
+        flash[:alert] = "An email has been sent to your email address. To complete your registration, please click link in confirmation email to verify."
         render :new
       elsif user.authenticate(params[:password])
         session[:user_id] = user.id

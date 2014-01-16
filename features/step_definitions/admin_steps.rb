@@ -264,7 +264,7 @@ Then(/^I can create a new quiz named "(.*?)"$/) do |name|
   click_link('New Quiz')
   fill_in 'Name', with: name
   click_button('Save')
-  expect(page).to have_content name
+  Quiz.find_by_name!(name)
 end
 
 Given(/^a quiz named "(.*?)"$/) do |name|
@@ -276,12 +276,13 @@ When(/^I edit the quiz named "(.*?)" quiz$/) do |name|
 end
 
 When(/^change the quiz name to "(.*?)"$/) do |name|
-  fill_in 'Name', with: "Quiz-#{name}-Edited"
+  @editedname = name
+  fill_in 'Name', with: name
   click_button('Save')
 end
 
 Then(/^the name of the quiz is stored$/) do
-  expect(page).to have_content "Edited"
+   Quiz.find_by_name!(@editedname)
 end
 
 When(/^add a question named, "(.*?)"$/) do |name|
@@ -292,7 +293,7 @@ Then(/^the question is added to the quiz$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^a question, "(.*?)"$/) do |name|
+Given(/^a question named "(.*?)"$/) do |name|
   pending # express the regexp above with the code you wish you had
 end
 

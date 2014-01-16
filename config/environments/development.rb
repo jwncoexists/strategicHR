@@ -27,6 +27,8 @@ StrategicHR::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:132bb4931d798e5199e5ab3dfe085137@grideye.redistogo.com:9741'
+
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',

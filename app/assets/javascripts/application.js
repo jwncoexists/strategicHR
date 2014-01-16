@@ -14,3 +14,33 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+function ytPlayerStateChange (state) {
+  switch (state) {
+    case 0:
+      // Video is unstarted
+      console.log('video event 0: ended');
+      break;   
+    case 1:
+      // Video is now playing
+      console.log('video event 1: playing');
+      break; 
+    case 2:
+      // Video is now paused
+      console.log('video event 2: paused');
+      break; 
+    case 3:
+      // Video is now buffering
+      console.log('video event 3: buffering');
+      break;
+  }
+}
+
+function onYouTubePlayerReady(id){
+  var player = $('#' + id)[0];
+  if (player.addEventListener) {
+    player.addEventListener('onStateChange', 'ytPlayerStateChange');
+  }
+  else {
+    player.attachEvent('onStateChange', 'ytPlayerStateChange');
+  }
+}

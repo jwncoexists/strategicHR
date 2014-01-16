@@ -25,7 +25,7 @@ Feature: admin manage quizzes page
 
   Scenario: I can delete an existing quiz question
     Given a quiz named "Strategic HR Summary"
-    And a question, "What type of shortage do workplaces face today?"
+    And a question named "What type of shortage do workplaces face today?"
     When I edit the quiz named "Strategic HR Summary" quiz
     And delete the question named, "What type of shortage do workplaces face today?"
     Then the question is removed from the quiz
