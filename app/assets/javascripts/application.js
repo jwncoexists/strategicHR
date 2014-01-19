@@ -35,7 +35,7 @@ function ytPlayerStateChange (state) {
   }
 }
 
-function onYouTubePlayerReady(id){
+function onYouTubeIframeAPIReady(id){
   var player = $('#' + id)[0];
   if (player.addEventListener) {
     player.addEventListener('onStateChange', 'ytPlayerStateChange');
