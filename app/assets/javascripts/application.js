@@ -19,6 +19,7 @@
 // after the API code downloads.
 var player;
 function onYouTubeIframeAPIReady() {
+  console.log('onYouTubeIframeAPIReady');
   player = new YT.Player('player', {
     events: {
       'onReady': onPlayerReady,
