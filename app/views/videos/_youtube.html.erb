@@ -29,7 +29,8 @@
   }
 
   function onPlayerStateChange (state) {
-    switch (state) {
+    console.log(state);
+    switch (state.data) {
       case 0:
         // Video is unstarted
         console.log('video event 0: ended');
