@@ -25,7 +25,7 @@ module ApplicationHelper
     end
 
     %Q{<iframe id="player" type="text/html" width="640" height="390" 
-          src="http://www.youtube.com/embed/#{ youtube_id }?enablejsapi=1&origin=http://strategichr.herokuapp.com" frameborder="0"></iframe>}
+          src="//www.youtube.com/embed/#{youtube_id}?enablejsapi=1&origin=*" frameborder="0"></iframe>}
   end
 
   def link_to_add_fields(name, f, association)
