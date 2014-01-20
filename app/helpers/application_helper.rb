@@ -24,7 +24,8 @@ module ApplicationHelper
       youtube_id = $5
     end
 
-    %Q{<iframe title="YouTube video player" width="640" height="390" src="//www.youtube.com/embed/#{ youtube_id }?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>}
+    %Q{<iframe id="player" type="text/html" title="YouTube video player" 
+          width="640" height="390" src="//www.youtube.com/embed/#{ youtube_id }?enablejsapi=1" frameborder="0" allowfullscreen></iframe>}
   end
 
   def link_to_add_fields(name, f, association)

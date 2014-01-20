@@ -14,7 +14,25 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-function ytPlayerStateChange (state) {
+
+// This function creates an <iframe> (and YouTube player)
+// after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+function onPlayerStateChange (state) {
   switch (state) {
     case 0:
       // Video is unstarted
@@ -35,12 +53,4 @@ function ytPlayerStateChange (state) {
   }
 }
 
-function onYouTubeIframeAPIReady(id){
-  var player = $('#' + id)[0];
-  if (player.addEventListener) {
-    player.addEventListener('onStateChange', 'ytPlayerStateChange');
-  }
-  else {
-    player.attachEvent('onStateChange', 'ytPlayerStateChange');
-  }
-}
+
