@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'bootstrap-sass'
 gem 'newrelic_rpm'
-gem 'redis'
+
 
 group :development, :test do
   gem 'rspec-rails'
