@@ -6,6 +6,7 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Strategic HR Business Management HRCI Certified Training by Dr. Bob Nelson" %>">
 
     <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
 
     <%= csrf_meta_tags %>
   </head>
@@ -289,6 +290,6 @@
   </div>
   <!-- /.modal --> 
 </div>
-<%= javascript_include_tag "application" %>
+
 </body>
 </html>

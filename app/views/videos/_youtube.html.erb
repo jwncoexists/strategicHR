@@ -24,30 +24,5 @@
   }
 
   // 4. The API will call this function when the video player is ready.
-  function onPlayerReady(event) {
-    event.target.playVideo();
-  }
-
-  function onPlayerStateChange (state) {
-    console.log(state);
-    switch (state.data) {
-      case 0:
-        // Video is unstarted
-        console.log('video event 0: ended');
-        break;   
-      case 1:
-        // Video is now playing
-        console.log('video event 1: playing');
-        break; 
-      case 2:
-        // Video is now paused
-        console.log('video event 2: paused');
-        break; 
-      case 3:
-        // Video is now buffering
-        console.log('video event 3: buffering');
-        break;
-    }
-  }
-
+ 
 </script>

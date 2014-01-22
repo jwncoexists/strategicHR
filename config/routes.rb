@@ -9,6 +9,7 @@ StrategicHR::Application.routes.draw do
   root to: 'welcome#index'
   match "about" => 'welcome#about', via: :get
   resources :contact, only: [:new, :create]
+  resources :events, only: [:create], via: :post
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   resources :users
   resources :email_confirmations
