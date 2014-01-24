@@ -1,10 +1,19 @@
 development:
-  SENDGRID_USERNAME:
-  SENDGRID_PASSWORD:
+  EMAIL_USERNAME:  ""
+  EMAIL_PASSWORD:  ""
+  EMAIL_PORT:      ""
+  EMAIL_SMTPSRVR:  ""
+  EMAIL_DOMAIN:    ""
     # Stripe Keys
   PUBLISHABLE_KEY:   ""
   SECRET_KEY:        ""
 
 production:
+  EMAIL_USERNAME:  ""
+  EMAIL_PASSWORD:  ""
+  EMAIL_PORT:      ""
+  EMAIL_SMTPSRVR:  ""
+  EMAIL_DOMAIN:    ""
+  # stripe keys
   PUBLISHABLE_KEY:   ""
   SECRET_KEY:        ""

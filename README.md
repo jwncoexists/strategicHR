@@ -15,7 +15,7 @@ Users who are not registered can browse all of the courses, but they cannot watc
 
 * System dependencies
 
-Stripe, New Relic, YouTube, Bootstrap, SendGrid
+Stripe, YouTube, Bootstrap, email
 
 * Configuration
 
@@ -30,40 +30,17 @@ Stripe, New Relic, YouTube, Bootstrap, SendGrid
 Deployment
 -----
 
-<b>Establish SendGrid User Account:</b>
+<b>Configure Email:</b>
 
-1. This program uses SendGrid email via Heroku. Do the following to establish a user account on Heroku via the command prompt:
-  - heroku auth:logout
-  - heroku addons:add sendgrid:starter
+Emails are sent to new users when they register in order to confirm their
+email address.  Do the following to setup email:
 
-2. Verify SendGrid was successfully installed by typing 'heroku addons'
+1.  Copy the "config/application.example.yml" file, and remove "example" from the name.
 
-3. Get Sendgrid's user name and password, type:
-  - heroku config:get SENDGRID_USERNAME
-  - heroku config:get SENDGRID_PASSWORD
-
-3. To configure your SendGrid user name/password, copy the "config/application.example.yml" file, and remove "example" from the name, then specify your configurations in this file. Your application.yml should contain your sensitive credentials. It should be included in .gitIgnore as well.
+2.  Specify your production and development email configurations in this file. Your application.yml should contain your sensitive credentials. It should be included in .gitIgnore as well.
 
 <b>Establish a Stripe Account:</b>
 
-<b>Configure Heroku RedisToGo:</b>
-```
-1. heroku addons:add redistogo
-
-2. heroku config:get ADDON_CONFIG_NAME
-
-3. Added gem 'redis' to the GemFile
-
-4. Configure config/environments/development.rb with:
-
-   ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6389'
-
-   but substitute in string from step 2 above
-
-5. Configure Redis in config/initializers/redis.rb
-
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
 ```
 
