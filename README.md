@@ -15,7 +15,7 @@ Users who are not registered can browse all of the courses, but they cannot watc
 
 * System dependencies
 
-Stripe, New Relic, YouTube, Redis, Bootstrap, SendGrid
+Stripe, New Relic, YouTube, Bootstrap, SendGrid
 
 * Configuration
 

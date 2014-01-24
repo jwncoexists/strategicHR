@@ -15,6 +15,11 @@
 //= require bootstrap
 //= require_tree .
 
+
+
+// 2. This code loads the IFrame Player API code asynchronously.
+
+
 function onPlayerReady(event) {
   event.target.playVideo();
 }
@@ -23,7 +28,6 @@ function onPlayerStateChange (state) {
   console.log(state);
   console.log(state.target.getVideoUrl())
   console.log(state.target.getDuration())
-  console.log(state.target.getVideoEmbedCode())
   console.log(player.getCurrentTime())
   switch (state.data) {
     case 0:
@@ -47,3 +51,4 @@ function onPlayerStateChange (state) {
       break;
   }
 }
+
