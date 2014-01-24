@@ -11,7 +11,6 @@ gem 'sass-rails', '>= 3.2' # sass-rails needs to be higher than 3.2
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'bootstrap-sass'
-gem 'newrelic_rpm'
 
 
 group :development, :test do
