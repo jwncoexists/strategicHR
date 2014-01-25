@@ -82,15 +82,15 @@ StrategicHR::Application.configure do
   config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
   # http://strategichr.herokuapp.com
-  config.action_mailer.default_url_options = { host: ENV['EMAIL_DOMAIN'] }  
+  config.action_mailer.default_url_options = { host: "strategichr.drbobnelson.com" }  
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => "smtpout.secureserver.net",
-    :port           => 80,
+    :port           => 3535,
     :authentication => :plain,
     :user_name      => ENV['EMAIL_USERNAME'],
     :password       => ENV['EMAIL_PASSWORD'],
-    :domain         => ENV['EMAIL_DOMAIN'],
+    :domain         => "strategichr.drbobnelson.com",
     :enable_starttls_auto => true   }
 end
