@@ -87,7 +87,7 @@ StrategicHR::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => ENV['EMAIL_SMTPSRVR'],
-    :port           => ENV['EMAIL_PORT'],
+    :port           => 80,
     :authentication => :plain,
     :user_name      => ENV['EMAIL_USERNAME'],
     :password       => ENV['EMAIL_PASSWORD'],
