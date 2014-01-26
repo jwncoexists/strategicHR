@@ -12,6 +12,10 @@ StrategicHR::Application.routes.draw do
   resources :events, only: [:create], via: :post
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   resources :users
+
+  get "users/reconfirm"
+  match "reconfirm" => "users#reconfirm", via: :get
+
   resources :email_confirmations
   resources :courses
   resources :videos

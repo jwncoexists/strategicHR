@@ -6,8 +6,9 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       if !user.confirmed_at
-        flash[:alert] = "An email has been sent to your email address. To complete your registration, please click link in confirmation email to verify."
-        render :new
+        link = "<a href= '#{reconfirm_path(id: user.id)}'>Click</a>" 
+        flash[:error] = "Your email is not verified. Please verify before login. <br/> #{link} here to resend verification email.".html_safe
+        redirect_to :back
       elsif user.authenticate(params[:password])
         session[:user_id] = user.id
         if params[:remember_me]

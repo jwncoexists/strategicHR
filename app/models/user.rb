@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  before_save :update_slug
   has_secure_password
   validates_presence_of :password, :on => :create
   before_create { generate_token(:token) }
@@ -21,11 +20,4 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
   
-  def update_slug
-    self.slug = self.name.parameterize
-  end
-
-  def to_param
-    self.slug
-  end
 end

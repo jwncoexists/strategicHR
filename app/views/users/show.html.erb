@@ -2,6 +2,7 @@
 
 <% if can? :update, @user %>
   <%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-primary btn-mini' %>
+  <%= link_to "Resend confirmation email", reconfirm_path(id: @user.id), class: 'btn btn-primary btn-mini' %>
 <% end %>
 <% if can? :destroy, @user %>
   <%= link_to "Delete User", @user, method: :delete, class: 'btn btn-primary btn-mini btn-danger', data: { confirm: "Are you sure you want to delete user #{@user.name}, #{@user.email}?" } %> 
@@ -20,6 +21,10 @@
     <tr>
       <td><strong>Account Type:</strong></td>
       <td><%= @user.account %></td>
+    </tr>
+    <tr>
+      <td><strong>Confirmed At:</strong></td>
+      <td><%= @user.confirmed_at %></td>
     </tr>
     <tr>
       <td><strong>Member Since:</strong></td>

@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find_by_slug(params[:id])
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -39,10 +40,27 @@ class UsersController < ApplicationController
 
   end
 
+  # resend user confirmation email
+  def reconfirm
+     @user = User.find(params[:id])
+     
+    if @user
+      # generate a new token
+      @user.generate_token(:token)
+      @user.save
+      RegistrationMailer.registration_confirmation(@user, 
+        new_email_confirmation_url(token: @user.token)).deliver
+      redirect_to :back, notice: "Confirmation email has been re-sent!"
+    else
+      redirect_to :back, notice: "User not found!!"
+    end
+
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-     @user = User.find_by_slug(params[:id])
+     @user = User.find(params[:id])
      # @user = User.find(params[:id])
      # merge default value with params so if no collaborators checked, will erase
      if @user.update_attributes(params[:user])
@@ -56,7 +74,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find_by_slug(params[:id])
+    @user = User.find(params[:id])
     authorize! :destroy, @user, message: "You don't have acccess to delete this user."
     name = @user.name
     if @user.destroy
@@ -71,11 +89,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find_by_slug(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :account, :created_at, :updated_at)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :account, :created_at, :updated_at, :token)
     end
 end
