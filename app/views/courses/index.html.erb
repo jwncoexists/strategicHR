@@ -40,7 +40,7 @@
             <% elsif can? :view_certificate, course %>
               <td><%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %></td>
             <% else %>
-               <td><%= link_to "View Course Info", course_path(course), class: 'btn btn-primary btn-mini' %></td>
+               <td><%= link_to "Learn More About Course", course_path(course), class: 'btn btn-primary btn-mini' %></td>
             <% end %>
           <% else %>
             <td><%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %></td>

@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       @user.save
       RegistrationMailer.registration_confirmation(@user, 
         new_email_confirmation_url(token: @user.token)).deliver
-      redirect_to :back, notice: "Confirmation email has been re-sent!"
+      redirect_to :back, notice: "Confirmation email has been re-sent! Please click link in email to verify your email address."
     else
       redirect_to :back, notice: "User not found!!"
     end
