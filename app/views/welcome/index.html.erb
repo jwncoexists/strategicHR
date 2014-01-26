@@ -2,28 +2,35 @@
 <div class="block features">
   <h2 class="title-divider"><span>Earn CEU Credits <span class="de-em">@your place, @your pace!</span></span> <small></small></h2>
   <div class="row">
-    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("bob-microphone.jpg", class: "img-responsive", alt: "Dr. Bob Nelson"), about_path %>
+    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("bob-microphone.jpg", class: "img-responsive", alt: "Dr. Bob Nelson", title: "Dr. Bob Nelson"), about_path %>
       <h3 class="title"><a href=<%= about_path %> >Dr. Bob <span class="de-em">Nelson</span></a></h3>
       <p>Best-selling author and motivational speaker, Dr. Bob Nelson, is one of the world’s leading experts in Strategic Human Resource Management, including: employee motivation, performance, engagement, recognition, and rewards. He has worked with nearly all of the Fortune 500 companies, and is president of Nelson Motivation Inc., a management training and consulting company that... <%= link_to( "Read more...", about_path) %></p>
     </div>
-    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("feature-computer.png", class: "img-responsive", alt: "HRCI Business Management Strategic HR Online Training"), courses_path %>
+    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("feature-computer.png", class: "img-responsive", alt: "HRCI Certified Traing by Dr. Bob Nelson", title: "Dr. Bob's HRCI Certified Online Courses"), courses_path %>
       <h3 class="title"><a href=<%= courses_path %>>Certified <span class="de-em">Online Training</span></a></h3>
       <p>Now you can take Dr. Bob Nelson's HRCI certified Strategic Human Resource Business and Management courses online, and earn CEU credits at your place, and at your own pace!</p>
 
       <p> Strategic HR is no longer optional for businesses! Managers must work to motivate and unify employees around the goals of the business.  This emerging trend in human resources is now a critical factor in the competitive success of organizations. Dr. Bob offers a variety of Strategic HR online courses which are pre-approved for Business CEU credits by the HR Certification Institute. <%= link_to( "View course list...", courses_path) %></p>
     </div>
-    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("feature-video.png", class: "img-responsive", alt: "Pay only when you pass the course"), pricing_path %>
-      <h3 class="title"><a href=<%= pricing_path %>>Don't Pay <span class="de-em">Until You Pass</span></a></h3>
-      <p>There is no charge to sign-up for Dr. Bob's Strategic Human Resource management training, and you can view all of the course training videos for free!  Your only expense will be $39.99 at the end of the course to receive your certificate of HRCI CEU credits.</p>
 
-      <p>All of Dr. Bob's courses are fun and engaging, and are best known for their practical, real-life, positive ideas and techniques to improve employee performance, morale, productivity, motivation, and engagement. Choose from a variety of cutting-edge topics aimed at engaging and energizing employees and teams to meet corporate goals.
+    <div class="feature col-sm-6 col-md-3"> <%= image_tag("feature-happy.png", class: "img-responsive", alt: "Practical and fun HRCI Certified online training") %>
+      <h3 class="title primary-colour">Practical & <span class="de-em primary-colour">Fun</span></h3></font>
+      <p>All of Dr. Bob's courses are fun and engaging, and are best known for their cutting-edge, practical, real-life, positive ideas and techniques to improve employee performance, morale, productivity, motivation, and engagement.</p>
+      <p> Prepare your organization for the generation of Millenials now entering the workforce! Gain insights into the current shortage of skilled workers. These topics and more are all available in Dr. Bob Nelson's HRCI Certified online training classes.</p>
+
+      <p>Choose from a variety of cutting-edge topics aimed at engaging and energizing employees and teams to meet corporate goals.</p>  
+
     </div>
-    <div class="feature col-sm-6 col-md-3"> <%= image_tag("feature-mobile.png", class: "img-responsive", alt: "Mobile friendly HRCI Certified online training") %>
-      <h3 class="title primary-colour">Mobile <span class="de-em primary-colour">Friendly</span></h3></font>
-      <p>Earn CEU credits using your tablet or smart phone!  Dr. Bob's online Strategic Human Resource seminars are mobile device friendly!</p>
+
+    <div class="feature col-sm-6 col-md-3"> <%= link_to image_tag("feature-certificate.png", class: "img-responsive", alt: "Pay only when you pass the course", title: "View pricing"), pricing_path %>
+      <h3 class="title"><a href=<%= pricing_path %>>Don't Pay <span class="de-em">Until You Pass!</span></a></h3>
+      <p>There is no charge to sign-up for Dr. Bob's Strategic Human Resource management training, and you can view all of the course training materials for free!  Your only expense will be $39.99 at the end of the course to receive your certificate of HRCI CEU credits.</p>
+
       <p>Join the leading-edge human resource professionals and executives from around the world who have helped their organizations succeed with Dr. Bob Nelson's positive, proven, real-life, fun, and insightful seminars! </p>
       <p><%= link_to( "Sign up for FREE and start earning your HR Business & Management CEU credits today!", new_user_path) %></p>
+
     </div>
+
   </div>
 </div>
 
