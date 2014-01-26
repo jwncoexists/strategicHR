@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222163219) do
+ActiveRecord::Schema.define(version: 20140126015843) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -125,25 +125,27 @@ ActiveRecord::Schema.define(version: 20131222163219) do
   add_index "sections", ["video_id"], name: "index_sections_on_video_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "last_name",                          null: false
-    t.string   "password_digest", default: "",       null: false
-    t.string   "email",           default: "",       null: false
-    t.string   "account",         default: "member"
+    t.string   "last_name",                                 null: false
+    t.string   "password_digest",        default: "",       null: false
+    t.string   "email",                  default: "",       null: false
+    t.string   "account",                default: "member"
     t.string   "slug"
     t.date     "confirmed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
-    t.string   "first_name",      default: ""
-    t.string   "title",           default: ""
-    t.string   "company",         default: ""
-    t.string   "address1",        default: ""
-    t.string   "address2",        default: ""
-    t.string   "city",            default: ""
-    t.string   "state",           default: ""
-    t.string   "postal_code",     default: ""
-    t.string   "country",         default: ""
-    t.string   "phone",           default: ""
+    t.string   "first_name",             default: ""
+    t.string   "title",                  default: ""
+    t.string   "company",                default: ""
+    t.string   "address1",               default: ""
+    t.string   "address2",               default: ""
+    t.string   "city",                   default: ""
+    t.string   "state",                  default: ""
+    t.string   "postal_code",            default: ""
+    t.string   "country",                default: ""
+    t.string   "phone",                  default: ""
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["confirmed_at"], name: "index_users_on_confirmed_at", using: :btree

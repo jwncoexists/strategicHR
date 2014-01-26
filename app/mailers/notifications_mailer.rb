@@ -1,8 +1,8 @@
 class NotificationsMailer < ActionMailer::Base
-  default from: "jenniferwnelson@sbcglobal.net"
+  default from: "bob@drbobnelson.com"
 
   def new_message(message)
     @message = message
-    mail to: "bob@drbobnelson.com", subject: "[http://strategichr.herokuapp.com] #{message.subject}"
+    mail to: "bob@drbobnelson.com", subject: "StrategicHR: #{message.subject}"
   end
 end

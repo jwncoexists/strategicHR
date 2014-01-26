@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
     account.nil? ? false : ACCOUNTS.index(base_account.to_s) <= ACCOUNTS.index(account)
   end 
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.hex(6)

@@ -1,5 +1,6 @@
 StrategicHR::Application.routes.draw do
 
+  get "password_resets/new"
   get "welcome/index"
   get "welcome/about"
   get "welcome/pricing"
@@ -32,6 +33,8 @@ StrategicHR::Application.routes.draw do
 
   get "sessions/create"
   get "sessions/destroy"
+  
+  resources :password_resets
   #match 'contact' => 'contact#new', :as => 'contact', :via => :get
   #match 'contact' => 'contact#create', :as => 'contact', :via => :post
 

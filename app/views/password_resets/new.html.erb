@@ -1,0 +1,17 @@
+<h2 class="title-divider"><span>Forgot <span class="de-em">My Password</span></span> <small></small></h2>
+<div class="row">
+  <div class="col-md-6">
+    <%= form_tag password_resets_path, :method => :post do %>
+      <div class="control-group">
+        <%= label_tag :email, 'Email:', size: 40 %>
+        <div class="controls">
+          <%= text_field_tag :email, params[:email], size: 40, placeholder: "email address", required: true %>
+        </div>
+      </div>
+      <div>
+        <br>
+        <%= submit_tag "Reset Password", class: 'btn btn-primary btn-large'  %>
+      </div>
+    <% end %>
+  </div>
+</div>
