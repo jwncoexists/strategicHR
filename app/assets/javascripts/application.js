@@ -14,12 +14,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require_tree ../../../vendor/assets/javascripts/.
 
 
 
-// 2. This code loads the IFrame Player API code asynchronously.
-
-
+// YouTube Event Handling
+// This code loads the IFrame Player API code asynchronously.
 function onPlayerReady(event) {
   event.target.playVideo();
 }
