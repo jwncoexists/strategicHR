@@ -1,7 +1,7 @@
 <h2 class="title-divider"><span>Purchase Certificate for: <span class="de-em"><%= @course.name %></span></span> <small></small></h2>
 
 <p><i>This certificate will enable you to claim the appropriate CEU credits for completing the course. Please verify all of the information below and then click the "Pay With Card" button below.  After purchasing the certificate, you will be redirected to a link where you can print, view, and save the certificate to the file.</p>
-<p><strong>If more than one type of CEU credit is available for a course, then you will need to choose from the menu below which type of CEU credits you want, BEFORE purchasing the certificate.</p></i></strong>
+<p><strong>If more than one type of CEU credit is available for a course, then you will need to choose from the dropdown menu below which type of CEU credits you want, BEFORE purchasing the certificate.</p></i></strong>
 
 <div class="row">
   <div class="col-sm-12"> 
@@ -47,7 +47,7 @@
         <div class="col-sm-10">
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="Dr. Bob Nelson's Strategic HR Online Course Certificate"
+              data-description="Dr. Bob Nelson's Strategic HR Course Certificate"
               data-amount=<%= (@course.price * 100).to_i %>></script>
         </div>
       </div>

@@ -5,9 +5,13 @@
     <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
   <% end %>
 </div>
-<br><br>
+<div class="col-md-8">
+<p><i>All of Dr. Bob Nelson's courses are fun and engaging, and are best known for their cutting-edge, practical, real-life, positive ideas and techniques to improve employee performance, morale, productivity, motivation, and engagement. Choose from one of the courses listed below. Click on a course to find out more about it, including how many HRCI certified CEU credits are available for the course.</p></i>
+<br>
+</div>
 <% if !current_user %>
   <div class="col-md-8">
+
     <% @courses.each do |course| %>
       <h4 class="media-heading" %>
         <%= link_to course.name, course_path(course) %>
@@ -40,7 +44,7 @@
             <% elsif can? :view_certificate, course %>
               <td><%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %></td>
             <% else %>
-               <td><%= link_to "Learn More About Course", course_path(course), class: 'btn btn-primary btn-mini' %></td>
+               <td><%= link_to "Learn More About This Course", course_path(course), class: 'btn btn-primary btn-mini' %></td>
             <% end %>
           <% else %>
             <td><%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %></td>

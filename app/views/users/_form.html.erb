@@ -1,9 +1,8 @@
-<div>
-  <%= form_for(@user) do |f| %>
+<div id="content">
+  <%= form_for(@user, class: "form-login form-wrapper form-medium", role:"form") do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
         <ul>
         <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -13,25 +12,25 @@
     <% end %>
 
     <fieldset>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :first_name, 'First Name:' %><br>
-        <%= f.text_field :first_name, size: 40, placeholder: "first name", required: true %>
+        <%= f.text_field :first_name, size: 40, class: 'form-control', id: 'signup-first-name-page', required: true %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :last_name, 'Last Name:' %><br>
-        <%= f.text_field :last_name, size: 40, placeholder: "last name", required: true %>
+        <%= f.text_field :last_name, size: 40, class: 'form-control', id: 'signup-last-name-page', required: true %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :email, 'Email:' %><br>
-        <%= f.email_field :email, size: 40, placeholder: "email address", required: true  %>
+        <%= f.email_field :email, size: 40, class: 'form-control', id: 'signup-email-page', required: true  %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :password, 'Password:' %><br>
-        <%= f.password_field :password, size:40, placeholder: "password", required: true  %>
+        <%= f.password_field :password, size:40, class: 'form-control', id: 'signup-password-page', required: true  %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :password_confirmation, 'Confirm password:' %><br>
-        <%= f.password_field :password_confirmation, size: 40, placeholder: "confirm password", required: true  %>
+        <%= f.password_field :password_confirmation, size: 40, class: 'form-control', id: 'signup-password-confirm-page', required: true  %>
       </div>
       <%= f.hidden_field :account, :value => @user.account %>
       <br>
