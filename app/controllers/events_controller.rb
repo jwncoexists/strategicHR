@@ -1,9 +1,7 @@
 class EventsController < ApplicationController
-
+  # add youtube start/stop event to the Resque queue for background processing
   def create
-    #REDIS.hmset(current_user.id, "email", current_user.email, 
-    #            "video", params[:video], "status", params[:status], 
-    #            "time", Time.now())
+    Resque.enqueue(VideoTime, current_user.id, params[:video], params[:status], Time.now().utc)
     render nothing: true
   end
 end

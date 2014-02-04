@@ -19,11 +19,8 @@ group :development, :test do
   gem 'railroady'
 end
 
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platforms => :ruby
-
-
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -36,6 +33,7 @@ gem 'figaro'
 gem 'redcarpet'
 gem 'prawn'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'resque'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'

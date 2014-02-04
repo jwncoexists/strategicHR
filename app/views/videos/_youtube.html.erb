@@ -15,7 +15,7 @@
     player = new YT.Player('player', {
       height: '390',
       width: '640',
-      videoId: '<%= "#{youtube_id(@video.url)}" %>',
+      videoId: '<%= "#{find_youtube_id(@video.url)}" %>',
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange

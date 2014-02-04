@@ -28,7 +28,7 @@ module ApplicationHelper
           src="//www.youtube.com/embed/#{youtube_id}?enablejsapi=1&origin=*" frameborder="0"></iframe>}
   end
 
-  def youtube_id(youtube_url)
+  def find_youtube_id(youtube_url)
     if youtube_url[/youtu\.be\/([^\?]*)/]
       youtube_id = $1
     else

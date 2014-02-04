@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126015843) do
+ActiveRecord::Schema.define(version: 20140204021030) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -77,6 +77,22 @@ ActiveRecord::Schema.define(version: 20140126015843) do
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
 
+  create_table "logs", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "video_id"
+    t.text     "url"
+    t.string   "status"
+    t.datetime "time"
+    t.boolean  "tracked",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logs", ["course_id"], name: "index_logs_on_course_id", using: :btree
+  add_index "logs", ["user_id"], name: "index_logs_on_user_id", using: :btree
+  add_index "logs", ["video_id"], name: "index_logs_on_video_id", using: :btree
+
   create_table "questions", force: true do |t|
     t.text     "content"
     t.integer  "quiz_id"
@@ -124,6 +140,17 @@ ActiveRecord::Schema.define(version: 20140126015843) do
   add_index "sections", ["quiz_id"], name: "index_sections_on_quiz_id", using: :btree
   add_index "sections", ["video_id"], name: "index_sections_on_video_id", using: :btree
 
+  create_table "stats", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.float    "total_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stats", ["course_id"], name: "index_stats_on_course_id", using: :btree
+  add_index "stats", ["user_id"], name: "index_stats_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "last_name",                                 null: false
     t.string   "password_digest",        default: "",       null: false
@@ -160,6 +187,9 @@ ActiveRecord::Schema.define(version: 20140126015843) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "youtube_id"
   end
+
+  add_index "videos", ["youtube_id"], name: "index_videos_on_youtube_id", using: :btree
 
 end

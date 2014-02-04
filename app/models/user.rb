@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   before_create { generate_token(:token) }
   has_many :certificates
   has_many :attempts, dependent: :destroy
+  has_many :logs
+  has_many :summaries
 
   ACCOUNTS = %w[member admin]
   def account?(base_account)
