@@ -97,11 +97,7 @@
             <li class="dropdown"> <a href="blog.htm" class="dropdown-toggle" id="blog-drop" data-toggle="dropdown">Courses +</a> 
               <!-- Dropdown Menu -->
               <ul class="dropdown-menu" role="menu" aria-labelledby="blog-drop">
-                <% if current_user %>
-                  <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">My Courses</a></li>
-                <% else %>
-                  <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">All Courses</a></li>
-                <% end %>
+                <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">All Courses</a></li>
                 <% Course.all.each do |course| %>
                   <li role="presentation"><a role="menuitem" href=<%=course_path(course) %> tabindex="-1" class="menu-item"><%= course.name %></a></li>
                 <% end %>
