@@ -6,27 +6,27 @@
       <div class="control-group">
         <%= form.label :name,'Name:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :name, autofocus: true, size: 40, placeholder: "name", required: true %>
+          <%= form.text_field :name, autofocus: true, size: 40, required: true %>
         </div>
       </div>
       
       <div class="control-group">
         <%= form.label :email, 'Email:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :email, size: 40, placeholder: "email", required: true %>
+          <%= form.text_field :email, size: 40, required: true %>
         </div>
       </div>
       <div class="control-group">
         <%= form.label :subject, 'Subject:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :subject, size: 40, placeholder: "subject of email", required: true  %>
+          <%= form.text_field :subject, size: 40, required: true  %>
         </div>
       </div>
       
       <div class="control-group">
         <%= form.label :body, 'Message:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_area :body, placeholder: "message body", rows: 8, cols: 40, required: true %>
+          <%= form.text_area :body, rows: 8, cols: 40, required: true %>
         </div>
       </div>
       <br>
