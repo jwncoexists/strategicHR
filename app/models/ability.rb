@@ -48,7 +48,7 @@ class Ability
       elsif user.account? :member
         can :take, Course, released: true
         can :view_certificate, Course do |course|
-          course.my_status(user) == "Certificate Purchased"
+          course.my_status(user) == "Course Completed! Certificate Purchased."
         end
         can :purchase_certificate, Course do |course|
           Certificate.where(course_id: course.id, user_id: user.id).empty? &&

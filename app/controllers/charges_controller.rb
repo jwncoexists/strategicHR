@@ -23,7 +23,7 @@ class ChargesController < ApplicationController
     @certificate = Certificate.create(course_id: @course.id,
                                       user_id: current_user.id,
                                       purchase_date: Time.now,
-                                      purchase_price: @amount,
+                                      purchase_price: @amount/100.0,
                                       ceu_id: @ceu.id)
     rescue Stripe::CardError => e
       flash[:error] = e.message

@@ -1,7 +1,7 @@
 <h2 class="title-divider"><span>Thank You for Your <span class="de-em">Purchase!</span></span> <small></small></h2>
 
 <% if can? :view_certificate, @course %>
-  <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
+  <%= link_to "View/Print Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
 <br>
 
@@ -28,3 +28,6 @@
         <td>Amount Paid:</td>
         <td><%= "$#{@certificate.purchase_price}" %></td>
       </tr>
+    </div>
+  </table>
+</div>

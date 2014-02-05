@@ -22,12 +22,12 @@ class Course < ActiveRecord::Base
     return_status = "Coming Soon! This elearning course is not yet available."
     if (self.released)
       if (!self.certificates.where(user_id: user_id).empty?)
-          return_status = "Course Completed!  Certificate Purchased."
+          return_status = "Course Completed! Certificate Purchased."
       else
         if (!Stat.where(user_id: user_id, course_id: self.id).empty?)
-          return_status = "In Progress."
+          return_status = "In Progress"
         else
-          return_status = "Not Started."
+          return_status = "Not Started"
         end
         all_sections_complete = true
         self.sections.each do |section|
@@ -36,7 +36,7 @@ class Course < ActiveRecord::Base
           end
         end
         if (all_sections_complete)
-          return_status = "Quiz".pluralize(self.sections.count) + " Complete."
+          return_status = "Quiz".pluralize(self.sections.count) + " Complete"
         end
       end
     end
