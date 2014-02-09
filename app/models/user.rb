@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   validates_presence_of :password, :on => :create
+  validates :email, presence: true, uniqueness: true
   before_create { generate_token(:token) }
   has_many :certificates
   has_many :attempts, dependent: :destroy

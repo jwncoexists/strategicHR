@@ -1,18 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <%= form_for(@user, class: "form-login form-wrapper form-narrow", role:"form") do |f| %>
-      <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved: </h2>
-          <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <fieldset>
+    <%= form_for(@user, html: { class: 'form-login form-wrapper form-medium', role: 'form' } ) do |f| %>
+      <h5>StrategicHR Account Information</h5><br>
+      <fieldset id="login">
         <div class="form-group">
           <%= f.label :first_name, '*First Name:' %><br>
           <%= f.text_field :first_name, class: 'form-control', id: 'signup-first-name-page', required: true %>

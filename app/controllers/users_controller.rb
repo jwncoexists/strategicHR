@@ -34,7 +34,11 @@ class UsersController < ApplicationController
         new_email_confirmation_url(token: @user.token)).deliver
       redirect_to login_path, notice: "A confirmation email has been sent!! Click link in the email to verify address, then log in below."
     else
-      flash[:error] = "Error creating new user. Please try again."
+      if @user.errors.any?
+        flash[:error] = "Error creating new user. Please try again. #{@user.errors.full_messages.first}."
+      else
+        flash[:error] = "Error creating new user. Please try again." 
+      end
       render :new
     end
 
