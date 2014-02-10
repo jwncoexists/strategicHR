@@ -18,6 +18,8 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rails_layout'
   gem 'railroady'
+  gem "minitest-rails"
+  gem "autotest-rails"
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
