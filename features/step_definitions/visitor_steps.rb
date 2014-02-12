@@ -46,11 +46,11 @@ Given(/^I am a visitor to the registration page$/) do
 end
 
 When(/^I enter required registration information$/) do
-  fill_in "First Name:", with: "Test"
-  fill_in "Last Name:", with: "User"
-  fill_in "Email:", with: "test@example.com"
-  fill_in "Password:", with: "5555"
-  fill_in "Confirm password:", with: "5555"
+  fill_in 'signup-first-name-page', with: "Test"
+  fill_in 'signup-last-name-page', with: "User"
+  fill_in 'signup-email-page', with: "test@example.com"
+  fill_in 'signup-password-page', with: "visitorpassword"
+  fill_in 'signup-password-confirm-page', with: "visitorpassword"
 end
 
 When(/^I click the Register button$/) do
@@ -58,6 +58,6 @@ When(/^I click the Register button$/) do
 end
 
 Then(/^I am directed to the login screen with a notice to confirm my email address$/) do
-  expect(page).to have_content "An email has been sent"
+  expect(page).to have_content "A confirmation email has been sent"
   expect(page).to have_content "Please Login"
 end

@@ -19,7 +19,9 @@ class ResultsController < ApplicationController
     @quiz = Quiz.find(@section.quiz_id)
     @question = Question.find(@result.question_id)
     # save the user's answer in the result record
-    @result.answer_id = Answer.where(question_id: @result.question.id, content: params[:answer]).first.id
+    if (params[:answer])
+      @result.answer_id = Answer.where(question_id: @result.question.id, content: params[:answer]).first.id
+    end
   
     if @result.save
       if params[:commit].upcase.include? "NEXT"

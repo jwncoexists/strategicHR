@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         else
           cookies[:token] = user.token
         end
-        redirect_to courses_path notice: "You are now logged in to Strategic HR by Dr. Bob."
+        redirect_to courses_path, notice: "You are now logged in to StrategicHR Online Training."
       else
         flash[:alert] =  "Invalid user/password combination."
         render :new

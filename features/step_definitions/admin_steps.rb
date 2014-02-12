@@ -4,39 +4,35 @@
 When(/^I log in as an administrative user$/) do
 
   visit(new_user_path)
-  fill_in 'First Name:', with: 'Test'
-  fill_in 'Last Name:', with: 'Admin User'
-  fill_in 'Email:', with: 'admin@example.com'
-  fill_in 'Password:', with: 'admin'
-  fill_in 'Confirm password:', with: 'admin'
+  fill_in 'signup-first-name-page', with: 'admin'
+  fill_in 'signup-last-name-page', with: 'user'
+  fill_in 'signup-email-page', with: 'testadmin@example.com'
+  fill_in 'signup-password-page', with: 'adminpassword'
+  fill_in 'signup-password-confirm-page', with: 'adminpassword'
   click_button('Register') 
 
-  @user = User.find_by_email('admin@example.com')
-  if !@user.update_attribute(:confirmed_at, Time.now)
-    fail('Unable to update confirmed_at attribute for admin user')
-  end
-  if !@user.update_attribute(:account, 'admin')
-    fail('Unable to update account for admin user')
-  end
-  if User.count < 1
-    fail('User not added to database')
+  @user = User.find_by_email!('testadmin@example.com')
+  @user.update_attribute(:confirmed_at, Time.now)
+  @user.update_attribute(:account, 'admin')
+
+  if (@user.confirmed_at.nil? || @user.account != 'admin')
+    fail("Unable to set administrative attributes for user")
   end
 
-  visit('/login')
-  fill_in 'Email:', with: 'admin@example.com'
-  fill_in 'Password:', with: 'admin'
+  visit(login_path)
+  fill_in 'login-email-page', with: 'testadmin@example.com'
+  fill_in 'login-password-page', with: 'adminpassword'
 
-  within_fieldset 'login' do
+  within_fieldset 'login-page' do
     click_button('Login')
   end
-end
-
-When(/^I visit the admin home page$/) do
-  visit(root_path)
+  page.should have_selector ".alert", text: "You are now logged in to StrategicHR Online Training."
+  # save_and_open_page
 end
 
 Then(/^I can see links to administrative functions$/) do
   # only admins can update users
+  # puts page.body
   expect(page).to have_content "Users"
 end
 
@@ -60,7 +56,7 @@ Given(/^I log in as a courses administrator named "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'Email:', with: "#{name}@example.com"
   fill_in 'Password:', with: "letmeinplease"
-  within_fieldset 'login' do
+  within_fieldset 'login-page' do
     click_button('Login')
   end
 end
@@ -173,7 +169,7 @@ Given(/^I log in as the videos "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: "letmeinplease"
-  within_fieldset 'login' do
+  within_fieldset 'login-page' do
     click_button('Login')
   end
 end
@@ -183,7 +179,7 @@ Given(/^I visit the Videos page$/) do
 end
 
 Then(/^I can add a new video named "(.*?)"$/) do |name|
-  puts page.body
+  #puts page.body
   click_link('Add Video')
   fill_in 'Name:', with: name
   fill_in 'Description:', with: Faker::Lorem.paragraph
@@ -251,7 +247,7 @@ Given(/^I log in as the quizzes "(.*?)"$/) do |name|
   visit('/login')
   fill_in 'email', with: "#{name}@example.com"
   fill_in 'password', with: "letmeinplease"
-  within_fieldset 'login' do
+  within_fieldset 'login-page' do
     click_button('Login')
   end
 end
@@ -268,11 +264,16 @@ Then(/^I can create a new quiz named "(.*?)"$/) do |name|
 end
 
 Given(/^a quiz named "(.*?)"$/) do |name|
-  @quiz = Quiz.create!(name: name)
+  click_link('New Quiz')
+  fill_in 'Name', with: name
+  click_button('Save')
+  @quiz = Quiz.find_by_name!(name)
+  @name = name
 end
 
 When(/^I edit the quiz named "(.*?)" quiz$/) do |name|
   visit(edit_quiz_path(@quiz))
+  page.should have_content(name)
 end
 
 When(/^change the quiz name to "(.*?)"$/) do |name|
@@ -286,23 +287,37 @@ Then(/^the name of the quiz is stored$/) do
 end
 
 When(/^add a question named, "(.*?)"$/) do |name|
-  pending # express the regexp above with the code you wish you had
+  click_link('Add Question')
+  #puts page.body
+  # type_into_keyboard("My Question", append_return: false)
+  click_button('Save')
 end
 
 Then(/^the question is added to the quiz$/) do
-  pending # express the regexp above with the code you wish you had
+  if (@quiz.questions.count <= 0)
+    fail("Question not added to quiz, count = #{@quiz.questions.count}")
+  end
 end
 
 Given(/^a question named "(.*?)"$/) do |name|
-  pending # express the regexp above with the code you wish you had
+  @question = @quiz.questions.build
+  @question.content = name
+  @quiz.save
 end
 
 When(/^delete the question named, "(.*?)"$/) do |name|
-  pending # express the regexp above with the code you wish you had
+  @prevcount = @quiz.questions.count
+  page.check('quiz_questions_attributes_0__destroy')
+  #puts page.body
+  # type_into_keyboard("My Question", append_return: false)
+  click_button('Save')
+
 end
 
 Then(/^the question is removed from the quiz$/) do
-  pending # express the regexp above with the code you wish you had
+  if (@quiz.questions.count == @prevcount)
+    fail("Question could not be deleted fromt the quiz: #{name}, #questions: #{@quiz.questions.count}")
+  end
 end
 
 When(/^I view the "(.*?)" Quiz$/) do |name|

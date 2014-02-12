@@ -89,7 +89,7 @@
     <% @attempt.results.each do |result| %>
       <tr>
         <td><%= Question.find(result.question_id).content %></td>
-        <td><%= Answer.find(result.answer_id).content %></td>
+        <td><%= Answer.find(result.answer_id).content unless result.answer_id.nil? %></td>
         <% if result.answer_id == result.correct_answer_id %>
           <td><font color="green">CORRECT</td></font>
           <td></td>
