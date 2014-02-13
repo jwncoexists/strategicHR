@@ -3,7 +3,7 @@ class CertificatePdf < Prawn::Document
   def initialize(certificate)
     super(page_layout: :landscape)
     @certificate = certificate
-    @ceu = Ceu.find(@certificate.ceu_id)
+    @ceu = Ceu.find(@certificate.ceu_id) unless @certificate.ceu_id.nil?
     @user = User.find(@certificate.user_id)
     @course = Course.find(@certificate.course_id)
     image "#{Rails.root}/app/assets/images/StrategicHRCertificate.png", :at => [0, 542]

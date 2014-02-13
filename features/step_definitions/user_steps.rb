@@ -13,7 +13,7 @@ Then(/^I see a form asking me for information to sign in to StrategicHR$/) do
 end
 
 Given(/^I am a user$/) do
-    @user = User.create!(
+  @user = User.create!(
     first_name: "member",
     last_name: "user",
     email: "#member@example.com",
@@ -56,7 +56,7 @@ end
 # my courses.feature
 #------------------------
 Given(/^a member user named "(.*?)"$/) do |name|
-    @user = User.create!(
+  @user = User.create!(
     first_name: "name",
     last_name: "name",
     email: "#{name}@example.com",
@@ -101,10 +101,10 @@ end
 # video.feature
 #------------------------
 Given(/^the video "(.*?)" is assigned to course "(.*?)"$/) do |video, course|
-    @section = Section.create!(
-    sequence: 1,
-    course_id: @course.id,
-    video_id: @video.id
+  @section = Section.create!(
+      sequence: 1,
+      course_id: @course.id,
+      video_id: @video.id
   )
 end
 
@@ -128,48 +128,142 @@ end
 # quiz.feature
 #------------------------
 
-Given(/^quiz named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given(/^a section for the course "(.*?)" with the quiz "(.*?)"$/) do |course, quiz|
+  @section = Section.create!(
+      sequence: 1,
+      course_id: @course.id,
+      quiz_id: @quiz.id
+  )
 end
 
-Given(/^the quiz "(.*?)" is assigned to course "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given(/^two questions for the Quiz named "(.*?)"$/) do |name|
+  @question1 = Question.create!(
+      content: 'What is question 1?',
+      quiz_id: @quiz.id
+    )
+    @question2 = Question.create!(
+      content: 'What is question 2?',
+      quiz_id: @quiz.id
+    )
 end
 
+Given(/^two answers for each of the the questions for the quiz name "(.*?)"$/) do |arg1|
+  @answer11 = Answer.create!(
+      content: 'Correct',
+      question_id: @question1.id,
+      correct: true
+    )
+  @answer12 = Answer.create!(
+      content: 'Incorrect',
+      question_id: @question1.id,
+      correct: false
+    )    
 
-
-
-Given(/^I have purchased a certificate for "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  @answer21 = Answer.create!(
+      content: 'Correct',
+      question_id: @question2.id,
+      correct: true
+    )
+  @answer22 = Answer.create!(
+      content: 'Incorrect',
+      question_id: @question2.id,
+      correct: false
+    )
 end
 
-When(/^I visit my certificates page$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I go to the quiz page for "(.*?)"$/) do |name|
+  click_link('Take Quiz')
 end
 
-Then(/^I can view my "(.*?)" certificate$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I see a link to start the quiz$/) do
+  expect(page).to have_content 'Begin Quiz'
 end
 
-Then(/^I can print my "(.*?)" certificate$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I click on the link to start the quiz named "(.*?)"$/) do |name|
+  click_link('Begin Quiz Btn')
 end
 
-When(/^I visit  my certificates page$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I see the first question for the quiz$/) do
+  expect(page).to have_content 'Please select one of the following answers:'
 end
 
-Then(/^I can email my "(.*?)" certificate$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I answer all the questions for the quiz named "(.*?)"$/) do |name|
+  choose('answer_Correct')
+  click_button('Next')
+  choose('answer_Incorrect')
+  click_button('Complete Quiz')
 end
 
+Then(/^I see my results$/) do
+   expect(page).to have_content 'Quiz Results for'
+end
+
+#------------------------
+# certificate_purchase.feature
+#------------------------
+
+Given(/^a successful quiz attempt for the course "(.*?)" and the quiz "(.*?)"$/) do |course, quiz|
+  @attempt = Attempt.create!(
+          user_id: @user.id,
+          section_id: @section.id,
+          passed: true,
+          status: "PASSED"
+  )
+end
+
+When(/^I go to the Courses page$/) do
+  visit(courses_path)
+end
+
+Then(/^I see a link to purchase a certificate for the course named "(.*?)"$/) do |name|
+  expect(page).to have_content 'Purchase Certificate'
+end
+
+When(/^I click on a link to purchase a certificate for the course named "(.*?)"$/) do |arg1|
+  click_link('Purchase Certificate')
+end
+
+Then(/^I am prompted for information to purchase the certificate$/) do
+ expect(page).to have_content 'Purchase Certificate for:'
+end
+
+#------------------------
+# certificate.feature
+#------------------------
+
+Given(/^I have purchased a certificate for the course named "(.*?)"$/) do |course|
+    @certificate = Certificate.create!(
+          user_id: @user.id,
+          course_id: @course.id,
+          purchase_date: Time.now,
+          purchase_price: @course.price
+        )
+
+end
+
+When(/^I click on the "(.*?)" link$/) do |name|
+  click_link(name)
+end
+
+Then(/^I can view my "(.*?)" course certificate$/) do |name|
+  page.response_headers['Content-Type'].should == 'application/pdf'
+end
+
+#------------------------
+# email_confirmation.feature
+#------------------------
 When(/^I go to the email confirmation page$/) do
-  pending # express the regexp above with the code you wish you had
+  @user = User.find_by_email!("test@example.com")
+  visit(new_email_confirmation_url(token: @user.token))
 end
 
-Then(/^I see a confirmation that I my registration with strategicHR is complete$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I see a confirmation that my registration with strategicHR is complete$/) do
+  expect(page).to have_content('Your registration with StrategicHR by Dr. Bob Nelson has been confirmed.')
 end
+
+#------------------------
+# my_account.feature
+#------------------------
 
 When(/^I go to my account page$/) do
   pending # express the regexp above with the code you wish you had
@@ -179,63 +273,9 @@ Then(/^I see information about my account$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I click on the "(.*?)" link$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I am prompted with a form to change my password$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I am prompted with a form to change my email address$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I am prompted with a form to update my profile$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I go to my certificates page$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I see information about all of the certificates I have ordered, and certificates that are available to order$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I click on a link to purchase a certificate for a completed class named "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I am prompted to enter my credit card information for purchasing the certificate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I go to the quiz page for a course$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I see my status for the quiz and links to start or resume the quiz$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I go to the quiz page for "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I click on the link to start the "(.*?)" quiz$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I see the first question for the quiz$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
 
-When(/^I click on the link to start the "(.*?)" video$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
 
-Then(/^the video starts playing$/) do
-  pending # express the regexp above with the code you wish you had
-end
+
+
+
