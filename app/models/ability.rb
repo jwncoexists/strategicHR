@@ -37,6 +37,9 @@ class Ability
           Certificate.where(course_id: course.id, user_id: user.id).empty? &&
           course.my_status(user) =~ /Quiz(zes)? Complete/
         end
+        can :view_handout, Course do |course|
+          !course.handout.file.nil?
+        end
         can :create, Course
         can :update, Course
         can :destroy, Course
@@ -47,6 +50,9 @@ class Ability
         can :manage, User
       elsif user.account? :member
         can :take, Course, released: true
+        can :view_handout, Course do |course|
+          course.released && !course.handout.file.nil?
+        end
         can :view_certificate, Course do |course|
           course.my_status(user) == "Course Completed! Certificate Purchased."
         end

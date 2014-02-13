@@ -1,14 +1,16 @@
 Feature: my courses page
 
-  As a registered user, I can see the My Courses page and can go to the "5 Trends Shaping the Future of Work Course"
+  As a registered user, I can see the Courses page, I can go to the "5 Trends Shaping the Future of Work Course", and I can see the status of that course.
+
+  Background:
+    Given a member user named "member user"
+    And a course named "5 Trends"
+    And I log in as member user named "member user"
+    And I visit the Courses page
 
   Scenario:
-    Given I am a user
-    When I go to my courses page
-    Then I see a dashboard of all my courses 
+    Then I see a list all my courses 
 
   Scenario:
-    Given I am a user
-    When I go to my courses page
-    And I click on the link to the "5 Trends Shaping the Future of Work" course
-    Then see the course page for "5 Trends Shaping the Future of Work"
+    When I click on the link to the "5 Trends" course
+    Then I see the course page for "5 Trends"

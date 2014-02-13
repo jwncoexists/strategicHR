@@ -72,6 +72,7 @@ Then(/^I can create a new course named "(.*?)"$/) do |name|
   fill_in 'Description', with: Faker::Lorem.paragraph
   fill_in 'CEU', with: 5
   fill_in 'Price', with: 39.99
+  check('Released')
   page.select Video.first.name
   page.select Quiz.first.name
   click_button('Save')
@@ -80,7 +81,8 @@ end
 
 Given(/^a course named "(.*?)"$/) do |name|
   @course = Course.create!(name: name, 
-                           description: Faker::Lorem.paragraph)
+                           description: Faker::Lorem.paragraph,
+                           released: true)
   section = @course.sections.build
   ceu = @course.ceus.build
 end

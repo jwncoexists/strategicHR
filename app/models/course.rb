@@ -1,6 +1,5 @@
 class Course < ActiveRecord::Base
   before_save :update_slug
-
   has_many :sections, dependent: :destroy
   has_many :videos, through: :sections
   has_many :quizzes, through: :sections
@@ -8,6 +7,7 @@ class Course < ActiveRecord::Base
   has_many :certificates
   has_many :ceus, dependent: :destroy
   accepts_nested_attributes_for :ceus, allow_destroy: true
+  mount_uploader :handout, HandoutUploader
 
   def update_slug
     self.slug = self.name.parameterize
@@ -16,6 +16,13 @@ class Course < ActiveRecord::Base
   def to_param
     self.slug
   end
+
+  def remove_changed_handout
+    self.remove_handout!
+    self.handout = nil
+    self.save
+  end
+
 
   # return status of N/A, Not Started, In Progress, Completed, Certificate Purchased
   def my_status(user_id)
