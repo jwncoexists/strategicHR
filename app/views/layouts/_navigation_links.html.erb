@@ -1,24 +1,30 @@
 <%# add navigation links to this file %>
-<%= link_to 'StrategicHR', root_path, class: 'navbar-brand' %>
-<%= link_to "Courses", courses_path, class: 'menu-item', role: 'menuitem' %>
-<% if can? :update, User %>
-  <%= link_to "Users", users_path, class: 'menu-item', role: 'menuitem'  %>
-<% end %>
-<% if can? :update, Video %>
-  <%= link_to "Videos", videos_path, class: 'menu-item', role: 'menuitem'  %>
-<% end %>
-<% if can? :update, Quiz %>
-  <%= link_to "Quizzes", quizzes_path, class: 'menu-item', role: 'menuitem' %>
-<% end %>
-<%= link_to "About", welcome_about_path, class: 'menu-item', role: 'menuitem' %>
-<%= link_to "Contact", contact_path, class: 'menu-item', role: 'menuitem'  %>
-<% if current_user %>
-  <div class="btn-group user-menu pull-right"> 
-    <%= link_to "Logout", logout_path, method: :delete, class: 'btn btn-primary', role: 'menuitem'  %>
-  </div>
-<% else %>
-  <div class="btn-group user-menu pull-right"> 
-    <%= link_to "Login", login_path, class: 'btn btn-primary'  %>
-    <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary'  %>
-  </div>
-<% end %>
+ <li class="home-link"><a href=<%= root_path %>><i class="fa fa-home"></i><span class="hidden">Home</span></a></li>
+
+  <li class="dropdown"> <a href="blog.htm" class="dropdown-toggle" id="blog-drop" data-toggle="dropdown">Courses +</a> 
+    <!-- Dropdown Menu -->
+    <ul class="dropdown-menu" role="menu" aria-labelledby="blog-drop">
+      <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">All Courses</a></li>
+      <% Course.all.each do |course| %>
+        <li role="presentation"><a role="menuitem" href=<%=course_path(course) %> tabindex="-1" class="menu-item"><%= course.name %></a></li>
+      <% end %>
+    </ul>
+  </li>
+
+  <% if can? :view_pricing, User %>
+    <li><a href=<%= pricing_path %> class="menu-item">Pricing</a></li>
+  <% end %>
+  <li><a href=<%= contact_path %> class="menu-item">Contact</a></li>
+  <li><a href=<%= about_path %> class="menu-item">About</a></li>
+  <% if can? :update, User %>
+    <li><a href=<%= users_path %> class="menu-item">Users</a></li>
+  <% end %>
+  <% if can? :update, Quiz %>
+    <li><a href=<%= quizzes_path %> class="menu-item">Quizzes</a></li>
+  <% end %>
+  <% if can? :update, Video %>
+    <li><a href=<%= videos_path %> class="menu-item">Videos</a></li>
+  <% end %>
+  <% if can? :view_account, current_user %>
+    <li><a href=<%= user_path(current_user) %> class="menu-item">My Account</a></li>
+  <% end %>

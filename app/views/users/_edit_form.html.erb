@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for(@user, html: { class: 'form-login form-wrapper form-medium', role: 'form' } ) do |f| %>
+      <h4>StrategicHR Account Information</h4><br>
+      <fieldset id="login">
+        <div class="form-group">
+          <%= f.label :first_name, '*First Name:' %><br>
+          <%= f.text_field :first_name, class: 'form-control', id: 'signup-first-name-page', required: true, autofocus: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :last_name, '*Last Name:' %><br>
+          <%= f.text_field :last_name, size: 40, class: 'form-control', id: 'signup-last-name-page', required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :title, 'Title:' %><br>
+          <%= f.text_field :title, size: 40, class: 'form-control', id: 'signup-title-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, '*Email:' %><br>
+          <%= f.email_field :email, size: 40, class: 'form-control', id: 'signup-email-page', required: true  %>
+        </div>
+        <div class="form-group">
+          <%= f.label :phone, 'Phone:' %><br>
+          <%= f.phone_field :phone, size: 40, class: 'form-control', id: 'signup-phone-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :company, 'Company:' %><br>
+          <%= f.text_field :company, size: 40, class: 'form-control', id: 'signup-company-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :address1, 'Address1:' %><br>
+          <%= f.text_field :address1, size: 40, class: 'form-control', id: 'signup-address1-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :address2, 'Address2:' %><br>
+          <%= f.text_field :address2, size: 40, class: 'form-control', id: 'signup-address2-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :city, 'City:' %><br>
+          <%= f.text_field :city, size: 40, class: 'form-control', id: 'signup-city-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :state, 'State:' %><br>
+          <%= f.text_field :state, size: 40, class: 'form-control', id: 'signup-state-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :postal_code, 'Postal Code:' %><br>
+          <%= f.text_field :postal_code, size: 40, class: 'form-control', id: 'signup-postalcode-page' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :country, 'Country:' %><br>
+          <%= f.text_field :country, size: 40, class: 'form-control', id: 'signup-country-page' %>
+        </div>
+        <%= f.hidden_field :account, :value => @user.account %>
+        <br>
+        <div class="actions">
+          <%= f.submit "Save", class: 'btn btn-primary btn-large'  %>
+        </div>
+        <br>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

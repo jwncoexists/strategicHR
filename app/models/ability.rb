@@ -48,8 +48,15 @@ class Ability
         can :manage, Section
         can :manage, Video
         can :manage, User
+        can :view_pricing, User
       elsif user.account? :member
         can :take, Course, released: true
+        can :view_account, User do |acctuser|
+          user.account == "member" && acctuser.id == user.id
+        end
+        can :edit_account, User do |acctuser|
+          user.account == "member" && acctuser.id == user.id
+        end
         can :view_handout, Course do |course|
           course.released && !course.handout.file.nil?
         end
@@ -65,6 +72,7 @@ class Ability
     # users who are not logged in can view courses  
     else
       can :view, Course
+      can :view_pricing, User
     end
   end
 end

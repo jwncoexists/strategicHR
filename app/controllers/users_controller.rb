@@ -11,6 +11,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    if (!can? :view_account, @user)
+      redirect_to root_path, notice: "You don't have access to view that information. Please select from menu options above."
+    end
   end
 
   # GET /users/new
@@ -22,6 +25,9 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    if (!can? :edit_account, @user)
+      redirect_to root_path, notice: "You don't have access to view that information. Please select from menu options above."
+    end
   end
 
   # POST /users
@@ -67,10 +73,10 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      # @user = User.find(params[:id])
      # merge default value with params so if no collaborators checked, will erase
-     if @user.update_attributes(params[:user])
+     if @user.update_attributes(user_params_nopw)
        redirect_to @user
      else
-       flash[:error] = "Error saving user.  Please try again."
+       flash[:error] = "Error saving user.  Please try again. #{@user.errors.full_messages.first}."
        render :edit
      end
   end
@@ -99,6 +105,11 @@ class UsersController < ApplicationController
     # Never trust parameters from the internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, 
+                                   :title, :company, :phone, :address1, :address2, :city, :state, :postal_code,
+                                   :country, :confirmed_at, :account, :created_at, :updated_at, :token)
+    end
+    def user_params_nopw
+      params.require(:user).permit(:first_name, :last_name, :email,
                                    :title, :company, :phone, :address1, :address2, :city, :state, :postal_code,
                                    :country, :confirmed_at, :account, :created_at, :updated_at, :token)
     end

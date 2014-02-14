@@ -9,6 +9,7 @@
     <%= javascript_include_tag "application" %>
 
     <%= csrf_meta_tags %>
+    <meta name="google-site-verification" content="kR9x2W23R64P9-Yj0Umnu3dpKxIfv1y4Yh7wV_C3-4Y" />
   </head>
  <body class="page page-index">
 <a href="#content" class="sr-only">Skip to content</a>
@@ -92,30 +93,8 @@
           
           <!--main navigation-->
           <ul class="nav navbar-nav">
-            <li class="home-link"><a href=<%= root_path %>><i class="fa fa-home"></i><span class="hidden">Home</span></a></li>
-
-            <li class="dropdown"> <a href="blog.htm" class="dropdown-toggle" id="blog-drop" data-toggle="dropdown">Courses +</a> 
-              <!-- Dropdown Menu -->
-              <ul class="dropdown-menu" role="menu" aria-labelledby="blog-drop">
-                <li role="presentation"><a role="menuitem" href=<%=courses_path %> tabindex="-1" class="menu-item">All Courses</a></li>
-                <% Course.all.each do |course| %>
-                  <li role="presentation"><a role="menuitem" href=<%=course_path(course) %> tabindex="-1" class="menu-item"><%= course.name %></a></li>
-                <% end %>
-              </ul>
-            </li>
-
-            <li><a href=<%= pricing_path %> class="menu-item">Pricing</a></li>
-            <li><a href=<%= contact_path %> class="menu-item">Contact</a></li>
-            <li><a href=<%= about_path %> class="menu-item">About</a></li>
-            <% if can? :update, User %>
-              <li><a href=<%= users_path %> class="menu-item">Users</a></li>
-            <% end %>
-            <% if can? :update, Quiz %>
-              <li><a href=<%= quizzes_path %> class="menu-item">Quizzes</a></li>
-            <% end %>
-            <% if can? :update, Video %>
-              <li><a href=<%= videos_path %> class="menu-item">Videos</a></li>
-            <% end %>
+            <%= render 'layouts/navigation_links' %>
+ 
           </ul>
         </div>
         <!--/.navbar-collapse --> 

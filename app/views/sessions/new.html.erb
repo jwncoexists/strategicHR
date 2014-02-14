@@ -4,15 +4,15 @@
     <%= form_tag sessions_create_path, class: 'form-login form-wrapper form-narrow', :method => :get do %>
       <fieldset id="login-page">
         <div class="form-group">
-          <%= label_tag :email, 'Email:', size: 40, class: 'sr-only', for: 'login-email-page' %>
+          <%= label_tag :email, 'Email:', size: 40, for: 'login-email-page' %>
           <div class="controls">
-            <%= text_field_tag :email, params[:email], size: 40, id: 'login-email-page', class: 'form-control email',  placeholder: "email address", required: true %>
+            <%= text_field_tag :email, params[:email], size: 40, id: 'login-email-page', autofocus: true, class: 'form-control email',  required: true %>
           </div>
         </div>
         <div class="form-group">
-          <%= label_tag :password, 'Password:', size: 40, class: 'sr-only', for: 'login-password-page' %>
+          <%= label_tag :password, 'Password:', size: 40, for: 'login-password-page' %>
           <div class="controls">
-            <%= password_field_tag :password, params[:password], size: 40, id: 'login-password-page', class: 'form-control password', placeholder: "password", required: true  %>
+            <%= password_field_tag :password, params[:password], size: 40, id: 'login-password-page', class: 'form-control password', required: true  %>
           </div>
         </div>
         <br>

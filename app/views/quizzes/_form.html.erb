@@ -1,7 +1,7 @@
 <%= form_for @quiz do |f| %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, size: 40, placeholder: "name of quiz", required: true  %>
+    <%= f.text_field :name, size: 40, placeholder: "name of quiz", required: true, autofocus: true  %>
   </div>
   <div class="field">
     <%= f.label :num_questions_to_show, "# Questions on a Quiz:"  %><br />

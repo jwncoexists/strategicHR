@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :password, presence: true, length: { minimum: 4 }
+  validates :password, presence: true, confirmation: true, 
+            length: { minimum: 4 }, unless: :already_has_password?
   validates :email, presence: true, uniqueness: true
   before_create { generate_token(:token) }
   has_many :certificates
@@ -29,5 +30,11 @@ class User < ActiveRecord::Base
   def name
     "#{self.first_name} #{self.last_name}"
   end
+
+  private
+
+    def already_has_password?
+      !self.password_digest.blank?
+    end
   
 end

@@ -264,14 +264,20 @@ end
 #------------------------
 # my_account.feature
 #------------------------
-
-When(/^I go to my account page$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^I visit My Account page$/) do
+  click_link("My Account")
 end
 
 Then(/^I see information about my account$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content(@user.name)
+  expect(page).to have_content("Edit User Info")
 end
+
+Then(/^I am prompted with a form to update my profile$/) do
+  expect(page).to have_content("Editing User Info")
+end
+
+
 
 
 
