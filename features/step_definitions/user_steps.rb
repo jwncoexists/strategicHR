@@ -172,7 +172,7 @@ Given(/^two answers for each of the the questions for the quiz name "(.*?)"$/) d
 end
 
 When(/^I go to the quiz page for "(.*?)"$/) do |name|
-  click_link('Take Quiz')
+  click_link('Take Quiz Link')
 end
 
 Then(/^I see a link to start the quiz$/) do

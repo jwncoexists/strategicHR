@@ -51,6 +51,14 @@ class Ability
         can :view_pricing, User
       elsif user.account? :member
         can :take, Course, released: true
+        can :see_course_video_button, Course do |course|
+          course.released && course.sections.count == 1 && !course.sections.first.video_id.nil?
+        end
+        can :see_course_quiz_button, Course do |course|
+          course.released && course.sections.count == 1 &&
+          course.sections.first.attempts.where(user_id: user.id, passed: true).empty? &&
+          !course.sections.first.quiz_id.nil?
+        end
         can :view_account, User do |acctuser|
           user.account == "member" && acctuser.id == user.id
         end

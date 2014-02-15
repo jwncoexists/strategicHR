@@ -32,8 +32,14 @@
 <% if can? :create, Course %>
   <%= link_to "New Course", new_course_path, class: 'btn btn-primary btn-mini' %>
 <% end %>
+<% if can? :see_course_video_button, @course %>
+  <%= link_to "Watch Video", video_path(Video.find(@course.sections.first.video_id)), class: 'btn btn-primary btn-mini' %>
+<% end %>
 <% if can? :view_handout, @course %>
-  <%= link_to "View Course Handout", @course.handout_url.to_s, class: 'btn btn-primary btn-mini' %>
+  <%= link_to "View Handout", @course.handout_url.to_s, class: 'btn btn-primary btn-mini' %>
+<% end %>
+<% if can? :see_course_quiz_button, @course %>
+  <%= link_to "Take Quiz", new_attempt_path(section: @course.sections.first), class: 'btn btn-primary btn-mini' %>
 <% end %>
 <% if can? :purchase_certificate, @course %>
   <%= link_to "Purchase Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini' %>
@@ -76,7 +82,7 @@
             <% else %>
               <td>
                 <% if section.quiz_id %>
-                  <%= link_to "Take Quiz", new_attempt_path(section: section) %>
+                  <%= link_to "Take Quiz", new_attempt_path(section: section), id: 'Take Quiz Link' %>
                   <% if !section.attempts.where(user_id: current_user.id).empty? %>
                     OR <%= link_to "View Last Results", attempt_path(section.attempts.where(user_id: current_user.id).order("end_time DESC").first) %>
                   <% end %>
