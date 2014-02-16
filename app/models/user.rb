@@ -54,6 +54,27 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      headercol = self.column_names
+      headercol << "Video Minutes"
+      headercol << "# Certificates"
+      headercol << "Quizzes Passed"
+      headercol << "Quizzes Failed"
+      headercol << "Last Video Accessed"
+      csv << headercol
+      all.each do |user|
+        rowdata = user.attributes.values_at(*self.column_names)
+        rowdata << user.video_minutes_total
+        rowdata << user.certificate_count
+        rowdata << user.quizzes_passed_count
+        rowdata << user.quizzes_failed_count
+        rowdata << user.last_video_access
+        csv << rowdata
+      end
+    end
+  end
+
   private
 
     def already_has_password?

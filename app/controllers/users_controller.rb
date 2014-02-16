@@ -4,7 +4,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if (!can? :manage, User )
+      redirect_to root_path, notice: "You don't have access to view that information. Please select from menu options above."
+    end
     @users = User.order(:last_name)
+    respond_to do |format|
+      format.html
+      #format.csv { render text: @users.to_csv }
+      format.csv { send_data @users.to_csv }
+    end
   end
 
   # GET /users/1
