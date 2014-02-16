@@ -11,8 +11,8 @@ class VideoTime
                         tracked: false).order("created_at desc").first
     return if prevlog.nil?
     youtube_url = video_url
-    youtube_url[/^.*feature=player_embedded.*v=(.*$)/]
-    youtube_id = $1
+    regex = /http:\/\/(?:www.)?(\w*).com\/.*v=(\w*)/
+    youtube_id = regex.match(youtube_url)[2]
     video = Video.find_by_youtube_id(youtube_id)
     section = Section.where(video_id: video.id).first
     # Rails.logger.debug("Updating logged video time: #{curlog.time} - #{prevlog.time}")

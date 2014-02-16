@@ -1,0 +1,9 @@
+production:
+    after_symlink:
+      - source: /.cloud66/handouts.sh
+        destination: /tmp/handouts.sh
+        target: rails
+        execute: true
+        sudo: true
+        apply_during: all
+        run_on: all_servers
