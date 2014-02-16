@@ -31,10 +31,10 @@ class Ability
     if user
       if user.account? :admin
         can :view_certificate, Course do |course|
-          !Certificate.where(course_id: course.id, user_id: user.id).empty?
+          !Certificate.where(user_id: user.id, course_id: course.id).empty?
         end
         can :purchase_certificate, Course do |course|
-          Certificate.where(course_id: course.id, user_id: user.id).empty? &&
+          Certificate.where(user_id: user.id, course_id: course.id).empty? &&
           course.my_status(user) =~ /Quiz(zes)? Complete/
         end
         can :view_handout, Course do |course|
@@ -72,7 +72,7 @@ class Ability
           course.my_status(user) == "Course Completed! Certificate Purchased."
         end
         can :purchase_certificate, Course do |course|
-          Certificate.where(course_id: course.id, user_id: user.id).empty? &&
+          Certificate.where(user_id: user.id, course_id: course.id).empty? &&
           course.my_status(user) =~ /Quiz(zes)? Complete/
         end
       end

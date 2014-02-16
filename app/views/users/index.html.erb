@@ -9,6 +9,11 @@
           <th>User Name</th>
           <th>Email</th>
           <th>Member Since</th>
+          <th>Video Minutes</th>
+          <th># Certificates</th>
+          <th># Quizzes Passed</th>
+          <th># Quizzes Failed</th>
+          <th>Last Video Access</th>
         </tr>
       </thead>
 
@@ -18,6 +23,11 @@
             <td><%= link_to user.name, user_path(user)  %></td>
             <td><%= user.email %></td>
             <td><%= user.created_at %></td>
+            <td><%= user.video_minutes_total %></td>
+            <td><%= user.certificate_count %></td>
+            <td><%= user.quizzes_passed_count %></td>
+            <td><%= user.quizzes_failed_count %></td>
+            <td><%= user.last_video_access %></td>
          </tr>
         <% end %>
       </tbody>

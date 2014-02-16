@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212193322) do
+ActiveRecord::Schema.define(version: 20140216183311) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140212193322) do
     t.boolean  "passed",     default: false
   end
 
+  add_index "attempts", ["section_id", "user_id"], name: "index_attempts_on_section_id_and_user_id", using: :btree
   add_index "attempts", ["section_id"], name: "index_attempts_on_section_id", using: :btree
   add_index "attempts", ["user_id"], name: "index_attempts_on_user_id", using: :btree
 
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140212193322) do
 
   add_index "certificates", ["ceu_id"], name: "index_certificates_on_ceu_id", using: :btree
   add_index "certificates", ["course_id"], name: "index_certificates_on_course_id", using: :btree
+  add_index "certificates", ["user_id", "course_id"], name: "index_certificates_on_user_id_and_course_id", using: :btree
   add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", using: :btree
 
   create_table "ceus", force: true do |t|
@@ -90,9 +92,8 @@ ActiveRecord::Schema.define(version: 20140212193322) do
     t.datetime "updated_at"
   end
 
-  add_index "logs", ["course_id"], name: "index_logs_on_course_id", using: :btree
+  add_index "logs", ["user_id", "url", "status", "tracked"], name: "index_logs_on_user_id_and_url_and_status_and_tracked", using: :btree
   add_index "logs", ["user_id"], name: "index_logs_on_user_id", using: :btree
-  add_index "logs", ["video_id"], name: "index_logs_on_video_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.text     "content"
@@ -150,6 +151,7 @@ ActiveRecord::Schema.define(version: 20140212193322) do
   end
 
   add_index "stats", ["course_id"], name: "index_stats_on_course_id", using: :btree
+  add_index "stats", ["user_id", "course_id"], name: "index_stats_on_user_id_and_course_id", using: :btree
   add_index "stats", ["user_id"], name: "index_stats_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

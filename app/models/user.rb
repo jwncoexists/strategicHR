@@ -31,6 +31,26 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def video_minutes_total
+    (Stat.where(user_id: self.id).sum :total_time)/60
+  end
+
+  def certificate_count
+    Certificate.where(user_id: self.id).count
+  end
+
+  def quizzes_passed_count
+    Attempt.where(user_id: self.id, passed: true).count
+  end
+
+  def quizzes_failed_count
+    Attempt.where(user_id: self.id, passed: false).count
+  end
+
+  def last_video_access
+    Log.where(user_id: self.id).order("created_at desc").last.time
+  end
+
   private
 
     def already_has_password?
