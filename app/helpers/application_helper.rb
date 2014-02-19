@@ -14,7 +14,7 @@ module ApplicationHelper
     (redcarpet.render text).html_safe
   end
 
-    # this method will embed the code from the partial
+    # Never got event monitoring to work with this, so created my own player
   def youtube_embed(youtube_url)
     if youtube_url[/youtu\.be\/([^\?]*)/]
       youtube_id = $1
@@ -27,6 +27,7 @@ module ApplicationHelper
     %Q{<iframe id="player" type="text/html" width="640" height="390" 
           src="//www.youtube.com/embed/#{youtube_id}?enablejsapi=1&origin=*" frameborder="0"></iframe>}
   end
+
 
   def find_youtube_id(youtube_url)
     if youtube_url[/youtu\.be\/([^\?]*)/]

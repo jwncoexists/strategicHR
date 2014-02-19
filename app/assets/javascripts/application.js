@@ -16,15 +16,13 @@
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/.
 
-
-
 // YouTube Event Handling
 // This code loads the IFrame Player API code asynchronously.
-function onPlayerReady(event) {
+function ytOnPlayerReady(event) {
   event.target.playVideo();
 }
 
-function onPlayerStateChange (state) {
+function ytOnPlayerStateChange (state) {
 
   //console.log(state.target.getVideoUrl())
   //console.log(state.target.getVideoEmbedCode())
@@ -48,4 +46,7 @@ function onPlayerStateChange (state) {
       break;
   }
 }
+
+
+
 

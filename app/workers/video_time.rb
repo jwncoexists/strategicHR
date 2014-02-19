@@ -10,14 +10,20 @@ class VideoTime
     prevlog = Log.where(user_id: user_id, url: video_url, status: "start", 
                         tracked: false).order("created_at desc").first
     return if prevlog.nil?
-    youtube_url = video_url
-    regex = /http:\/\/(?:www.)?(\w*).com\/.*v=(\w*)/
-    youtube_id = regex.match(youtube_url)[2]
-    video = Video.find_by_youtube_id(youtube_id)
+    
+    if (ENV['VIDEO_SOURCE'] == "Youtube")
+      youtube_url = video_url
+      regex = /http:\/\/(?:www.)?(\w*).com\/.*v=(\w*)/
+      video_id = regex.match(youtube_url)[2]
+    else # vimeo
+      video_id = video_url
+    end
+    video = Video.find_by_youtube_id(video_id)
     section = Section.where(video_id: video.id).first
-    # Rails.logger.debug("Updating logged video time: #{curlog.time} - #{prevlog.time}")
+
     total = curlog.time - prevlog.time
     course_stat = Stat.where(user_id: user_id, course_id: section.course_id).first
+    
     # if already a stat record, just update it. Otherwise create it
     if course_stat.nil?
       course_stat = Stat.create(user_id: user_id, course_id: section.course_id, total_time: total)

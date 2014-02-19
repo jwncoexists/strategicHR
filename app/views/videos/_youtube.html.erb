@@ -17,8 +17,8 @@
       width: '640',
       videoId: '<%= "#{find_youtube_id(@video.url)}" %>',
       events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onReady': ytOnPlayerReady,
+        'onStateChange': ytOnPlayerStateChange
       }
     });
   }
