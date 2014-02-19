@@ -15,15 +15,17 @@ class VideoTime
       youtube_url = video_url
       regex = /http:\/\/(?:www.)?(\w*).com\/.*v=(\w*)/
       video_id = regex.match(youtube_url)[2]
+      video = Video.find_by_youtube_id(video_id)
     else # vimeo
       video_id = video_url
+      video = Video.find_by_url(video_id)
     end
-    video = Video.find_by_youtube_id(video_id)
+    
     section = Section.where(video_id: video.id).first
 
     total = curlog.time - prevlog.time
     course_stat = Stat.where(user_id: user_id, course_id: section.course_id).first
-    
+
     # if already a stat record, just update it. Otherwise create it
     if course_stat.nil?
       course_stat = Stat.create(user_id: user_id, course_id: section.course_id, total_time: total)

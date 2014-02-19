@@ -5,7 +5,7 @@ FactoryGirl.define do
     account "member"
     password "letmein"
     password_confirmation "letmein"
-    email "test@example.com"
+    email { "#{first_name}.#{last_name}@example.com".downcase }
     confirmed_at Time.now
   end
 end

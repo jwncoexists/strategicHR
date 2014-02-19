@@ -1,9 +1,8 @@
 FactoryGirl.define do
-  factory :video do
+  factory :course do
     name "Creating a Culture of Recognition"
     description "Creating a Culture of Recognition."
-    length 90
-    presenter "Dr. Bob Nelson"
-    url "12345"
+    price 39.99
+    released true
   end
 end
