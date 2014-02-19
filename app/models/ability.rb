@@ -51,6 +51,7 @@ class Ability
         can :view_pricing, User
       elsif user.account? :member
         can :take, Course, released: true
+        can :view, Video 
         can :see_course_video_button, Course do |course|
           course.released && course.sections.count == 1 && !course.sections.first.video_id.nil?
         end

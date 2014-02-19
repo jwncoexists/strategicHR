@@ -14,6 +14,15 @@ class Video < ActiveRecord::Base
     self.slug
   end
 
+  def course
+    s = Section.where(video_id: self.id).first
+    if (s)
+      Course.find(s.course_id)
+    else
+      nil
+    end
+  end
+
   def ytid
     # if the youtube url is  http://www.youtube.com/watch?v=XwmtNk_Yb2Q
     # convert this to the embedded url of http://www.youtube.com/embed/XwmtNk_Yb2Q

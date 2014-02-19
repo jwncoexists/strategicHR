@@ -1,5 +1,6 @@
 <h2 class="title-divider"><span><%= @video.name %> <span class="de-em">Video</span></span> <small></small></h2>
 
+<%= link_to "Go to Course", course_path(@video.course), class: 'btn btn-primary btn-mini' unless @video.course.nil? %>
 <% if can? :update, @video %>
   <%= link_to "Edit Video", edit_video_path, class: 'btn btn-primary btn-mini' %>
 <% end %>
@@ -12,7 +13,11 @@
 <% end %>    
 
   <br>
-  <%= render 'vimeo' %>
+  <% if can? :view, @video %>
+    <%= render 'vimeo' %>
+  <% else %>
+    <p>Please sign-up for StrategicHR to watch Dr. Bob Nelson's videos.</p>
+  <% end %>
 
 
 

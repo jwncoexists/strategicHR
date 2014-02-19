@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def last_video_access
-    l = Log.where(user_id: self.id).order("created_at desc").last
+    l = Log.where(user_id: self.id).order("created_at DESC").first
     if (l) then
       l.time
     end

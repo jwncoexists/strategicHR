@@ -1,7 +1,7 @@
 
 
 <% if can? :manage, User %>
-  <h2 class="title-divider"><span>All <span class="de-em">Users</span></span> <small></small></h2>
+  <h2 class="title-divider"><span>All <span class="de-em">Users (<%= User.count %> Total)</span></span> <small></small></h2>
   <p><%= link_to "Download", users_path(format: "csv"), class: 'btn btn-primary btn-mini' %>
   </p>
   <div class="table-responsive">
@@ -11,6 +11,7 @@
           <th>User Name</th>
           <th>Email</th>
           <th>Member Since</th>
+          <th>Confirmed At</th>
           <th>Video Minutes</th>
           <th># Certificates</th>
           <th># Quizzes Passed</th>
@@ -25,6 +26,7 @@
             <td><%= link_to user.name, user_path(user)  %></td>
             <td><%= user.email %></td>
             <td><%= user.created_at %></td>
+            <td><%= user.confirmed_at %></td>
             <td><%= user.video_minutes_total %></td>
             <td><%= user.certificate_count %></td>
             <td><%= user.quizzes_passed_count %></td>

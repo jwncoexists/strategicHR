@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe VideosController do
 
   describe "GET 'new'" do
     it "returns http success" do

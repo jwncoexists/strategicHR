@@ -35,5 +35,6 @@ class VideoTime
     end
     # now update the tracked attribute
     prevlog.update_attribute(:tracked, true) 
+    curlog.update_attribute(:tracked, true)
   end
 end
