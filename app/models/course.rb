@@ -24,6 +24,32 @@ class Course < ActiveRecord::Base
   end
 
 
+  def video_minutes_total
+    ((Stat.where(course_id: self.id).sum :total_time)/60).round(2)
+  end
+
+  def certificate_count
+    Certificate.where(course_id: self.id).count
+  end
+
+  def quizzes_passed_count
+    # Attempt.where(user_id: self.id, passed: true).count
+    count = 0
+    Section.where(course_id: self.id).each do |section|
+      count = count + section.attempts.where(passed: true).count
+    end
+    count
+  end
+
+  def quizzes_failed_count
+    #Attempt.where(user_id: self.id, passed: false).count
+    count = 0
+    Section.where(course_id: self.id).each do |section|
+      count = count + section.attempts.where(passed: false).count
+    end
+    count
+  end
+
   # return status of N/A, Not Started, In Progress, Completed, Certificate Purchased
   def my_status(user_id)
     return_status = "Coming Soon! This elearning course is not yet available."

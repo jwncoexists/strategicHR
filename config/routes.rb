@@ -1,14 +1,14 @@
 StrategicHR::Application.routes.draw do
 
-  get "password_resets/new"
+  root to: 'welcome#index'
   get "welcome/index"
   get "welcome/about"
   get "welcome/pricing"
   match "pricing" => 'welcome#pricing', via: :get
   get "welcome/privacy"
   match "privacy" => 'welcome#privacy', via: :get
-  root to: 'welcome#index'
   match "about" => 'welcome#about', via: :get
+  get "password_resets/new"
   resources :contact, only: [:new, :create]
   resources :events, only: [:create], via: :post
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
@@ -17,11 +17,13 @@ StrategicHR::Application.routes.draw do
   get "users/reconfirm"
   match "reconfirm" => "users#reconfirm", via: :get
 
+
   resources :email_confirmations
   resources :courses
   resources :videos
   resources :quizzes
   resources :certificates, only: [:show, :index]
+  resources :reports, only: [:index]
   resources :attempts
   resources :results
   resources :charges

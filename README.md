@@ -79,6 +79,7 @@ Log in to StrategicHR as an administrative user, and do the following to create 
 * Running the test suite
 ---
 bundle exec cucumber
+rspec spec
 rake test
 
 

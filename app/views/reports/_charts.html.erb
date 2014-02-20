@@ -1,0 +1,33 @@
+<script src="https://www.google.com/jsapi"></script>
+<%= javascript_tag do %>
+   window.course_data = <%= raw @course_data.to_json %>
+<% end %>
+<script>
+
+  // Load the Visualization API and the piechart package.
+  google.load('visualization', '1.0', {'packages':['corechart']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    // Create the data table.
+    var data = new google.visualization.arrayToDataTable( window.course_data);
+
+    // Set chart options
+    var options = {'title':'Course Statistics',
+                   'legend': { position: 'top', maxLines: 3},
+                    'vAxis': {title: 'Course',  titleTextStyle: {color: 'red'}} 
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+<div id="chart_div" style="width: 1000px; height: 600px;"></div>

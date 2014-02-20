@@ -1,0 +1,32 @@
+<% if can? :manage, User %>
+  <h2 class="title-divider"><span>StrategicHR <span class="de-em">Report</span></span> <small></small></h2>
+  <%= render 'charts' %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th># Certificates Purchased</th>
+          <th>Total Video Minutes Watched</th>
+          <th># Users Passed Quiz</th>
+          <th># Quiz Failures</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @courses.each do |course| %>
+          <tr>
+            <td><%= course.name %>
+            <td><%= course.certificate_count %></td>
+            <td><%= course.video_minutes_total %></td>
+            <td><%= course.quizzes_passed_count %></td>
+            <td><%= course.quizzes_failed_count %></td>
+         </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>This page is not available.</p>
+<% end %>
+

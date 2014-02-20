@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def video_minutes_total
-    (Stat.where(user_id: self.id).sum :total_time)/60
+    ((Stat.where(user_id: self.id).sum :total_time)/60).round(2)
   end
 
   def certificate_count

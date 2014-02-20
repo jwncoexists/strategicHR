@@ -1,5 +1,4 @@
 
-
 <% if can? :manage, User %>
   <h2 class="title-divider"><span>All <span class="de-em">Users (<%= User.count %> Total)</span></span> <small></small></h2>
   <p><%= link_to "Download", users_path(format: "csv"), class: 'btn btn-primary btn-mini' %>

@@ -18,6 +18,7 @@
   <li><a href=<%= about_path %> class="menu-item">About</a></li>
   <% if can? :update, User %>
     <li><a href=<%= users_path %> class="menu-item">Users</a></li>
+    <li><a href=<%= reports_path %> class="menu-item">Reports</a></li>
   <% end %>
   <% if can? :update, Quiz %>
     <li><a href=<%= quizzes_path %> class="menu-item">Quizzes</a></li>
