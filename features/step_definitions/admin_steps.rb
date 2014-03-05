@@ -159,7 +159,7 @@ Given(/^a videos administrative user named "(.*?)"$/) do |name|
   @user = User.create!(
     first_name: "Admin",
     last_name: "User",
-    email: "#{name}@example.com",
+    email: "cucumber-admin@example.com",
     password: "letmeinplease",
     password_confirmation: "letmeinplease",
     confirmed_at: Time.now,
@@ -169,7 +169,7 @@ end
 
 Given(/^I log in as the videos "(.*?)"$/) do |name|
   visit('/login')
-  fill_in 'email', with: "#{name}@example.com"
+  fill_in 'email', with: "cucumber-admin@example.com"
   fill_in 'password', with: "letmeinplease"
   within_fieldset 'login-page' do
     click_button('Login')
@@ -238,7 +238,7 @@ Given(/^a quizzes administrative user named "(.*?)"$/) do |name|
     @user = User.create!(
     first_name: "Admin",
     last_name: "User",
-    email: "#{name}@example.com",
+    email: "cucumber-admin@example.com",
     password: "letmeinplease",
     password_confirmation: "letmeinplease",
     confirmed_at: Time.now,
@@ -247,7 +247,7 @@ end
 
 Given(/^I log in as the quizzes "(.*?)"$/) do |name|
   visit('/login')
-  fill_in 'email', with: "#{name}@example.com"
+  fill_in 'email', with: "cucumber-admin@example.com"
   fill_in 'password', with: "letmeinplease"
   within_fieldset 'login-page' do
     click_button('Login')

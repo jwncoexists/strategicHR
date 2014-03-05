@@ -3,7 +3,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email].downcase)
     user.send_password_reset if user
     redirect_to root_url, :notice => "An email has been sent with password reset instructions."
   end

@@ -4,8 +4,8 @@ Feature: admin manage courses page
   As an administrative user, I can add, update and delete courses.
 
   Background:
-    Given a courses administrative user named "Test Admin User"
-    And I log in as a courses administrator named "Test Admin User"
+    Given a courses administrative user named "Test-Admin-User"
+    And I log in as a courses administrator named "Test-Admin-User"
     And I visit the Manage Courses home page
 
   Scenario: I can add a new course

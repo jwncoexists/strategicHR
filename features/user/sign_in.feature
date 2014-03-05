@@ -13,3 +13,9 @@ Feature: sign-in page
     And I enter my user name and password
     Then I see My Courses page
     And I do not see Admin functions
+
+  Scenario:
+    Given I am a user who registered with an uppercase email
+    When I go to the sign-in page
+    And I enter my email and password in lowercase
+    Then I see My Courses page

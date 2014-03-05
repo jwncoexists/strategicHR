@@ -9,16 +9,16 @@ Feature: admin manage users page
     Then I can create a new user named "John Doe"
 
   Scenario: I can change an existing user
-    Given a user "John Doe"
+    Given a user "John-Doe"
     When I log in as an administrative user
-    When I edit "John Doe" user
-    And change his name to "Jane Doe"
+    When I edit "John-Doe" user
+    And change his name to "Jane-Doe"
     Then the name of the user is stored
 
   Scenario: I can delete a user
-    Given a user "Jane Doe"
+    Given a user "Jane-Doe"
     When I log in as an administrative user
-    And I edit the "Jane Doe" user
+    And I edit the "Jane-Doe" user
     Then I can delete the user
 
   Scenario: I can export the user list

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email].downcase)
     if user
       if !user.confirmed_at
         link = "<a href= '#{reconfirm_path(id: user.id)}'>Click here to resend verification email.</a>" 

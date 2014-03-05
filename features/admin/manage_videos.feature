@@ -4,7 +4,7 @@ Feature: admin manage videos page
   As an administrative user, I can add, update and delete videos.
 
   Background:
-    Given a videos administrative user named "Test Admin User"
+    Given a videos administrative user named "Test-Admin-User"
     And I log in as the videos "Test Admin User"
     And I visit the Videos page
 

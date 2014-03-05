@@ -4,7 +4,7 @@ Feature: admin manage quizzes page
   As an administrative user, I can add, update and delete quizzes.
 
   Background:
-    Given a quizzes administrative user named "Test Admin User"
+    Given a quizzes administrative user named "Test-Admin-User"
     And I log in as the quizzes "Test Admin User"
     And I visit the Quizzes page
 

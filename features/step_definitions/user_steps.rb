@@ -14,9 +14,9 @@ end
 
 Given(/^I am a user$/) do
   @user = User.create!(
-    first_name: "member",
+    first_name: "cucumber",
     last_name: "user",
-    email: "#member@example.com",
+    email: "cucumber@example.com",
     password: "letmeinplease",
     password_confirmation: "letmeinplease",
     confirmed_at: Time.now,
@@ -39,6 +39,27 @@ end
 
 Then(/^I do not see Admin functions$/) do
   page.should_not have_selector(:link_or_button, "Users")
+end
+
+
+Given(/^I am a user who registered with an uppercase email$/) do
+    @user = User.create!(
+    first_name: "member",
+    last_name: "user",
+    email: "NEWMEMBER@example.com",
+    password: "letmeinplease",
+    password_confirmation: "letmeinplease",
+    confirmed_at: Time.now,
+  )
+end
+
+When(/^I enter my email and password in lowercase$/) do
+  visit(login_path)
+  fill_in 'login-email-page', with: "newmember@example.com"
+  fill_in 'login-password-page', with: "letmeinplease"
+  within_fieldset 'login-page' do
+    click_button('Login')
+  end
 end
 
 #------------------------
