@@ -45,7 +45,10 @@
       </tr>
       <% @courses.each do |course| %>
         <tr>
-          <td><%= link_to course.name, course_path(course) %></td>
+          <td>
+            <%= image_tag(course.image.thumb.url, class: "img-responsive pull-left", style: "PADDING-RIGHT: 10px") if course.image %>
+            <%= link_to course.name, course_path(course) %>
+          </td>
           <% if can? :take, Course %>
             <td><%= course.my_status(current_user.id) %></td>
             <% if can? :purchase_certificate, course %>
@@ -56,7 +59,9 @@
                <td><%= link_to "Go to Course", course_path(course), class: 'btn btn-primary btn-mini' %></td>
             <% end %>
           <% else %>
-            <td><%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %></td>
+            <td>
+              <%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %>
+            </td>
           <% end %>
         </tr>
       <% end %>
