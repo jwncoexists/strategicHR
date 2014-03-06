@@ -54,7 +54,7 @@
         <h4 class="title media-heading">Course Description</h4>
         </p>
         <% if @course.image %>
-          <%= image_tag(@course.image, class: "media-object img-responsive") %>
+          <%= image_tag(@course.image, class: "img-responsive pull-left", style: "PADDING-RIGHT: 10px") %>
         <% end %>
         <p class="lead"><%= markdown @course.description %></p>
 

@@ -20,7 +20,8 @@
               <%= link_to course.name, course_path(course) %>
             </h4>
             <% if course.image %>
-              <%= image_tag(course.image.small.url, class: "media-object img-responsive") %>
+              <br>
+              <%= image_tag(course.image.small.url, class: "img-responsive pull-left", style: "PADDING-RIGHT: 10px") %>
             <% end %>
             <p>
               <%= markdown course.description.split[0..100].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %>
