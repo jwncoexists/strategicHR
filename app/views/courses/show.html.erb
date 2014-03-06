@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-9"> 
     <div class="well well-mini">
-      <h4 class="inline-el pad-right"><span>CEU <span class="de-em">Credits</span></span></h4>
+      <h4 class="inline-el pad-right"><span>CEU <span class="de-em">Credits </span></span></h4>
       <% if @ceus.empty? %>
          <p><i>No CEU credits are available for this course.<p/></i>
       <% else %>
@@ -14,6 +14,7 @@
               <td><%= ceu.credit %></td>
               <td><font class="primary-colour">| </font><%= ceu.name %> Credits</td>
               <td><font class="primary-colour">| </font><%= ceu.organization %></td>
+              <td><font class="primary-colour">| </font><%= "$#{@course.price} for Certificate" %></td>
             <% end %>
             </tr>
           </table>
