@@ -19,6 +19,13 @@
         <%= f.check_box :remove_changed_handout, { checked: false } %><label>Remove handout</label>
       </div>
     </div>
+    <div class="control-group">
+      <%= f.label :image, "Image: #{@course.image}", class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :image %>
+        <%= f.check_box :remove_changed_image, { checked: false } %><label>Remove image</label>
+      </div>
+    </div>   
 
     <div class="control-group">
       <%= f.label :price, class: 'control-label' %>

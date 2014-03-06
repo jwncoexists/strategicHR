@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   has_many :ceus, dependent: :destroy
   accepts_nested_attributes_for :ceus, allow_destroy: true
   mount_uploader :handout, HandoutUploader
+  mount_uploader :image, ImageUploader
 
   def update_slug
     self.slug = self.name.parameterize
@@ -20,6 +21,13 @@ class Course < ActiveRecord::Base
   def remove_changed_handout
     self.remove_handout!
     self.handout = nil
+    self.save
+  end
+
+
+  def remove_changed_image
+    self.remove_image!
+    self.image = nil
     self.save
   end
 
