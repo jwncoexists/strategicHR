@@ -23,7 +23,7 @@
               <%= image_tag(course.image.small.url, class: "media-object img-responsive") %>
             <% end %>
             <p>
-              <%= markdown course.description.split[0..60].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %>
+              <%= markdown course.description.split[0..100].join(' ')+"...[Click here to learn more about this course](#{course_path(course)})." %>
             </p>
           </div>
         </div>
