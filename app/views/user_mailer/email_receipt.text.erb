@@ -1,0 +1,13 @@
+Congratulations!! You have earned, and purchased a certificate of completion for Dr. Bob Nelson's online learning course: <%= @course.name %>!  Print out or download your certificate by visiting  strategichr.drbobnelson.com
+
+RECEIPT FOR PURCHASE
+====================
+
+Purchase Date:   <%= @certificate.purchase_date.strftime("%c") %>
+Item Purchased:  <%= "Certificate of Completion for: #{@course.name}" %>
+CEU Credits:     <%= @ceu.full_ceu_name %>
+Course Code:     <%= @ceu.code %>
+Payment Method:  Credit Card
+Amount Paid:     <%= @certificate.purchase_price %>
+
+Email bob@drbobnelson.com with any questions or feedback.

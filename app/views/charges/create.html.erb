@@ -1,9 +1,17 @@
-<h2 class="title-divider"><span>Thank You for Your <span class="de-em">Purchase!</span></span> <small></small></h2>
+<h2 class="title-divider"><span>Thank You <span class="de-em">for Your Purchase!</span></span> <small></small></h2>
 
-<% if can? :view_certificate, @course %>
-  <%= link_to "View/Print Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
-<% end %>
-<br>
+<div class="row">
+  <div class="col-md-8">
+    <% if can? :view_certificate, @course %>
+      <%= link_to "View/Print Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
+    <% end %>
+  </div>
+  <br>
+  <div class="col-md-8">
+    <p><i>Congratulations!! You have successfully purchased a certificate for Dr. Bob Nelson's online course, <strong> <%= Course.find(@certificate.course_id).name %> </strong>! Click on the View/Print Certificate button above to obtain your certificate.  A copy of this receipt has been emailed to <%= current_user.email %>.</p></i>
+      <br>
+  </div>
+</div>
 
  <div class="table-responsive">
   <table class="table table-striped table-bordered table-condensed"> 
@@ -17,8 +25,12 @@
         <td><%= "Certificate of Completion for: #{Course.find(@certificate.course_id).name}" %></td>
       </tr>
       <tr>
-        <td>CEU Credits:</td>
+        <td>CEU Credits Earned:</td>
         <td><%= "#{Ceu.find(@certificate.ceu_id).full_ceu_name}" %></td>
+      </tr>
+      <tr>
+        <td>Course Code:</td>
+        <td><%= "#{Ceu.find(@certificate.ceu_id).code}" %></td>
       </tr>
       <tr>
         <td>Payment Method:</td>

@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  
+  def send_receipt(certificate)
+    UserMailer.email_receipt(self, certificate).deliver
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.hex(6)
