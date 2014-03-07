@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
     @count = Result.where(attempt_id: @attempt.id).count
     @question = Question.find(@result.question_id)
     @answers = []
-    @answers = @question.answers
+    @answers = @question.answers.order('id ASC')
   end
 
   def update

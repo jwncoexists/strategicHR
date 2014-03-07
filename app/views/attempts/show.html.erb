@@ -15,9 +15,9 @@
 <div class="row">
   <div class="col-sm-12">
     <% if @attempt.passed %>
-      <h4>Congratulations you PASSED this quiz!!</h4>
+      <h4><font color="green">Congratulations you PASSED this quiz!!</h4></font>
     <% else %>
-      <h4>You <i>did not pass</i> this quiz.  Please review the elearning module and then take the quiz again.</h4>
+      <h4>You <i><font color="red">did not pass</i></font> this quiz.  Please review the elearning module and then take the quiz again.</h4>
     <% end %>
     <div class="row">
       <div class="col-sm-3" >
@@ -26,7 +26,13 @@
         </span>
       </div>
       <div class="col-sm-3 col-sm-offset-1">
+        <% if @attempt.passed %>
+          <font color="green">
+        <% else %>
+          <font color="red">
+        <% end %>
         <h5><%= "#{@score}%" %> </h5>
+        </font>
       </div>
     </div>
     <div class="row">
