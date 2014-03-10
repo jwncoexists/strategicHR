@@ -9,14 +9,15 @@
       <% else %>
         <div class="table-responsive">
           <table class="table-condensed">
-            <tr>
+
             <% @ceus.each do |ceu| %>
+                          <tr>
               <td><%= ceu.credit %></td>
               <td><font class="primary-colour">| </font><%= ceu.name %> Credits</td>
               <td><font class="primary-colour">| </font><%= ceu.organization %></td>
               <td><font class="primary-colour">| </font><%= "$#{@course.price} USD for Certificate" %></td>
+              </tr>
             <% end %>
-            </tr>
           </table>
         </div>
       <% end %>

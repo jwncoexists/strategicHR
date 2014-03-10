@@ -3,6 +3,6 @@ class NotificationsMailer < ActionMailer::Base
 
   def new_message(message)
     @message = message
-    mail to: "bob@drbobnelson.com", subject: "StrategicHR: #{message.subject}"
+    mail to: "bob@drbobnelson.com", cc: "jenniferwnelson@sbcglobal.net", subject: "StrategicHR: Message from a User"
   end
 end

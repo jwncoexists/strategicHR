@@ -1,19 +1,28 @@
-<h2 class="title-divider"><span>Send a Message <span class="de-em">to Dr. Bob Nelson</span></span> <small></small></h2>
+<h2 class="title-divider"><span>Send Us <span class="de-em">a Message!</span></span> <small></small></h2>
 
 <div class="row">
   <div class="col-md-6">
+    <p><i>Send us a message with your feedback, questions, or any issues you've encountered. We'd love to hear from you!</p></i>
     <%= form_for @message, :url => contact_path do |form| %>
       <div class="control-group">
         <%= form.label :name,'Name:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :name, autofocus: true, size: 40, required: true %>
+          <% if current_user %>
+            <%= form.text_field :name, size: 40, required: true, autofocus: true, value: current_user.name %>
+          <% else %>
+            <%= form.text_field :name, size: 40, autofocus: true, required: true %>
+          <% end %>
         </div>
       </div>
       
       <div class="control-group">
         <%= form.label :email, 'Email:', class: 'control-label' %>
         <div class="controls">
-          <%= form.text_field :email, size: 40, required: true %>
+          <% if current_user %>
+            <%= form.text_field :email, size: 40, required: true, value: current_user.email %>
+          <% else %>
+            <%= form.text_field :email, size: 40, required: true %>
+          <% end %>
         </div>
       </div>
       <div class="control-group">
