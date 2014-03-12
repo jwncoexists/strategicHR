@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
+    @resources = @course.resources.order(id: :asc)
     @ceus = @course.ceus
   end
 
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
     1.times do
       section = @course.sections.build
       ceu = @course.ceus.build
+      resource = @course.resources.build
     end
   end
 
@@ -21,6 +23,7 @@ class CoursesController < ApplicationController
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
     @ceus = @course.ceus
+    @resources = @course.resources.order(id: :asc)
     @videos = Video.all
     @quizzes = Quiz.all
     authorize! :update, @course, message: "You don't have access to edit this course."
@@ -70,7 +73,8 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:id, :name, :description, :price, :user_id, :slug, :released, :created_at, :updated_at, :handout, :image,
                                    sections_attributes: [:id, :course_id, :video_id, :quiz_id, :sequence, :created_at, :updated_at, :_destroy],
                                    ceus_attributes: [:id, :course_id, :name, :organization, :code, :credit, :created_at, :updated_at, :_destroy],
-                                    )
+                                   resources_attributes: [:id, :course_id, :title, :image, :description, :url, :created_at, :updated_at, :_destroy]
+                                  )
   end
 
 end

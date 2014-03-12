@@ -48,6 +48,14 @@
     <% end %>
     <%= link_to_add_fields "Add CEU Credits", f, :ceus %>
     <br>
+
+    <h4> Related Resources </h4>
+    <%= f.fields_for :resources do |resource| %>
+      <%= render 'resource_fields', f: resource %>
+    <% end %>
+    <%= link_to_add_fields "Add Related Resource", f, :resources %>
+    <br>
+
     <h4> Videos & Quizzes </h4>
     <%= f.fields_for :sections do |section| %>
       <%= render 'section_fields', f: section %>

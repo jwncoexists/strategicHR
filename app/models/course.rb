@@ -7,6 +7,9 @@ class Course < ActiveRecord::Base
   has_many :certificates
   has_many :ceus, dependent: :destroy
   accepts_nested_attributes_for :ceus, allow_destroy: true
+  has_many :resources, dependent: :destroy
+  accepts_nested_attributes_for :resources, allow_destroy: true
+  
   mount_uploader :handout, HandoutUploader
   mount_uploader :image, ImageUploader
 

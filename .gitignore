@@ -17,3 +17,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore all image & handout files uploaded for testing
+/public/uploads/course
+/public/uploads/resource
+/public/uploads/tmp
+
