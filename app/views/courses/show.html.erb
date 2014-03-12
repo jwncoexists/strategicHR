@@ -115,21 +115,24 @@
         <% if @resources.count > 0 %>
           <h4><center>Related Resources</h4></center>
           <% @resources.each do |resource| %>
-            <% if resource.url %>
-              <% if resource.title %>
-                <h5><br><%= link_to resource.title, resource.url %></h5>
+            <div class="sidebar-box">
+              <% if resource.url %>
+                <% if resource.title %>
+                  <center><h5><br><%= link_to resource.title, resource.url %></h5></center>
+                <% end %>
+                <% if resource.image %>
+                  <center><%= link_to image_tag(resource.image.sidebar.url, class: "img-responsive"), resource.url %></center>
+                <% end %>
+                <p><small class="muted"><%= resource.description if resource.description? %></p></small>
+              <% else %>
+                <center><h5><br>resource.title</h5></center>
+                <% if resource.image %>
+                  <center><%= image_tag(resource.image.sidebar, class: "img-responsive") %></center>
+                <% end %>
+                <p><br><small class="muted"><%= resource.description if resource.description? %></p></small></div>
               <% end %>
-              <% if resource.image %>
-                <center><%= link_to image_tag(resource.image.sidebar.url, class: "img-responsive img-thumbnail"), resource.url %></center>
-              <% end %>
-              <p><br><small class="muted"><%= resource.description if resource.description? %></p></small>
-            <% else %>
-              <h5><br>resource.title</h5>
-              <% if resource.image %>
-                <%= image_tag(resource.image.sidebar, class: "img-responsive img-thumbnail pull-center") %>
-              <% end %>
-              <p><br><small class="muted"><%= resource.description if resource.description? %></p></small></div>
-            <% end %>
+            </div>
+            <br>
           <% end %>
         <% end %>
       </div>
