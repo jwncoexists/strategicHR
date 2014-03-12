@@ -6,4 +6,4 @@ mkdir -p $STACK_BASE/shared/uploads/course/image
 chown nginx:app_writers $STACK_BASE/shared/uploads/course/image
 rm -rf $STACK_PATH/public/uploads/course/image
 ln -nsf $STACK_BASE/shared/uploads/course/image $STACK_PATH/public/uploads/course/image
-m
+
