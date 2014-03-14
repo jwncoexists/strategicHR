@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311214201) do
+ActiveRecord::Schema.define(version: 20140314230154) do
 
   create_table "answers", force: true do |t|
     t.string   "content"
@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(version: 20140311214201) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "passed",     default: false
+    t.integer  "course_id"
   end
 
+  add_index "attempts", ["course_id"], name: "index_attempts_on_course_id", using: :btree
   add_index "attempts", ["section_id", "user_id"], name: "index_attempts_on_section_id_and_user_id", using: :btree
   add_index "attempts", ["section_id"], name: "index_attempts_on_section_id", using: :btree
   add_index "attempts", ["user_id"], name: "index_attempts_on_user_id", using: :btree

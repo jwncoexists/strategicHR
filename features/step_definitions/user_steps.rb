@@ -153,6 +153,7 @@ Given(/^a section for the course "(.*?)" with the quiz "(.*?)"$/) do |course, qu
   @section = Section.create!(
       sequence: 1,
       course_id: @course.id,
+      video_id: @video.id,
       quiz_id: @quiz.id
   )
 end
@@ -227,6 +228,7 @@ Given(/^a successful quiz attempt for the course "(.*?)" and the quiz "(.*?)"$/)
   @attempt = Attempt.create!(
           user_id: @user.id,
           section_id: @section.id,
+          course_id: @section.course_id,
           passed: true,
           status: "PASSED"
   )

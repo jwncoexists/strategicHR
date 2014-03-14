@@ -3,6 +3,7 @@ class Course < ActiveRecord::Base
   has_many :sections, dependent: :destroy
   has_many :videos, through: :sections
   has_many :quizzes, through: :sections
+  has_many :attempts
   accepts_nested_attributes_for :sections, allow_destroy: true
   has_many :certificates
   has_many :ceus, dependent: :destroy
@@ -59,6 +60,19 @@ class Course < ActiveRecord::Base
       count = count + section.attempts.where(passed: false).count
     end
     count
+  end
+
+  # return id of first section which user hasn't passed quiz for, return nil if all passed, or not released
+  def next_incomplete_section(user_id)
+    if (self.released)
+      # loop through, stopping at the first section without a passing attempt
+      self.sections.order('id ASC').each do |section|
+        if (section.attempts.where(passed: true).count == 0)
+          return section
+        end
+      end 
+    end
+    nil
   end
 
   # return status of N/A, Not Started, In Progress, Completed, Certificate Purchased

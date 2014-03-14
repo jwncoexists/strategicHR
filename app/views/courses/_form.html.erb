@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-9">
   <%= form_for @course, html: { class: 'form-horizontal', multipart: true } do |f| %>
     <div class="control-group">
       <%= f.label :name, class: 'control-label' %>
@@ -41,12 +41,15 @@
       </div>
     </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
+    <hr/>
     <br>
+
     <h4> CEU Credits </h4>
     <%= f.fields_for :ceus do |ceu| %>
       <%= render 'ceu_fields', f: ceu %>
     <% end %>
     <%= link_to_add_fields "Add CEU Credits", f, :ceus %>
+    <hr/>
     <br>
 
     <h4> Related Resources </h4>
@@ -54,13 +57,15 @@
       <%= render 'resource_fields', f: resource %>
     <% end %>
     <%= link_to_add_fields "Add Related Resource", f, :resources %>
+    <hr/>
     <br>
 
     <h4> Videos & Quizzes </h4>
     <%= f.fields_for :sections do |section| %>
-      <%= render 'section_fields', f: section %>
+      <%= render 'section_fields', f: section  %>
     <% end %>
     <%= link_to_add_fields "Add Video/Quiz", f, :sections %>
+
     <br>
     <br>
     <div class="control-group">
@@ -69,4 +74,5 @@
       </div>
     </div>
   <% end %>
+
 </div>

@@ -3,4 +3,5 @@ class Section < ActiveRecord::Base
   has_one :video
   has_one :quiz
   has_many :attempts
+  default_scope order('id ASC')
 end

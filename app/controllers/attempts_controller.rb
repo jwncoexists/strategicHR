@@ -22,7 +22,9 @@ class AttemptsController < ApplicationController
     @section = Section.find(params[:section])
     @quiz = Quiz.find(@section.quiz_id)
     @course = Course.find(@section.course_id)
+    @video = Video.find(@section.video_id)
     @attempt = Attempt.create(user_id: current_user.id, 
+                              course_id: @course.id,
                               section_id: @section.id,
                               status: "Quiz Started",
                               start_time: Time.now,
@@ -57,7 +59,7 @@ class AttemptsController < ApplicationController
   private
 
   def attempt_params
-    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :start_time, :end_time, :passed, :created_at, :updated_at,
+    params.require(:attempt).permit(:id, :user_id, :section_id, :status, :course_id, :start_time, :end_time, :passed, :created_at, :updated_at,
                                     results_attributes: [:id, :attempt_id, :question_id, :correct_answer_id, :created_at, :updated_at,
                                                          :answer_id, :next_question, :prev_question, :_destroy] )
   end
