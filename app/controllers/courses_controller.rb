@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find_by_slug(params[:id])
     @sections = @course.sections.order(id: :asc)
+    @next_section = @course.next_incomplete_section(current_user.id) unless !current_user
     @resources = @course.resources.order(id: :asc)
     @ceus = @course.ceus
   end
