@@ -75,14 +75,15 @@ class Course < ActiveRecord::Base
     nil
   end
 
-  # return status of N/A, Not Started, In Progress, Completed, Certificate Purchased
+  # Not Started, In Progress, Course Completed, Certificate Purchased, Quiz Complete
   def my_status(user_id)
     return_status = "Coming Soon! This elearning course is not yet available."
     if (self.released)
       if (!self.certificates.where(user_id: user_id).empty?)
           return_status = "Course Completed! Certificate Purchased."
       else
-        if (!Stat.where(user_id: user_id, course_id: self.id).empty?)
+        if (!Stat.where(user_id: user_id, course_id: self.id).empty?) ||
+           (!self.attempts.empty?)
           return_status = "In Progress"
         else
           return_status = "Not Started"

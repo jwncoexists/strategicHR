@@ -1,6 +1,6 @@
-Feature: quiz page
+Feature: my course status
 
-  As a user, I can see the quiz page for a course
+  As a user, I can see the status of my courses
 
   Background:
     Given a member user named "member-user"
@@ -14,23 +14,19 @@ Feature: quiz page
     And I visit the "5 Trends" course page
 
   Scenario:
-    When I go to the quiz page for "5 Trends Quiz"
-    Then I see a link to start the quiz
-
-  Scenario:
-    When I go to the quiz page for "5 Trends Quiz"
-    And I click on the link to start the quiz named "5 Trends Quiz"
-    Then I see the first question for the quiz
-
-  Scenario:
-    When I go to the quiz page for "5 Trends Quiz"
-    And I click on the link to start the quiz named "5 Trends Quiz"
-    And I answer correctly all the questions for the quiz named "5 Trends Quiz"
-    Then I see that I passed the quiz
+    When I visit the Courses Page
+    Then I see that I have not started the course
 
   Scenario:
     When I go to the quiz page for "5 Trends Quiz"
     And I click on the link to start the quiz named "5 Trends Quiz"
     And I answer incorrectly some the questions for the quiz named "5 Trends Quiz"
-    And I visit the "5 Trends" course page
-    Then I see that that I did not pass the quiz
+    When I visit the Courses Page
+    Then I see that the course is in progress
+
+  Scenario:
+    When I go to the quiz page for "5 Trends Quiz"
+    And I click on the link to start the quiz named "5 Trends Quiz"
+    And I answer correctly all the questions for the quiz named "5 Trends Quiz"
+    When I visit the Courses Page
+    Then I see that the quizzes are complete

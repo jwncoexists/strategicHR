@@ -209,15 +209,27 @@ Then(/^I see the first question for the quiz$/) do
   expect(page).to have_content 'Please select one of the following answers:'
 end
 
-When(/^I answer all the questions for the quiz named "(.*?)"$/) do |name|
+When(/^I answer correctly all the questions for the quiz named "(.*?)"$/) do |name|
   choose('answer_Correct')
+  click_button('Next')
+  choose('answer_Correct')
+  click_button('Complete Quiz')
+end
+
+Then(/^I see that I passed the quiz$/) do
+   expect(page).to have_content 'Quiz Results for'
+   expect(page).to have_content 'you PASSED this quiz'
+end
+
+When(/^I answer incorrectly some the questions for the quiz named "(.*?)"$/) do |arg1|
+  choose('answer_Incorrect')
   click_button('Next')
   choose('answer_Incorrect')
   click_button('Complete Quiz')
 end
 
-Then(/^I see my results$/) do
-   expect(page).to have_content 'Quiz Results for'
+Then(/^I see that that I did not pass the quiz$/) do
+  expect(page).to have_content 'Take Quiz OR View Last Results'
 end
 
 #------------------------
@@ -271,6 +283,26 @@ end
 Then(/^I can view my "(.*?)" course certificate$/) do |name|
   page.response_headers['Content-Type'].should == 'application/pdf'
 end
+
+#------------------------
+# course_status.feature
+#------------------------
+When(/^I visit the Courses Page$/) do
+  visit(courses_path)
+end
+
+Then(/^I see that I have not started the course$/) do
+  expect(page).to have_content 'Not Started'
+end
+
+Then(/^I see that the course is in progress$/) do
+  expect(page).to have_content 'In Progress'
+end
+
+Then(/^I see that the quizzes are complete$/) do
+  expect(page).to have_content 'Quiz Complete'
+end
+
 
 #------------------------
 # email_confirmation.feature
