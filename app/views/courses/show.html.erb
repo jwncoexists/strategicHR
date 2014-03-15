@@ -89,7 +89,7 @@
                   <% else %>
                     <td>
                       <% if section.quiz_id %>
-                        <%= link_to "Take Quiz", new_attempt_path(section: section), id: 'Take Quiz Link' %>
+                        <%= link_to "Take Quiz", new_attempt_path(section: section), id: "Take Quiz #{Quiz.find(section.quiz_id).name} Link" %>
                         <% if !section.attempts.where(user_id: current_user.id).empty? %>
                           OR <%= link_to "View Last Results", attempt_path(section.attempts.where(user_id: current_user.id).order("end_time DESC").first) %>
                         <% end %>

@@ -158,6 +158,15 @@ Given(/^a section for the course "(.*?)" with the quiz "(.*?)"$/) do |course, qu
   )
 end
 
+Given(/^a second section for the course "(.*?)" with the quiz "(.*?)"$/) do |course, quiz|
+  @section = Section.create!(
+      sequence: 1,
+      course_id: @course.id,
+      video_id: @video2.id,
+      quiz_id: @quiz2.id
+  )
+end
+
 Given(/^two questions for the Quiz named "(.*?)"$/) do |name|
   @question1 = Question.create!(
       content: 'What is question 1?',
@@ -166,6 +175,17 @@ Given(/^two questions for the Quiz named "(.*?)"$/) do |name|
     @question2 = Question.create!(
       content: 'What is question 2?',
       quiz_id: @quiz.id
+    )
+end
+
+Given(/^two questions for the second Quiz named "(.*?)"$/) do |name|
+  @question3 = Question.create!(
+      content: 'What is question 3?',
+      quiz_id: @quiz2.id
+    )
+  @question4 = Question.create!(
+      content: 'What is question 4?',
+      quiz_id: @quiz2.id
     )
 end
 
@@ -193,8 +213,32 @@ Given(/^two answers for each of the the questions for the quiz name "(.*?)"$/) d
     )
 end
 
+Given(/^two answers for each of the the questions for the second quiz name "(.*?)"$/) do |arg1|
+  @answer31 = Answer.create!(
+      content: 'Correct',
+      question_id: @question3.id,
+      correct: true
+    )
+  @answer32 = Answer.create!(
+      content: 'Incorrect',
+      question_id: @question3.id,
+      correct: false
+    )    
+
+  @answer41 = Answer.create!(
+      content: 'Correct',
+      question_id: @question4.id,
+      correct: true
+    )
+  @answer42 = Answer.create!(
+      content: 'Incorrect',
+      question_id: @question4.id,
+      correct: false
+    )
+end
+
 When(/^I go to the quiz page for "(.*?)"$/) do |name|
-  click_link('Take Quiz Link')
+  click_link("Take Quiz #{name} Link")
 end
 
 Then(/^I see a link to start the quiz$/) do
@@ -231,6 +275,13 @@ end
 Then(/^I see that that I did not pass the quiz$/) do
   expect(page).to have_content 'Take Quiz OR View Last Results'
 end
+
+Then(/^I see that the status of the course named "(.*?)" is complete$/) do |name|
+  expect(page).to have_content 'Quizzes Complete'
+end
+
+
+
 
 #------------------------
 # certificate_purchase.feature
@@ -299,7 +350,8 @@ Then(/^I see that the course is in progress$/) do
   expect(page).to have_content 'In Progress'
 end
 
-Then(/^I see that the quizzes are complete$/) do
+
+Then(/^I see that the quiz named "(.*?)" is complete$/) do |name|
   expect(page).to have_content 'Quiz Complete'
 end
 

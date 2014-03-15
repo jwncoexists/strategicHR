@@ -112,8 +112,15 @@ end
 Given(/^a Quiz named "(.*?)"$/) do |name|
   @quiz = Quiz.create!(name: name, 
                        description: Faker::Lorem.paragraph, 
-                       passing_score: 70, 
-                       num_questions_to_show: 10)
+                       passing_score: 50, 
+                       num_questions_to_show: 2)
+end
+
+Given(/^a second Quiz named "(.*?)"$/) do |name|
+  @quiz2 = Quiz.create!(name: name, 
+                       description: Faker::Lorem.paragraph, 
+                       passing_score: 50, 
+                       num_questions_to_show: 2)
 end
 
 When(/^add the video named "(.*?)" to the course$/) do |name|
@@ -197,7 +204,15 @@ Given(/^a video named "(.*?)"$/) do |name|
                          description: Faker::Lorem.paragraph, 
                          length: 6, 
                          presenter: Faker::Name.name, 
-                         url: 'http://www.youtube.com/watch?v=pIVREol3Zsc')
+                         url: '89140212')
+end
+
+Given(/^a second video named "(.*?)"$/) do |name|
+  @video2 = Video.create!(name: name, 
+                         description: Faker::Lorem.paragraph, 
+                         length: 6, 
+                         presenter: Faker::Name.name, 
+                         url: '89140212')
 end
 
 When(/^I edit the the "(.*?)" video$/) do |name|
