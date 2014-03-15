@@ -67,7 +67,7 @@ class Course < ActiveRecord::Base
     if (self.released)
       # loop through, stopping at the first section without a passing attempt
       self.sections.order('id ASC').each do |section|
-        if (section.attempts.where(passed: true).count == 0)
+        if (section.attempts.where(passed: true, user_id: user_id).count == 0)
           return section
         end
       end 
