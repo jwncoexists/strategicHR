@@ -1,6 +1,8 @@
 <script src="https://www.google.com/jsapi"></script>
 <%= javascript_tag do %>
-   window.course_data = <%= raw @course_data.to_json %>
+   window.video_data = <%= raw @video_data.to_json %>
+   window.certificate_data = <%= raw @certificate_data.to_json %>
+   window.quiz_data = <%= raw @quiz_data.to_json %>
 <% end %>
 <script>
 
@@ -16,18 +18,41 @@
   function drawChart() {
 
     // Create the data table.
-    var data = new google.visualization.arrayToDataTable( window.course_data);
+    var viddata = new google.visualization.arrayToDataTable( window.video_data);
+    var quizdata = new google.visualization.arrayToDataTable( window.quiz_data);
+    var certdata = new google.visualization.arrayToDataTable( window.certificate_data);
 
-    // Set chart options
-    var options = {'title':'Course Statistics',
+
+    // Set quiz chart options
+    var options = {'title':'Quiz Statistics',
                    'legend': { position: 'top', maxLines: 3},
                     'vAxis': {title: 'Course',  titleTextStyle: {color: 'red'}} 
     };
-
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+    var quizchart = new google.visualization.BarChart(document.getElementById('vidchartdiv'));
+    quizchart.draw(quizdata, options);
+
+    // Set certificate chart options
+    var options = {'title':'Certificate Statistics',
+
+                    'vAxis': {title: 'Course',  titleTextStyle: {color: 'red'}} 
+    };
+    // Instantiate and draw our chart, passing in some options.
+    var certchart = new google.visualization.BarChart(document.getElementById('quizchartdiv'));
+    certchart.draw(certdata, options);
+
+    // Set video chart options
+    var options = {'title':'Video Statistics',
+
+                    'vAxis': {title: 'Course',  titleTextStyle: {color: 'red'}} 
+    };
+    // Instantiate and draw our chart, passing in some options.
+    var vidchart = new google.visualization.BarChart(document.getElementById('certchartdiv'));
+    vidchart.draw(viddata, options);
+
   }
 </script>
 
-<div id="chart_div" style="width: 1000px; height: 600px;"></div>
+<div id="vidchartdiv" style="width: 1000px; height: 600px;"></div>
+<div id="quizchartdiv" style="width: 1000px; height: 600px;"></div>
+<div id="certchartdiv" style="width: 1000px; height: 600px;"></div>
