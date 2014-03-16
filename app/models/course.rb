@@ -82,8 +82,9 @@ class Course < ActiveRecord::Base
       if (!self.certificates.where(user_id: user_id).empty?)
           return_status = "Course Completed! Certificate Purchased."
       else
+        # mark "In Progress" if they've watched any of the course videos
         if (!Stat.where(user_id: user_id, course_id: self.id).empty?) ||
-           (!self.attempts.empty?)
+           (!self.attempts.where(user_id: user_id).empty?)
           return_status = "In Progress"
         else
           return_status = "Not Started"
@@ -100,6 +101,53 @@ class Course < ActiveRecord::Base
       end
     end
     return_status
+  end
+
+  # this method to be run when the sections of a course are changed, and you want to 
+  # and a user previously passed the course before the sections changed
+  def mark_course_passed(user_id)
+
+    self.sections.each do |section|
+      
+      if (section.attempts.where(user_id: user_id, passed: true).empty?)
+        # create the Attempt record
+        attempt = Attempt.create(
+          user_id: user.id,
+          section_id: section.id,
+          course_id: self.id,
+          passed: true,
+          start_time: Time.now,
+          end_time: Time.now,
+          status: "Marked as Passed by Admininistrator")
+        # create the quiz results
+        quiz = Quiz.find(section.id)
+        num_questions = [quiz.questions.count, quiz.num_questions_to_show].min
+        
+        # randomly pick questions for the quiz
+        questions = quiz.questions.sample(num_questions)
+
+        #for each of the questions, create a result and set the correct answer
+        # store the results as a linked list for traversing in views
+        prev = nil
+        questions.each do |question|
+          if prev != nil
+            result = Result.create(attempt_id: attempt.id,
+                        question_id: question.id,
+                        correct_answer_id: question.answers.where(correct: true).first.id,
+                        answer_id: question.answers.where(correct: true).first.id,
+                        prev_question: prev.id)
+            prev.update_attribute(:next_question, result.id)
+          else
+            result = Result.create(attempt_id: attempt.id,
+                        question_id: question.id,
+                        answer_id: question.answers.where(correct: true).first.id,
+                        correct_answer_id: question.answers.where(correct: true).first.id)
+            @first_result = result
+          end
+          prev = result
+        end
+      end
+    end
   end
 
 end
