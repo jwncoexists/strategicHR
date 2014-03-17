@@ -5,6 +5,7 @@ Feature: purchase certificates for completed courses
   Background:
     Given a member user named "member-user"
     And a course named "5 Trends"
+    And a video named "5 Trends Video"
     And a Quiz named "5 Trends Quiz"
     And two questions for the Quiz named "5 Trends Quiz"
     And two answers for each of the the questions for the quiz name "5 Trends Quiz"

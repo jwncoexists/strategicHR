@@ -112,7 +112,7 @@ class Course < ActiveRecord::Base
       if (section.attempts.where(user_id: user_id, passed: true).empty?)
         # create the Attempt record
         attempt = Attempt.create(
-          user_id: user.id,
+          user_id: user_id,
           section_id: section.id,
           course_id: self.id,
           passed: true,
@@ -120,7 +120,7 @@ class Course < ActiveRecord::Base
           end_time: Time.now,
           status: "Marked as Passed by Admininistrator")
         # create the quiz results
-        quiz = Quiz.find(section.id)
+        quiz = Quiz.find(section.quiz_id)
         num_questions = [quiz.questions.count, quiz.num_questions_to_show].min
         
         # randomly pick questions for the quiz

@@ -1,19 +1,32 @@
 <h2 class="title-divider"><span>StrategicHR <span class="de-em">Training Quizzes</span></span> <small></small></h2>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <% if can? :create, Quiz %>
-      <%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary btn-mini' %>
+      <p><%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary btn-mini' %></p>
     <% end %>
   </div>
-  <div class="col-md-8">
-    <% @quizzes.each do |quiz| %>
-      <div class="article">
-        <h4><%= link_to quiz.name, quiz %> - <%= pluralize(quiz.questions.size, "Question") %></h4>
-        
-        <br>
-      </div>
-    <% end %>
+  <div class="col-md-9 blog-roll blog-list">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-condensed", id="Quiz List Table">
+        <tr>
+          <th>Quiz Name</th>
+          <th>Total # Questions</th>
+          <th># Questions per Quiz</th>
+          <th>Passing Score</th>
+        </tr>
+        <% @quizzes.each do |quiz| %>
+          <tr>
+            <div class="article">
+              <td><%= link_to quiz.name, quiz %></td>
+              <td><%= quiz.questions.size %></td>
+              <td><%= quiz.num_questions_to_show %></td>
+              <td><%= "#{quiz.passing_score}%" %></td>
+            </div>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>
 
