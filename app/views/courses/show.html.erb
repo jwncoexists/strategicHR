@@ -75,7 +75,7 @@
               <% @sections.each do |section| %>
                 <tr>
                   <td><% if section.video_id %>
-                        <%= link_to "#{Video.find(section.video_id).name} - #{Video.find(section.video_id).length.to_i} minutes", video_path(Video.find(section.video_id)) %>
+                        <%= link_to "#{Video.find(section.video_id).name} (#{Video.find(section.video_id).length.to_i} minutes)", video_path(Video.find(section.video_id)) %>
                       <% end %>
                   </td>
                   <% if can? :edit, Quiz %>
