@@ -44,7 +44,7 @@
   <%= link_to "Take Quiz", new_attempt_path(section: @next_section), class: 'btn btn-primary btn-mini' %>
 <% end %>
 <% if can? :purchase_certificate, @course %>
-  <%= link_to "Purchase Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini' %>
+  <%= link_to "Purchase Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini  certificate-color' %>
 <% elsif can? :view_certificate, @course %>
    <%= link_to "View Certificate", certificate_path(Certificate.where(user_id: current_user.id, course_id: @course.id).first, format: "pdf"), class: 'btn btn-primary btn-mini' %>
 <% end %>
@@ -62,7 +62,7 @@
 
         <% if can? :take, @course %>
           <h4>Course Videos & Quizzes</h4>
-          <p>To complete this course, watch all of the course videos listed below and complete all quizzes. </p> <p><i>Click on the links in the table below to watch a course video.  After you have watched the video, click on the link to take the quiz, or if you've already completed the quiz, then you can view the results of your quiz and purchase a certificate for CEU credits.</p></i>
+          <p>To complete this course, watch all of the course videos listed below and complete all quizzes. </p> <p><i>Click on the links in the table below to watch a course video.  After you have watched the video, click on the link to take the quiz.  If you've already passed all of the quizzes for a course, then you can purchase a certificate for CEU credits.</p></i>
           <div class="table-responsive">
             <table class="table table-striped table-bordered table-condensed">
               <tr>

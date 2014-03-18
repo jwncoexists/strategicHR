@@ -4,7 +4,7 @@
 <% if can? :purchase_certificate, @course %>
   <div class="row">
     <div class="col-sm-12">
-      <%= link_to "Purchase My Course Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini' %>
+      <%= link_to "Purchase My Course Certificate", new_charge_path(course_id: @course.id), class: 'btn btn-primary btn-mini certificate-color' %>
       <%= link_to "Return to Course", course_path(@course), class: 'btn btn-primary btn-mini' %>
     </div>
   </div>
