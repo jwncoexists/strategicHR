@@ -1,5 +1,5 @@
 When(/^I go to the strategicHR home page$/) do
-  visit root_path 
+  visit root_path
 end
 
 Then(/^I see a title of strategicHR$/) do

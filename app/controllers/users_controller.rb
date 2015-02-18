@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
+
 
 
   def index
@@ -42,14 +42,14 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      RegistrationMailer.registration_confirmation(@user, 
+      RegistrationMailer.registration_confirmation(@user,
         new_email_confirmation_url(token: @user.token)).deliver
       redirect_to login_path, notice: "A confirmation email has been sent!! Click link in the email to verify address, then log in below."
     else
       if @user.errors.any?
         flash[:error] = "Error creating new user. Please try again. #{@user.errors.full_messages.first}."
       else
-        flash[:error] = "Error creating new user. Please try again." 
+        flash[:error] = "Error creating new user. Please try again."
       end
       render :new
     end
@@ -59,12 +59,12 @@ class UsersController < ApplicationController
   # resend user confirmation email
   def reconfirm
      @user = User.find(params[:id])
-     
+
     if @user
       # generate a new token
       @user.generate_token(:token)
       @user.save
-      RegistrationMailer.registration_confirmation(@user, 
+      RegistrationMailer.registration_confirmation(@user,
         new_email_confirmation_url(token: @user.token)).deliver
       redirect_to :back, notice: "A confirmation email has been re-sent! Please click link in email to verify your email address."
     else
@@ -110,7 +110,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, 
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
                                    :title, :company, :phone, :address1, :address2, :city, :state, :postal_code,
                                    :country, :confirmed_at, :account, :created_at, :updated_at, :token)
     end

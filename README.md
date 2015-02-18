@@ -33,7 +33,7 @@ Redis, PostgreSQL, Resque, Stripe, YouTube, Bootstrap, email account
     redis-cli ping
     If get a PONG response, then Redis is running
 8.  Startup Resque background process
-    worker: 
+    worker:
     rake resque:work QUEUE=*
 
 * Create an Administrative User
@@ -89,14 +89,6 @@ rake test
 Video event monitoring background process.  A background process is included to monitor when users watch videos.  When users start/stop videos, events are added to a queue for a background Resque process.  The Resque process logs that event in the postgreSQL Log table, and calculates the amount of time a user has spent watching a video and stores it in the postgreSQL Stat table.
 
 ```
+* Screenshot
 
-
-
-
-
-
-
-
-
-
-
+![home page](/doc/home-page.png)

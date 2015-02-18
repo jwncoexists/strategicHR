@@ -11,12 +11,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #
@@ -51,12 +51,12 @@ class Ability
         can :view_pricing, User
       elsif user.account? :member
         can :take, Course, released: true
-        can :view, Video 
+        can :view, Video
         can :see_course_video_button, Course do |course|
           course.released && course.next_incomplete_section(user)
         end
         can :see_course_quiz_button, Course do |course|
-          course.released && 
+          course.released &&
           course.next_incomplete_section(user) &&
           !course.next_incomplete_section(user).quiz_id.nil?
         end
@@ -77,8 +77,8 @@ class Ability
           course.my_status(user) =~ /Quiz(zes)? Complete/
         end
       end
-      
-    # users who are not logged in can view courses  
+
+    # users who are not logged in can view courses
     else
       can :view, Course
       can :view_pricing, User

@@ -35,7 +35,7 @@ StrategicHR::Application.routes.draw do
 
   get "sessions/create"
   get "sessions/destroy"
-  
+
   resources :password_resets
   #match 'contact' => 'contact#new', :as => 'contact', :via => :get
   #match 'contact' => 'contact#create', :as => 'contact', :via => :post
@@ -80,7 +80,7 @@ StrategicHR::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
