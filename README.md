@@ -15,26 +15,31 @@ Users who are not registered can browse all of the courses, but they cannot watc
 ---
 
 Ruby version 2.0, Rails Version 4
-Redis, PostgreSQL, Resque, Stripe, YouTube, Bootstrap, email account
+Redis, PostgreSQL, Resque, Stripe, Vimeo, Bootstrap, email account
 
 
-* Deployment to your Local Machine
+* Installation
 ---
 1.  Install Rails 4.0 and Ruby 2.0
 2.  Install Cucumber using instructions from https://github.com/cucumber/cucumber-rails/blob/master/README.md
 3.  Install Redis (brew install redis)
 4.  Get the StrategicHR code from GitHub
 5.  In a terminal window:
-    cd <StrategicHR directory>
-    bundle
-6.  Startup the Redis server & background task:
+```
+    $ cd <StrategicHR directory>
+    $ bundle
+```
+6.  Start the PostgreSQL server
+7.  Startup the Redis server & background task:
     redis-server
 7.  Verify the Redis Server is operational by running:
     redis-cli ping
     If get a PONG response, then Redis is running
 8.  Startup Resque background process
+```
     worker:
-    rake resque:work QUEUE=*
+    $ rake resque:work QUEUE=*
+```
 
 * Create an Administrative User
 ---
@@ -60,7 +65,7 @@ email address.  Do the following to setup email:
 
 4.  Configure Environment Variables</b>
 
-* Creating New Courses
+* Create New Courses
 ---
 Log in to StrategicHR as an administrative user, and do the following to create a new course:
 
@@ -68,19 +73,16 @@ Log in to StrategicHR as an administrative user, and do the following to create 
 
 2.  <u>Create Quiz.</u>
 
-3.  Create Course.
-    Name
-    Description
-    Ceu code & credits
-    Video
-    Quiz
+3.  Create Course. Enter the Name, Description, Ceu code & credits, choose a Video, & choose a Quiz
 
 
 * Running the test suite
 ---
-bundle exec cucumber
-rspec spec
-rake test
+```
+$ bundle exec cucumber
+$ rspec spec
+$ rake test
+```
 
 
 * Services (job queues, cache servers, search engines, etc.)
@@ -91,4 +93,4 @@ Video event monitoring background process.  A background process is included to 
 ```
 * Screenshot
 
-![home page](/doc/home-page.png)
+![home page](./doc/home-page.png)

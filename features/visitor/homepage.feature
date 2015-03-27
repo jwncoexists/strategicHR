@@ -6,4 +6,3 @@ Feature: home page
     When I go to the strategicHR home page
     Then I see a title of strategicHR
     And I see Dr. Bob Nelson
-    And I see CEU Credits
