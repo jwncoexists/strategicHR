@@ -15,7 +15,7 @@ Users who are not registered can browse all of the courses, but they cannot watc
 ---
 
 Ruby version 2.0, Rails Version 4
-Redis, PostgreSQL, Resque, Stripe, Vimeo, Bootstrap, email account
+Redis, PostgreSQL, Resque, Stripe, Vimeo API, Bootstrap, email account
 
 
 * Installation
@@ -76,7 +76,7 @@ Log in to StrategicHR as an administrative user, and do the following to create 
 3.  Create Course. Enter the Name, Description, Ceu code & credits, choose a Video, & choose a Quiz
 
 
-* Running the test suite
+* Running the test suites
 ---
 ```
 $ bundle exec cucumber
@@ -90,7 +90,7 @@ $ rake test
 
 Video event monitoring background process.  A background process is included to monitor when users watch videos.  When users start/stop videos, events are added to a queue for a background Resque process.  The Resque process logs that event in the postgreSQL Log table, and calculates the amount of time a user has spent watching a video and stores it in the postgreSQL Stat table.
 
-```
+
 * Screenshot
 
 ![home page](./doc/home-page.png)
