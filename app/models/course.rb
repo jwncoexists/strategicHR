@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+  validates :name, presence: true
   before_save :update_slug
   has_many :sections, dependent: :destroy
   has_many :videos, through: :sections
@@ -10,7 +11,7 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :ceus, allow_destroy: true
   has_many :resources, dependent: :destroy
   accepts_nested_attributes_for :resources, allow_destroy: true
-  
+
   mount_uploader :handout, HandoutUploader
   mount_uploader :image, ImageUploader
 
@@ -35,17 +36,18 @@ class Course < ActiveRecord::Base
     self.save
   end
 
-
+  # return # of video minutes watched
   def video_minutes_total
     ((Stat.where(course_id: self.id).sum :total_time)/60).round(2)
   end
 
+  # return # of certificates obtained
   def certificate_count
     Certificate.where(course_id: self.id).count
   end
 
+  # return # of quizzes passed
   def quizzes_passed_count
-    # Attempt.where(user_id: self.id, passed: true).count
     count = 0
     Section.where(course_id: self.id).each do |section|
       count = count + section.attempts.where(passed: true).count
@@ -53,6 +55,7 @@ class Course < ActiveRecord::Base
     count
   end
 
+  # return # of quizzes failed
   def quizzes_failed_count
     #Attempt.where(user_id: self.id, passed: false).count
     count = 0
@@ -70,7 +73,7 @@ class Course < ActiveRecord::Base
         if (section.attempts.where(passed: true, user_id: user_id).count == 0)
           return section
         end
-      end 
+      end
     end
     nil
   end
@@ -103,12 +106,12 @@ class Course < ActiveRecord::Base
     return_status
   end
 
-  # this method to be run when the sections of a course are changed, and you want to 
+  # this method to be run when the sections of a course are changed, and you want to
   # and a user previously passed the course before the sections changed
   def mark_course_passed(user_id)
 
     self.sections.each do |section|
-      
+
       if (section.attempts.where(user_id: user_id, passed: true).empty?)
         # create the Attempt record
         attempt = Attempt.create(
@@ -122,7 +125,7 @@ class Course < ActiveRecord::Base
         # create the quiz results
         quiz = Quiz.find(section.quiz_id)
         num_questions = [quiz.questions.count, quiz.num_questions_to_show].min
-        
+
         # randomly pick questions for the quiz
         questions = quiz.questions.sample(num_questions)
 

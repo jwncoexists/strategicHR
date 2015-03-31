@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20140314230154) do
 
   add_index "ceus", ["course_id"], name: "index_ceus_on_course_id", using: :btree
 
-  create_table "courses", force: true do |t|
+  create_table "courses",     force: true do |t|
     t.string   "name"
     t.text     "description"
     t.decimal  "price",       precision: 8, scale: 2, default: 39.99
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20140314230154) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.boolean  "released",                            default: false
+    t.boolean  "released",    default: false
     t.string   "handout"
     t.string   "image"
   end

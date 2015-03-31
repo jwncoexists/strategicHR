@@ -24,7 +24,7 @@ module ApplicationHelper
       youtube_id = $5
     end
 
-    %Q{<iframe id="player" type="text/html" width="640" height="390" 
+    %Q{<iframe id="player" type="text/html" width="640" height="390"
           src="//www.youtube.com/embed/#{youtube_id}?enablejsapi=1&origin=*" frameborder="0"></iframe>}
   end
 

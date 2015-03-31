@@ -26,7 +26,7 @@ class ChargesController < ApplicationController
                                       purchase_price: @amount/100.0,
                                       ceu_id: @ceu.id)
     current_user.send_receipt(@certificate)
-    
+
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to @course

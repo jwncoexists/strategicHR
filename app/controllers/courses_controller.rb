@@ -32,8 +32,8 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    authorize! :create, @course, message: "You don't have access to create this course." 
-    
+    authorize! :create, @course, message: "You don't have access to create this course."
+
     if @course.save
       flash[:notice] = "Course was created successfully."
       redirect_to @course
@@ -46,7 +46,7 @@ class CoursesController < ApplicationController
   def update
      @course = Course.find_by_slug(params[:id])
      authorize! :update, @course, message: "You don't have access to update this course."
-     
+
      if @course.update_attributes(course_params)
        redirect_to @course, notice: "Course has been updated."
      else

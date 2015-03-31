@@ -55,7 +55,7 @@ class QuizzesController < ApplicationController
   # quiz-attr_accessible :name, :questions_attributes
   def quiz_params
     params.require(:quiz).permit(:id, :name, :description, :num_questions_to_show, :passing_score, :created_at, :updated_at,
-                                  questions_attributes: [:id, :content, :quiz_id, :created_at, :updated_at, :_destroy, 
+                                  questions_attributes: [:id, :content, :quiz_id, :created_at, :updated_at, :_destroy,
                                   answers_attributes: [:id, :content, :correct, :question_id, :created_at, :updated_at, :_destroy] ] )
   end
 

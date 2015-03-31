@@ -1,0 +1,6 @@
+one:
+  name: 'test course'
+  description: 'this is a test course'
+  price: 39.99
+  user_id: 1
+  released: true

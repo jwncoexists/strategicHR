@@ -22,13 +22,13 @@ class ResultsController < ApplicationController
     if (params[:answer])
       @result.answer_id = Answer.where(question_id: @result.question.id, content: params[:answer]).first.id
     end
-  
+
     if @result.save
       if params[:commit].upcase.include? "NEXT"
-        redirect_to edit_result_path( Result.find(@result.next_question) )  
+        redirect_to edit_result_path( Result.find(@result.next_question) )
       end
       if params[:commit].upcase.include? "PREVIOUS"
-        redirect_to edit_result_path( Result.find(@result.prev_question) )  
+        redirect_to edit_result_path( Result.find(@result.prev_question) )
       end
       if params[:commit].upcase.include? "COMPLETE"
         redirect_to attempt_path(@attempt)

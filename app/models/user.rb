@@ -88,5 +88,5 @@ class User < ActiveRecord::Base
     def already_has_password?
       !self.password_digest.blank?
     end
-  
+
 end

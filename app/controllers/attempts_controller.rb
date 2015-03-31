@@ -1,3 +1,4 @@
+# Attempts are created each time a user takes a quiz
 class AttemptsController < ApplicationController
   def index
     @attempts = Attempt.all
@@ -23,15 +24,15 @@ class AttemptsController < ApplicationController
     @quiz = Quiz.find(@section.quiz_id)
     @course = Course.find(@section.course_id)
     @video = Video.find(@section.video_id)
-    @attempt = Attempt.create(user_id: current_user.id, 
+    @attempt = Attempt.create(user_id: current_user.id,
                               course_id: @course.id,
                               section_id: @section.id,
                               status: "Quiz Started",
                               start_time: Time.now,
                               end_time: Time.now
-                              ) 
+                              )
     @num_questions = [@quiz.questions.count, @quiz.num_questions_to_show].min
-    
+
     # randomly pick questions for the quiz
     @questions = @quiz.questions.sample(@num_questions)
 

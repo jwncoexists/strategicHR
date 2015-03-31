@@ -18,8 +18,8 @@ class VideosController < ApplicationController
 
   def create
     @video = Video.new(video_params)
-    authorize! :create, @video, message: "You don't have access to create this video." 
-    
+    authorize! :create, @video, message: "You don't have access to create this video."
+
     if @video.save
       flash[:notice] = "Video was created successfully."
       redirect_to @video
@@ -32,7 +32,7 @@ class VideosController < ApplicationController
   def update
      @video = Video.find_by_slug(params[:id])
      authorize! :update, @video, message: "You don't have access to update this video."
-     
+
      if @video.update_attributes(video_params)
        redirect_to @video, notice: "Video has been updated."
      else
@@ -55,7 +55,7 @@ class VideosController < ApplicationController
   end
 
   private
-  
+
   def video_params
     params.require(:video).permit(:id, :name, :description, :length, :url, :presenter, :slug, :created_at, :updated_at, :youtube_id)
   end

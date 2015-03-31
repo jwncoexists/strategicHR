@@ -199,7 +199,7 @@ Given(/^two answers for each of the the questions for the quiz name "(.*?)"$/) d
       content: 'Incorrect',
       question_id: @question1.id,
       correct: false
-    )    
+    )
 
   @answer21 = Answer.create!(
       content: 'Correct',
@@ -223,7 +223,7 @@ Given(/^two answers for each of the the questions for the second quiz name "(.*?
       content: 'Incorrect',
       question_id: @question3.id,
       correct: false
-    )    
+    )
 
   @answer41 = Answer.create!(
       content: 'Correct',
@@ -306,7 +306,9 @@ Then(/^I see a link to purchase a certificate for the course named "(.*?)"$/) do
 end
 
 When(/^I click on a link to purchase a certificate for the course named "(.*?)"$/) do |arg1|
-  click_link('Purchase Certificate')
+  # click_link('Purchase Certificate')
+  first(:link, 'Purchase Certificate').click # new
+
 end
 
 Then(/^I am prompted for information to purchase the certificate$/) do
@@ -383,12 +385,3 @@ end
 Then(/^I am prompted with a form to update my profile$/) do
   expect(page).to have_content("Editing User Info")
 end
-
-
-
-
-
-
-
-
-

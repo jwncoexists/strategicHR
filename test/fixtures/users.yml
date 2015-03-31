@@ -2,7 +2,7 @@ admin:
   first_name: John
   last_name: Smith
   company: StrategicHR
-  title:  Developer 
+  title:  Developer
   account: admin
   email: admin@example.com
   confirmed_at: <%= Time.zone.today %>
@@ -12,7 +12,7 @@ member:
   first_name: John
   last_name: Doe
   company: Boeing
-  title:  HR Director 
+  title:  HR Director
   account: member
   email: member@example.com
   confirmed_at: <%= Time.zone.today %>
@@ -22,6 +22,6 @@ nonmember:
   first_name: Nancy
   last_name: Jones
   company: General Electric
-  title:  nonmember 
+  title:  nonmember
   email: nonmember@example.com
   password_digest: <%= BCrypt::Password.create "nonmember" %>
